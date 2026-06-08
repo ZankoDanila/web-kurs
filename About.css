@@ -1,0 +1,579 @@
+/* Базовые сбросы для страницы */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Секция на весь экран с фоном здания */
+.about-hero-section {
+    position: relative;
+    width: 100%;
+    min-height: calc(100vh - 90px);
+    
+    /* Темный градиент поверх фото здания БРУ. Убедитесь, что путь к картинке верный! */
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.40) 0%, rgba(0, 0, 0, 0.40) 100%), 
+                url('img/bru_building_background.jpg') center/cover no-repeat;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    box-sizing: border-box;
+}
+
+.about-container {
+    max-width: 1280px;
+    
+    margin-top: 90px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+/* --- ЛЕВАЯ КОЛОНКА (ТЕКСТ) --- */
+.about-content-left {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+}
+
+/* Точные стили заголовка из Figma */
+.about-title {
+    color: white;
+    font-size: 36px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    word-wrap: break-word;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin: 0 0 40px 0;
+    line-height: 1.2;
+}
+
+.about-card {
+    border: 1px solid white;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(2px);
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+/* Точные стили текста из Figma */
+.about-card p {
+    margin: 0;
+    color: white;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    word-wrap: break-word;
+    text-align: justify;
+}
+
+.wide-card {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.about-cards-row {
+    display: flex;
+    gap: 15px;
+}
+
+.small-card {
+    flex: 1;
+}
+
+/* --- ПРАВАЯ КОЛОНКА (КОЛЛАЖ) --- */
+.about-collage-right {
+    position: relative;
+    width: 350px;
+    height: 500px;
+}
+
+/* Стили для двух верхних картинок с белой рамкой */
+.collage-img {
+    position: absolute;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    object-fit: cover;
+}
+
+.img-top {
+    width: 255px;
+    height: 170px;
+    right: 95px;
+    top: 0;
+}
+
+.img-middle {
+    width: 255px;
+    height: 142px;
+    right: 95px;
+    top: 185px;
+}
+
+/* Стили для логотипа БРУ (картинка-ссылка) */
+.img-bottom-link {
+    position: absolute;
+    width: 105px;
+    height: 144px;
+    right: 0px;
+    top: 340px;
+    display: block;
+    border-radius: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+}
+
+/* Эффект увеличения при наведении на логотип */
+.img-bottom-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+}
+
+.logo-link-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* =========================================
+   СЕКЦИЯ РУКОВОДИТЕЛЯ ПРОЕКТА
+========================================= */
+
+.team-leader-section {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 27px; /* Точный зазор между колонками по координатам Figma */
+    padding-left: 20px;
+    box-sizing: border-box;
+}
+
+/* --- ЛЕВАЯ КОЛОНКА (Инфо и этапы) --- */
+.leader-info-left {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Небольшой зазор между строками истории */
+    max-width: 834px;
+    width: 100%;
+}
+
+/* Верхний зеленый блок */
+.leader-intro-box {
+    background: #84C276;
+    margin-top: 20px; 
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    /* Точные параметры для вмещения картинки 229x191 в блок высотой 213px */
+    padding: 11px; 
+    gap: 10px;
+    box-sizing: border-box;
+    height: 213px; 
+    margin-bottom: 22px; /* Отступ до первой строки истории */
+}
+
+.leader-small-photo {
+    width: 229px;
+    height: 191px;
+    border-radius: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.leader-intro-text {
+    margin: 0;
+    color: black;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    text-align: justify;
+    line-height: 1.3;
+}
+
+/* --- Шахматный порядок текста и иконок --- */
+.history-step-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Раскидываем иконку и текст по краям 834px */
+    gap: 12px;
+}
+
+.reverse-row {
+    flex-direction: row-reverse; /* Меняет местами текст и иконку */
+}
+
+/* Зеленые квадраты для иконок */
+.history-icon-box {
+    background: #84C276;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    width: 180px;
+    min-height: 96px; /* Точная высота по макету */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.step-icon {
+    max-width: 77px;
+    max-height: 77px;
+    object-fit: contain;
+}
+
+.history-step-text {
+    margin: 0;
+    color: black;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    text-transform: uppercase; /* Все тексты здесь капсом */
+    text-align: justify;
+    line-height: 1.4;
+    max-width: 642px; /* Точная ширина текстового блока по макету */
+}
+
+/* --- ПРАВАЯ КОЛОНКА (Большой портрет) --- */
+.leader-portrait-right {
+    margin-left: auto;
+    position: relative;
+    width: 602px;
+    height: 670px;
+    flex-shrink: 0;
+    overflow: hidden; 
+}
+
+.portrait-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Наложение с текстом (градиентная подложка) */
+.portrait-overlay {
+    position: absolute;
+    bottom: 16px; /* Отступ снизу */
+    left: 50%;
+    transform: translateX(-50%); 
+    width: 530px; /* Точная ширина плашки */
+    height: 173px; /* Точная высота плашки */
+    background: rgba(0, 0, 0, 0.40);
+    border-radius: 10px;
+    
+    /* Flexbox для идеального центрирования текста внутри подложки */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.portrait-name {
+    margin: 0 0 5px 0;
+    color: white;
+    font-size: 48px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 1.1;
+}
+
+.portrait-surname {
+    font-size: 40px;
+    text-transform: none; /* Убираем капс, чтобы было "Сергей Владимирович" */
+}
+
+.portrait-title {
+    margin: 0;
+    color: #FEEF9E;
+    font-size: 26px; /* Точный размер из Figma */
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    line-height: 1.2;
+}
+
+/* =========================================
+   ПЕРЕМЕННЫЕ (Добавьте в начало вашего CSS файла)
+========================================= */
+:root {
+  --bg-dark-blue: #004A8F;
+  --text-white: #FFFFFF;
+  --text-yellow: #FEEF9E;
+  
+  /* Цвета тегов */
+  --tag-bg-purple: #D1C4E9;
+  --tag-text-purple: #504762;
+  --tag-bg-yellow: #FEEF9E;
+  --tag-text-yellow: #92400E;
+  --tag-text-yellow-leader: #504762;
+  --tag-bg-teal: #B2DFDB;
+  --tag-text-teal: #025A52;
+  --tag-text-teal-leader: #504762;
+  --tag-bg-gray: #CFD8DC;
+  --tag-text-gray: #4F6974;
+}
+
+/* =========================================
+   СЕКЦИЯ: УЧАСТНИКИ-РАЗРАБОТЧИКИ ПРОЕКТА
+========================================= */
+.team-section {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 80px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  background-color: #E5E7EB; /* Светлый фон секции, удалите, если фон страницы уже серый */
+}
+
+/* --- Заголовок секции --- */
+.team-section .section-header {
+  background: linear-gradient(117deg, #004A8F 0%, #08355F 100%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  max-width: 1050px; /* Чтобы плашка не была слишком длинной */
+  margin-left: auto; /* Прижимает вправо, как на макете */
+  padding: 20px 40px;
+  border-radius: 10px 0 0 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+}
+
+.team-section .section-title {
+  color: var(--text-white);
+  font-size: 48px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  text-align: right;
+  margin: 0;
+}
+
+.team-section .header-icon {
+  width: 80px;
+  height: 80px;
+}
+
+/* --- Сетки карточек --- */
+.team-section .leaders-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  width: 100%;
+}
+
+.team-section .carousel-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.team-section .members-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* --- Общие стили карточек --- */
+.team-section .card {
+  background: var(--bg-dark-blue);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px 20px;
+  text-align: center;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.team-section .card.leader {
+  width: 380px;
+  min-height: 480px;
+}
+
+.team-section .card.member {
+  width: 280px;
+  min-height: 440px;
+}
+
+/* --- Элементы внутри карточки --- */
+.team-section .tag {
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 500;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.team-section .card.leader .tag {
+  font-size: 14px;
+  text-transform: uppercase;
+  min-height: 48px;
+  width: 90%;
+}
+
+.team-section .card.member .tag {
+  font-size: 16px;
+  min-height: 36px;
+}
+
+.team-section .avatar {
+  width: 124px;
+  height: 124px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+  background-color: #84C276; 
+}
+
+.team-section .name-block {
+  margin-bottom: 15px;
+}
+
+.team-section .last-name {
+  color: var(--text-white);
+  font-size: 32px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.team-section .card.member .last-name {
+  font-size: 24px;
+}
+
+.team-section .first-name {
+  color: var(--text-white);
+  font-size: 22px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+.team-section .card.member .first-name {
+  font-size: 18px;
+}
+
+.team-section .description {
+  color: var(--text-yellow);
+  font-family: 'Roboto Serif', serif;
+  font-weight: 400;
+  line-height: 1.4;
+  margin-bottom: 10px;
+  flex-grow: 1; 
+}
+
+.team-section .card.leader .description {
+  font-size: 16px;
+}
+
+.team-section .card.member .description {
+  font-size: 15px;
+}
+
+.team-section .expertise {
+  color: var(--text-white);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+.team-section .card.leader .expertise {
+  font-size: 16px;
+}
+
+.team-section .card.member .expertise {
+  font-size: 18px;
+}
+
+.team-section .btn {
+  background: var(--text-white);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+  border: 1px solid var(--bg-dark-blue);
+  color: var(--bg-dark-blue);
+  font-family: 'Roboto Slab', serif;
+  font-weight: 500;
+  font-size: 18px;
+  padding: 12px 30px;
+  text-decoration: none;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.team-section .card.member .btn {
+  font-size: 18px;
+  padding: 10px 25px;
+}
+
+.team-section .btn:hover {
+  transform: translateY(-2px);
+}
+
+/* --- Стрелки карусели --- */
+.team-section .carousel-arrow {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.team-section .carousel-arrow svg {
+  width: 40px;
+  height: 40px;
+  fill: none;
+  stroke: var(--bg-dark-blue);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* --- Цвета тегов (утилиты) --- */
+.team-section .tag-purple { background: var(--tag-bg-purple); color: var(--tag-text-purple); }
+.team-section .tag-yellow-lead { background: var(--tag-bg-yellow); color: var(--tag-text-yellow-leader); }
+.team-section .tag-teal-lead { background: var(--tag-bg-teal); color: var(--tag-text-teal-leader); }
+.team-section .tag-gray { background: var(--tag-bg-gray); color: var(--tag-text-gray); }
+.team-section .tag-yellow { background: var(--tag-bg-yellow); color: var(--tag-text-yellow); }
+.team-section .tag-teal { background: var(--tag-bg-teal); color: var(--tag-text-teal); }
+
+/* --- Адаптивность для мобильных устройств --- */
+@media (max-width: 900px) {
+  .team-section .section-header {
+    flex-direction: column-reverse;
+    text-align: center;
+    justify-content: center;
+    border-radius: 10px;
+    margin: 0 auto;
+  }
+  .team-section .section-title {
+    font-size: 32px;
+    text-align: center;
+  }
+  .team-section .carousel-arrow {
+    display: none;
+  }
+}

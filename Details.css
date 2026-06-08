@@ -1,0 +1,190 @@
+body {
+    background-color: #FFFFFF !important;
+    margin: 0;
+    padding: 0;
+}
+
+.details-main {
+    margin-top: 120px; /* Тот самый отступ 30px от шапки */
+    display: flex;
+    justify-content: center; /* Центрируем жесткий контейнер по экрану */
+    padding-bottom: 40px;
+}
+
+/* === ГЛАВНЫЙ КОНТЕЙНЕР === */
+.figma-exact-container {
+    width: 1277px;
+    background: rgba(217, 217, 217, 0.41);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
+    padding: 26px 36px 30px 33px; /* Внутренние отступы, вычисленные из координат Фигмы */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+/* === ВЕРХНИЙ РЯД (Заголовок и кнопки) === */
+.details-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px; /* Отступ до картинок и карточек */
+}
+
+.title-company-group {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.exact-title {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 50px;
+    color: #000000;
+}
+
+.exact-divider {
+    width: 5px;
+    height: 45px;
+    background-color: #004A8F;
+}
+
+.exact-company {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    color: #000000;
+    width: 400px; /* Жестко из Фигмы */
+}
+
+.exact-actions {
+    display: flex;
+    gap: 11px; /* Высчитано из (1053px - 856px - 186px) */
+}
+
+.exact-btn {
+    width: 186px;
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 500;
+    font-size: 16px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: filter 0.2s ease;
+}
+
+.exact-btn:hover {
+    filter: brightness(1.1);
+}
+
+.btn-secondary {
+    background: #FFFFFF;
+    color: #004A8F;
+    border: 1px solid #004A8F;
+}
+
+.btn-primary {
+    background: #004A8F;
+    color: #FFFFFF;
+    border: none;
+}
+
+/* === КОЛОНКИ С КОНТЕНТОМ === */
+.details-columns-row {
+    display: flex;
+    gap: 34px; /* Просвет между фото(707px) и правыми карточками(467px) */
+    align-items: flex-start;
+}
+
+.exact-col-left {
+    display: flex;
+    flex-direction: column;
+    gap: 23px; /* Расстояние от фото до нижней карточки */
+    width: 707px;
+}
+
+.exact-col-right {
+    display: flex;
+    flex-direction: column;
+    gap: 22px; /* Расстояние между двумя правыми карточками */
+    width: 467px;
+}
+
+/* === ЭЛЕМЕНТЫ === */
+.exact-image {
+    width: 707px;
+    height: 409px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    object-fit: cover;
+}
+
+.exact-card {
+    background: #FFFFFF;
+    border: 3px solid #004A8F;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+    box-sizing: border-box;
+    padding: 15px 30px; /* Внутренние отступы для текста */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* Жесткие размеры карточек из Фигмы */
+.card-bl { 
+    width: 690px; 
+    height: auto; 
+    margin-left: 7px; /* Смещение карточки относительно фото (из ваших абсолютов 40px - 33px = 7px) */
+}
+.card-tr { width: 465px; height: auto; }
+.card-br { width: 467px; height: auto; }
+
+/* Тексты внутри карточек */
+.exact-card-title {
+    margin: 0 0 15px 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: #000000;
+    text-align: center;
+}
+
+.exact-card-text {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #000000;
+    text-align: justify;
+}
+
+/* === ФИКС ДЛЯ ВЕРТИКАЛЬНОГО ВЫСТРАИВАНИЯ ДАТЧИКОВ ИЗ ОБЩЕГО JSON === */
+#all-products-container {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center;
+    width: 100%;
+    gap: 40px; /* Задает автоматический отступ между датчиками по вертикали */
+}
+
+.product-row-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    clear: both;
+}
+
+.figma-exact-container {
+    width: 1277px; /* Возвращаем точную проектную ширину из макета */
+    max-width: 100%;
+    margin: 0 auto;
+}
