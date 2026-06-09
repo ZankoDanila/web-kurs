@@ -29,6 +29,10 @@ body {
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+/* ==========================================================
+   ГЛАВНЫЙ ЭКРАН (HERO SECTION) И ОСНОВНОЙ КОНТЕНТ
+========================================================== */
+
 /* Главный контейнер первого экрана по размерам макета */
 .hero-section {
     width: 100%;
@@ -48,126 +52,14 @@ body {
     position: relative;
 }
 
-/* --- ШАПКА (HEADER) --- */
-.header {
-    width: 1200px; /* 1440px - 120px слева - 120px справа */
-    height: 61px;
-    background: #FFFFFF;
-    border-radius: 100px; /* Полностью скругленная панель-капсула */
-    
-    /* ТРЕБОВАНИЕ 2: Шапка всегда сверху при скролле */
-    position: fixed;
-    top: 27px;
-    left: 50%;
-    transform: translateX(-50%); /* Идеальное центрирование фиксированного блока */
-    z-index: 1000; /* Поверх любого контента на сайте */
-    
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 10px 4px 25px rgba(0, 0, 0, 0.5);
-    
-    /* ТРЕБОВАНИЕ 1: Кнопка кабинет ровно в 12px от правого края шапки */
-    padding-right: 12px; 
-    position: fixed;
-}
-
-/* Блок логотипа */
-.logo-block {
-    display: flex;
-    align-items: center;
-    padding-top: 7px;
-    padding-bottom: 6px;
-    padding-left: 27px; /* Отступ слева внутри шапки */
-}
-
-.logo-img {
-    width: 34px;
-    height: 48px;
-    object-fit: contain;
-}
-
-.logo-text {
-    display: flex;
-    flex-direction: column;
-    margin-left: 3px;
-    margin-top: 3px;
-    margin-bottom: 1px;
-}
-
-/* Текст логотипа (Для вписывания в 61px высоту уменьшил размер до читаемого аккуратного вида) */
-.logo-text span {
-    font-family: 'Inter', sans-serif;
-    font-weight: 800; /* Extra Bold */
-    font-size: 18px; /* Сбалансированный размер для двух строк */
-    white-space: nowrap;
-}
-
-.logo-text .text-black {
-    color: #000000;
-}
-
-.logo-text .text-blue {
-    color: #0055A4;
-}
-
-/* Панель навигации */
-.nav-panel {
-    width: 581px;
-    height: 34px;
-    background-color: #CBDCDE;
-    border-radius: 50px;
-    margin-top: 13px;
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 25px;
-}
-
-.nav-panel a {
-    font-family: 'Inter', sans-serif;
-    font-weight: 600; /* Semi Bold */
-    font-size: 16px;
-    color: #0055A4;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.nav-panel a:hover {
-    color: #000000;
-}
-
-.nav-panel a.active {
-    color: #000000;
-    font-weight: 700; /* Чуть жирнее, чтобы выделить активный пункт */
-}
-
-/* Кнопка КАБИНЕТ */
-.btn-cabinet {
-    width: 107px;
-    height: 28px;
-    background-color: #0055A4;
-    border-radius: 50px;
-    color: #FFFFFF;
-    font-family: 'Roboto Slab', serif;
-    font-weight: 500; /* Medium */
-    font-size: 16px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0px 4px 8px rgba(0, 85, 164, 0.3); /* Тень кнопки */
-    text-transform: uppercase;
-}
-
+/* --- ПОВЕДЕНИЕ СТРАНИЦЫ ПРИ СКРОЛЛЕ К ЯКОРЯМ --- */
 html {
     scroll-behavior: smooth;
 }
 
 /* Задаем отступ сверху при скролле к секциям. 
-  Ваша шапка имеет высоту 61px + отступ 27px = 88px.
-  Сделаем отступ в 105px, чтобы оставался красивый зазор.
+   Шапка имеет высоту 61px + отступ 27px = 88px.
+   Делаем зазор в 105px для идеального отображения.
 */
 #hero,
 #experience,
@@ -236,7 +128,7 @@ html {
     font-family: 'Roboto', sans-serif;
     font-weight: 400; /* Regular */
     font-size: 16px;
-    padding: 5px 8px; /* Аккуратные внутренние отступы для текста */
+    padding: 5px 8px; /* Внутренние отступы для текста */
 }
 
 .box-1 {
@@ -269,8 +161,9 @@ html {
 }
 
 .btn-order-hero:hover {
-    background-color: #00366d; /* Легкий интерактив при наведении */
+    background-color: #00366d; /* Интерактив при наведении */
 }
+
 
 /* === ОПЫТ ВНЕДРЕНИЯ === === ОПЫТ ВНЕДРЕНИЯ === === ОПЫТ ВНЕДРЕНИЯ === === ОПЫТ ВНЕДРЕНИЯ ===*/
 .experience-section {

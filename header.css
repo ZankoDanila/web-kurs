@@ -1,189 +1,296 @@
 /* ==========================================================
-   СТИЛИ ДЛЯ ЕДИНОЙ АДАПТИВНОЙ ШАПКИ
+   ОБЩИЕ СТИЛИ И ВАШ ОРИГИНАЛЬНЫЙ ДЕСТКОП (Экран > 1150px)
 ========================================================== */
-
-/* Отступ сверху для всего контента сайта, чтобы шапка его не перекрывала */
-body {
-  padding-top: 100px; 
+html {
+    scroll-behavior: smooth;
 }
 
-.universal-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 15px 20px;
-  box-sizing: border-box;
-  z-index: 9999;
+#hero, #experience, #complectation, #team, #news {
+    scroll-margin-top: 105px;
 }
 
-.header-container {
-  max-width: 1440px;
-  min-height: 61px;
-  margin: 0 auto;
-  background: #F3F3F3;
-  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 35px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 5px 25px;
-  position: relative;
-  box-sizing: border-box;
+/* ВАШ ОРИГИНАЛЬНЫЙ КОД ШАПКИ ДЛЯ ПК */
+.header {
+    width: 1200px; /* 1440px - 120px слева - 120px справа */
+    height: 61px;
+    background: #FFFFFF;
+    border-radius: 100px; /* Полностью скругленная панель-капсула */
+    
+    position: fixed;
+    top: 27px;
+    left: 50%;
+    transform: translateX(-50%); /* Идеальное центрирование фиксированного блока */
+    z-index: 1000; /* Поверх любого контента на сайте */
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 10px 4px 25px rgba(0, 0, 0, 0.5);
+    
+    padding-right: 12px; /* Кнопка кабинет ровно в 12px от правого края */
+    box-sizing: border-box;
 }
 
-.header-logo-group {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
+/* Блок логотипа */
+.logo-block {
+    display: flex;
+    align-items: center;
+    padding-top: 7px;
+    padding-bottom: 6px;
+    padding-left: 27px; /* Отступ слева внутри шапки */
+    text-decoration: none;
 }
 
 .logo-img {
-  width: 34px;
-  height: 48px;
-  object-fit: contain;
+    width: 34px;
+    height: 48px;
+    object-fit: contain;
 }
 
-.header-titles {
-  display: flex;
-  flex-direction: column;
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    margin-left: 3px;
+    margin-top: 3px;
+    margin-bottom: 1px;
 }
 
-.title-university {
-  color: #000000;
-  font-size: 18px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 800;
-  line-height: 20px;
+.logo-text span {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800; /* Extra Bold */
+    font-size: 18px; /* Сбалансированный размер для двух строк */
+    white-space: nowrap;
 }
 
-.title-system {
-  color: #0055A4;
-  font-size: 18px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 800;
-  line-height: 20px;
-}
+.logo-text .text-black { color: #000000; }
+.logo-text .text-blue { color: #0055A4; }
 
+/* Панель навигации */
 .nav-panel {
-  background: #CBDCDE;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 35px;
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  padding: 8px 35px;
-  transition: all 0.3s ease-in-out;
+    width: 581px;
+    height: 34px;
+    background-color: #CBDCDE;
+    border-radius: 50px;
+    margin-top: 13px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+    box-sizing: border-box;
 }
 
 .nav-panel a {
-  color: #0055A4;
-  font-size: 16px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  text-decoration: none;
-  transition: color 0.2s ease;
-  white-space: nowrap;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600; /* Semi Bold */
+    font-size: 16px;
+    color: #0055A4;
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
-.nav-panel a.active, 
-.nav-panel a:hover {
-  color: #000000 !important;
+.nav-panel a:hover { color: #000000; }
+.nav-panel a.active {
+    color: #000000;
+    font-weight: 700; /* Выделение активного пункта */
 }
 
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
+/* Кнопка КАБИНЕТ */
 .btn-cabinet {
-  background: #0055A4;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 100px;
-  color: #FFFFFF;
-  font-size: 16px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 800;
-  padding: 6px 22px;
-  text-decoration: none;
-  transition: background-color 0.2s ease;
+    width: 107px;
+    height: 28px;
+    background-color: #0055A4;
+    border-radius: 50px;
+    color: #FFFFFF;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 500; /* Medium */
+    font-size: 16px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 8px rgba(0, 85, 164, 0.3);
+    text-transform: uppercase;
 }
 
-.btn-cabinet:hover {
-  background: #003D73;
-}
-
+/* ЭЛЕМЕНТЫ УПРАВЛЕНИЯ АДАПТИВОМ (Скрыты на ПК) */
 .burger-menu {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 32px;
-  height: 22px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  box-sizing: border-box;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 32px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
 }
 
 .burger-menu span {
-  width: 100%;
-  height: 3px;
-  background-color: #004A8F;
-  border-radius: 2px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+    width: 100%;
+    height: 3px;
+    background-color: #004A8F;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-/* Точка излома (Планшеты и мобильные) */
-@media (max-width: 1150px) {
-  .burger-menu {
-    display: flex;
-  }
-
-  .nav-panel {
-    position: absolute;
-    top: 75px;
-    right: 20px;
-    background: #CBDCDE;
-    border-radius: 20px;
-    flex-direction: column;
-    gap: 20px;
-    padding: 25px 40px;
-    width: 260px;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
-    
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-15px);
-    pointer-events: none;
-  }
-
-  .nav-panel.open {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-
-  .burger-menu.active span:nth-child(1) {
-    transform: translateY(9px) rotate(45deg);
-  }
-  .burger-menu.active span:nth-child(2) {
-    opacity: 0;
-  }
-  .burger-menu.active span:nth-child(3) {
-    transform: translateY(-10px) rotate(-45deg);
-  }
+.btn-cabinet-mobile {
+    display: none !important;
 }
 
+
+/* ==========================================================
+   АДАПТИВ ДЛЯ ПЛАНШЕТА (Разрешение от 601px до 1150px)
+========================================================== */
+@media (max-width: 1150px) and (min-width: 601px) {
+    .header {
+        width: calc(100% - 40px);
+        max-width: 711px; /* Ограничение по ширине макета планшета */
+    }
+
+    /* Из Фигмы: Бургер встает ПЕРЕД Кабинетом с помощью свойства order */
+    .burger-menu {
+        display: flex;
+        order: 2;
+        margin-left: auto; /* Прижимает блок к правой стороне */
+        margin-right: 20px; /* Зазор между бургером и кнопкой кабинет */
+    }
+
+    .btn-cabinet {
+        order: 3;
+    }
+
+    /* Из Фигмы: Панель выезжает горизонтально на top: 73px */
+    .nav-panel {
+        position: absolute;
+        top: 73px;
+        left: 50%;
+        transform: translateX(-50%) translateY(-15px);
+        width: 581px;
+        height: 34px;
+        margin: 0;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 35px;
+        
+        /* Состояние анимации */
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+        z-index: 999;
+    }
+
+    .nav-panel.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+        pointer-events: auto;
+    }
+}
+
+
+/* ==========================================================
+   АДАПТИВ ДЛЯ МОБИЛЬНЫХ (Экран <= 600px)
+========================================================== */
 @media (max-width: 600px) {
-  body { padding-top: 85px; } /* Чуть меньше отступ на мобилках */
-  .title-university, .title-system {
-    font-size: 13px;
-    line-height: 15px;
-  }
-  .header-container { padding: 5px 15px; }
-  .btn-cabinet { font-size: 14px; padding: 5px 15px; }
+    .header {
+        width: calc(100% - 30px);
+        max-width: 450px;
+        background: #F3F3F3;
+        box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 35px;
+        padding-right: 20px;
+    }
+
+    .logo-text span {
+        font-size: 13px;
+        line-height: 15px;
+    }
+
+    /* Скрываем наружную кнопку Кабинет */
+    .btn-cabinet {
+        display: none !important;
+    }
+
+    .burger-menu {
+        display: flex;
+        margin-left: auto;
+    }
+
+    /* Из Фигмы: Компактный вертикальный блок (131px на 208px) */
+    .nav-panel {
+        position: absolute;
+        top: 73px;
+        right: 15px;
+        width: 131px;
+        min-height: 208px;
+        background: #CBDCDE;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 35px;
+        margin: 0;
+        
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 15px 10px;
+        gap: 12px;
+        box-sizing: border-box;
+
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-15px);
+        transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .nav-panel.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .nav-panel a {
+        font-size: 14px;
+        text-align: center;
+        width: 100%;
+    }
+
+    /* Мобильная кнопка встает в самый низ плашки */
+    .btn-cabinet-mobile {
+        display: flex !important;
+        width: 107px;
+        height: 28px;
+        background: #0055A4;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 100px;
+        color: white !important;
+        font-weight: 800;
+        font-size: 14px !important;
+        align-items: center;
+        justify-content: center;
+        margin-top: auto;
+    }
+}
+
+/* Анимация крестика бургера */
+.burger-menu.active span:nth-child(1) { transform: translateY(10px) rotate(45deg); }
+.burger-menu.active span:nth-child(2) { opacity: 0; }
+.burger-menu.active span:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
+
+/* --- АДАПТИВ ДЛЯ МОБИЛЬНЫХ ЭКРАНОВ (МЕНЕЕ 430px) --- */
+@media (max-width: 430px) {
+    /* Скрываем текстовый блок логотипа */
+    .logo-text {
+        display: none !important; /* !important гарантирует переопределение флекс-режимов */
+    }
+
+    /* Корректируем размеры шапки, чтобы иконка и бургер аккуратно встали по краям */
+    .header {
+        width: calc(100% - 30px); /* Задаем резиновую ширину с отступами по бокам */
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .logo-block {
+        padding-left: 0; /* Сбрасываем внутренний левый отступ, так как текста больше нет */
+    }
 }

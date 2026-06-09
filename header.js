@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const placeholder = document.getElementById('header-placeholder');
 
     if (placeholder) {
-        // Подгружаем внешний файл шапки
         fetch('header.html')
             .then(response => {
                 if (!response.ok) {
@@ -11,10 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return response.text();
             })
             .then(htmlContent => {
-                // Вставляем полученный HTML в плейсхолдер
                 placeholder.innerHTML = htmlContent;
-                
-                // А ТЕПЕРЬ запускаем всю логику навигации (когда элементы точно появились)
                 initHeaderLogic();
             })
             .catch(error => {
@@ -23,26 +19,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Вся логика управления шапкой запускается только после успешного Fetch-инжекта
 function initHeaderLogic() {
     
     // ==========================================================
-    // ФУНКЦИЯ АВТОМАТИЧЕСКОЙ ПОДСВЕТКИ ССЫЛОК (ВАШ АЛГОРИТМ)
+    // АВТОМАТИЧЕСКАЯ ПОДСВЕТКА ССЫЛОК ДЛЯ MAIN.HTML
     // ==========================================================
     function updateActiveLinks() {
-        let currentPath = window.location.pathname.split('/').pop() || 'index.html';
+        let currentPath = window.location.pathname.split('/').pop() || 'Main.html';
         let currentHash = window.location.hash;
 
-        // Сбрасываем класс active у ссылок внутри уже созданной nav-panel
+        // Снимаем класс active со всех ссылок в шапке
         document.querySelectorAll('.nav-panel a').forEach(el => el.classList.remove('active'));
 
-        let activeId = 'nav-index'; // Дефолт
+        let activeId = 'nav-index'; // По умолчанию активна "ГЛАВНАЯ"
 
         if (currentPath === 'about.html') {
             activeId = 'nav-team';
         } else if (currentPath === 'details.html') {
             activeId = 'nav-developments';
-        } else if (currentPath === 'index.html' || currentPath === '') {
+        } else if (currentPath === 'Main.html' || currentPath === '') {
+            // Проверка якорей на главной странице
             if (currentHash === '#experience') activeId = 'nav-developments';
             else if (currentHash === '#complectation') activeId = 'nav-system';
             else if (currentHash === '#team') activeId = 'nav-team';
@@ -55,29 +51,25 @@ function initHeaderLogic() {
         }
     }
 
-    // Инициализируем подсветку
     updateActiveLinks();
-    
-    // Переключаем стили на лету, если пользователь ходит по якорям на главной
     window.addEventListener('hashchange', updateActiveLinks);
 
-
     // ==========================================================
-    // ЛОГИКА ВЫЕЗЖАЮЩЕГО МОБИЛЬНОГО МЕНЮ (БУРГЕР)
+    // ЛОГИКА ВЫЕЗЖАЮЩЕГО МЕНЮ (БУРГЕР)
     // ==========================================================
     const burgerBtn = document.getElementById('burgerBtn');
     const navPanel = document.getElementById('navPanel');
 
     if (burgerBtn && navPanel) {
         
-        // Открытие-закрытие по клику на бургер
+        // Переключатель состояния клика
         burgerBtn.addEventListener('click', (event) => {
             event.stopPropagation(); 
             burgerBtn.classList.toggle('active'); 
             navPanel.classList.toggle('open');    
         });
 
-        // Закрытие при выборе любого пункта меню
+        // Закрытие при клике на любую ссылку в меню
         navPanel.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 burgerBtn.classList.remove('active');
@@ -85,7 +77,7 @@ function initHeaderLogic() {
             });
         });
 
-        // Закрытие по клику в любое пустое место экрана мимо меню
+        // Закрытие при клике мимо открытого меню на пустую область
         document.addEventListener('click', (event) => {
             if (!navPanel.contains(event.target) && !burgerBtn.contains(event.target)) {
                 burgerBtn.classList.remove('active');
