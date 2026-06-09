@@ -188,3 +188,101 @@ body {
     max-width: 100%;
     margin: 0 auto;
 }
+
+/* === ПЛАНШЕТНАЯ И МОБИЛЬНАЯ ВЕРСИЯ (до 768px) === */
+@media (max-width: 768px) {
+    
+    .details-main {
+        margin-top: 80px; /* Немного уменьшаем отступ от шапки для компактности */
+        padding: 0 15px; /* Защитные отступы по краям экрана */
+    }
+
+    .figma-exact-container {
+        width: 100%;
+        padding: 24px; /* Уменьшаем внутренние отступы контейнера */
+    }
+
+    /* --- Шапка карточки (Заголовок, компания, кнопки) --- */
+    .details-header-row {
+        flex-direction: column; /* Ставим элементы друг под друга */
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .title-company-group {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .exact-title {
+        font-size: 38px; /* Чуть уменьшаем шрифт заголовка */
+    }
+
+    .exact-divider {
+        width: 60px; /* Превращаем вертикальную палку в горизонтальный акцент */
+        height: 4px;
+    }
+
+    .exact-company {
+        width: 100%; /* Снимаем жесткое ограничение в 400px */
+        font-size: 16px;
+    }
+
+    .exact-actions {
+        width: 100%;
+        justify-content: flex-start; /* Кнопки прижимаем влево */
+        gap: 15px;
+    }
+
+    .exact-btn {
+        width: 100%; /* На планшете кнопки тоже можно сделать на всю ширину, либо оставить flex: 1 */
+        max-width: 200px;
+    }
+
+    /* --- Контент (Перестроение из 2 колонок в 1) --- */
+    .details-columns-row {
+        flex-direction: column; /* Главное правило: теперь это одна колонка */
+        gap: 20px;
+    }
+
+    .exact-col-left, 
+    .exact-col-right {
+        width: 100%; /* Обе бывшие колонки занимают всю ширину */
+        gap: 20px;
+    }
+
+    /* --- Изображение и карточки --- */
+    .exact-image {
+        width: 100%;
+        height: auto; /* Высота подстраивается пропорционально */
+        aspect-ratio: 16 / 9; /* Сохраняем красивые пропорции фото */
+    }
+
+    .exact-card {
+        padding: 20px; /* Немного уменьшаем внутренний отступ для экономии места */
+    }
+
+    /* Обнуляем жесткую ширину и сдвиги для всех карточек */
+    .card-bl, 
+    .card-tr, 
+    .card-br {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
+/* === ДОПОЛНИТЕЛЬНАЯ КОРРЕКЦИЯ ДЛЯ ТЕЛЕФОНОВ (до 480px) === */
+@media (max-width: 480px) {
+    .exact-actions {
+        flex-direction: column; /* На узких экранах кнопки встанут друг под другом */
+    }
+    
+    .exact-btn {
+        max-width: 100%; /* Кнопки на всю ширину экрана телефона */
+    }
+    
+    .exact-title {
+        font-size: 32px;
+    }
+}
