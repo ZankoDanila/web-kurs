@@ -5,9 +5,9 @@ body {
 }
 
 .details-main {
-    margin-top: 120px; /* Тот самый отступ 30px от шапки */
+    margin-top: 120px;
     display: flex;
-    justify-content: center; /* Центрируем жесткий контейнер по экрану */
+    justify-content: center;
     padding-bottom: 40px;
 }
 
@@ -17,7 +17,7 @@ body {
     background: rgba(217, 217, 217, 0.41);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 12px;
-    padding: 26px 36px 30px 33px; /* Внутренние отступы, вычисленные из координат Фигмы */
+    padding: 26px 36px 30px 33px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -28,7 +28,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 14px; /* Отступ до картинок и карточек */
+    margin-bottom: 14px;
 }
 
 .title-company-group {
@@ -49,6 +49,7 @@ body {
     width: 5px;
     height: 45px;
     background-color: #004A8F;
+    flex-shrink: 0;
 }
 
 .exact-company {
@@ -56,12 +57,12 @@ body {
     font-weight: 400;
     font-size: 20px;
     color: #000000;
-    width: 400px; /* Жестко из Фигмы */
+    width: 400px;
 }
 
 .exact-actions {
     display: flex;
-    gap: 11px; /* Высчитано из (1053px - 856px - 186px) */
+    gap: 11px;
 }
 
 .exact-btn {
@@ -77,11 +78,16 @@ body {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     cursor: pointer;
     box-sizing: border-box;
-    transition: filter 0.2s ease;
+    transition: filter 0.2s ease, transform 0.2s ease;
 }
 
 .exact-btn:hover {
     filter: brightness(1.1);
+    transform: translateY(-2px);
+}
+
+.exact-btn:active {
+    transform: translateY(0);
 }
 
 .btn-secondary {
@@ -99,21 +105,21 @@ body {
 /* === КОЛОНКИ С КОНТЕНТОМ === */
 .details-columns-row {
     display: flex;
-    gap: 34px; /* Просвет между фото(707px) и правыми карточками(467px) */
+    gap: 34px;
     align-items: flex-start;
 }
 
 .exact-col-left {
     display: flex;
     flex-direction: column;
-    gap: 23px; /* Расстояние от фото до нижней карточки */
+    gap: 23px;
     width: 707px;
 }
 
 .exact-col-right {
     display: flex;
     flex-direction: column;
-    gap: 22px; /* Расстояние между двумя правыми карточками */
+    gap: 22px;
     width: 467px;
 }
 
@@ -132,22 +138,20 @@ body {
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
     border-radius: 20px;
     box-sizing: border-box;
-    padding: 15px 30px; /* Внутренние отступы для текста */
+    padding: 15px 30px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
 }
 
-/* Жесткие размеры карточек из Фигмы */
-.card-bl { 
-    width: 690px; 
-    height: auto; 
-    margin-left: 7px; /* Смещение карточки относительно фото (из ваших абсолютов 40px - 33px = 7px) */
+.card-bl {
+    width: 690px;
+    height: auto;
+    margin-left: 7px;
 }
 .card-tr { width: 465px; height: auto; }
 .card-br { width: 467px; height: auto; }
 
-/* Тексты внутри карточек */
 .exact-card-title {
     margin: 0 0 15px 0;
     font-family: 'Inter', sans-serif;
@@ -167,13 +171,13 @@ body {
     text-align: justify;
 }
 
-/* === ФИКС ДЛЯ ВЕРТИКАЛЬНОГО ВЫСТРАИВАНИЯ ДАТЧИКОВ ИЗ ОБЩЕГО JSON === */
+/* === ВЕРТИКАЛЬНОЕ ВЫСТРАИВАНИЕ ДАТЧИКОВ === */
 #all-products-container {
     display: flex !important;
     flex-direction: column !important;
     align-items: center;
     width: 100%;
-    gap: 40px; /* Задает автоматический отступ между датчиками по вертикали */
+    gap: 40px;
 }
 
 .product-row-wrapper {
@@ -183,106 +187,187 @@ body {
     clear: both;
 }
 
-.figma-exact-container {
-    width: 1277px; /* Возвращаем точную проектную ширину из макета */
-    max-width: 100%;
-    margin: 0 auto;
-}
+/* =============================================
+   ПЛАНШЕТ  ≤ 768px
+   Макет Фигмы: ширина контейнера 728px,
+   одна колонка, кнопки 340px + 347px
+============================================= */
+@media (max-width: 1200px) {
 
-/* === ПЛАНШЕТНАЯ И МОБИЛЬНАЯ ВЕРСИЯ (до 768px) === */
-@media (max-width: 768px) {
-    
     .details-main {
-        margin-top: 80px; /* Немного уменьшаем отступ от шапки для компактности */
-        padding: 0 15px; /* Защитные отступы по краям экрана */
+        margin-top: 110px; /* шапка 61px + отступ 27px + nav-drawer 44px + зазор */
+        padding: 0 15px 40px;
     }
 
     .figma-exact-container {
         width: 100%;
-        padding: 24px; /* Уменьшаем внутренние отступы контейнера */
+        padding: 20px 15px 24px;
     }
 
-    /* --- Шапка карточки (Заголовок, компания, кнопки) --- */
+    /* --- Шапка датчика --- */
     .details-header-row {
-        flex-direction: column; /* Ставим элементы друг под друга */
+        flex-direction: column;
         align-items: flex-start;
-        gap: 20px;
+        gap: 16px;
+        margin-bottom: 20px;
     }
 
     .title-company-group {
-        flex-direction: column;
+        flex-direction: row;       /* заголовок + разделитель + компания в ряд, как в макете */
         align-items: flex-start;
-        gap: 15px;
+        gap: 10px;
+        width: 100%;
     }
 
     .exact-title {
-        font-size: 38px; /* Чуть уменьшаем шрифт заголовка */
+        font-size: 45px;           /* Фигма: font-size 45px на планшете */
+        line-height: 1;
     }
 
+    /* Разделитель на планшете — вертикальная линия, как в макете */
     .exact-divider {
-        width: 60px; /* Превращаем вертикальную палку в горизонтальный акцент */
-        height: 4px;
+        width: 5px;
+        height: 43px;
+        flex-shrink: 0;
+        margin-top: 6px;
     }
 
     .exact-company {
-        width: 100%; /* Снимаем жесткое ограничение в 400px */
-        font-size: 16px;
+        width: auto;
+        flex: 1;
+        font-size: 18px;           /* Фигма: 18px на планшете */
     }
 
     .exact-actions {
         width: 100%;
-        justify-content: flex-start; /* Кнопки прижимаем влево */
-        gap: 15px;
+        gap: 10px;
     }
 
+    /* Фигма: кнопки 340px и 347px — делаем flex:1 чтобы делили ширину пополам */
     .exact-btn {
-        width: 100%; /* На планшете кнопки тоже можно сделать на всю ширину, либо оставить flex: 1 */
-        max-width: 200px;
+        flex: 1;
+        max-width: none;
+        height: 50px;
+        font-size: 24px;           /* Фигма: 24px на планшете */
     }
 
-    /* --- Контент (Перестроение из 2 колонок в 1) --- */
+    /* --- Контент: одна колонка --- */
     .details-columns-row {
-        flex-direction: column; /* Главное правило: теперь это одна колонка */
+        flex-direction: column;
         gap: 20px;
     }
 
-    .exact-col-left, 
+    .exact-col-left,
     .exact-col-right {
-        width: 100%; /* Обе бывшие колонки занимают всю ширину */
+        width: 100%;
         gap: 20px;
     }
 
-    /* --- Изображение и карточки --- */
     .exact-image {
         width: 100%;
-        height: auto; /* Высота подстраивается пропорционально */
-        aspect-ratio: 16 / 9; /* Сохраняем красивые пропорции фото */
+        height: auto;
+        aspect-ratio: 16 / 9;
     }
 
     .exact-card {
-        padding: 20px; /* Немного уменьшаем внутренний отступ для экономии места */
+        padding: 16px 20px;
     }
 
-    /* Обнуляем жесткую ширину и сдвиги для всех карточек */
-    .card-bl, 
-    .card-tr, 
+    /* Фигма: на планшете правая колонка разбита на две карточки рядом */
+    .exact-col-right {
+        flex-direction: row;       /* правые две карточки рядом, как в макете */
+        align-items: flex-start;
+    }
+
+    .exact-card-title {
+        font-size: 18px;           /* Фигма: 18px на планшете */
+    }
+
+    .exact-card-text {
+        font-size: 14px;           /* Фигма: 14px на планшете */
+    }
+
+    .card-bl,
+    .card-tr,
     .card-br {
         width: 100%;
         margin-left: 0;
     }
+
+    /* card-tr и card-br рядом — каждая занимает половину */
+    .card-tr,
+    .card-br {
+        flex: 1;
+    }
 }
 
-/* === ДОПОЛНИТЕЛЬНАЯ КОРРЕКЦИЯ ДЛЯ ТЕЛЕФОНОВ (до 480px) === */
+/* =============================================
+   МОБИЛЬНЫЙ  ≤ 480px
+   Макет Фигмы: ширина контейнера 314px,
+   одна колонка, всё стекает вертикально
+============================================= */
 @media (max-width: 480px) {
-    .exact-actions {
-        flex-direction: column; /* На узких экранах кнопки встанут друг под другом */
+
+    .details-main {
+        margin-top: 100px; /* шапка 61px + 27px + зазор, дравер уже не горизонтальный */
+        padding: 0 8px 30px;
     }
-    
-    .exact-btn {
-        max-width: 100%; /* Кнопки на всю ширину экрана телефона */
+
+    .figma-exact-container {
+        padding: 15px 10px 20px;
+        border-radius: 12px;
     }
-    
+
+    /* --- Шапка датчика --- */
+    .title-company-group {
+        flex-direction: column;    /* на мобильном — стопкой */
+        align-items: flex-start;
+        gap: 4px;
+    }
+
     .exact-title {
-        font-size: 32px;
+        font-size: 32px;           /* Фигма: 32px на мобильном */
+        line-height: 1.1;
+    }
+
+    /* Разделитель — горизонтальная черта, как в мобильном макете */
+    .exact-divider {
+        width: 50px;
+        height: 5px;
+        margin-top: 0;
+    }
+
+    .exact-company {
+        font-size: 14px;           /* Фигма: 14px на мобильном */
+        width: 100%;
+    }
+
+    .exact-actions {
+        flex-direction: column;    /* кнопки стопкой */
+        gap: 8px;
+    }
+
+    .exact-btn {
+        flex: none;
+        width: 100%;
+        height: 30px;              /* Фигма: высота кнопок 30px на мобильном */
+        font-size: 16px;           /* Фигма: 16px на мобильном */
+    }
+
+    /* --- Правая колонка: снова вертикально --- */
+    .exact-col-right {
+        flex-direction: column;
+    }
+
+    .exact-card-title {
+        font-size: 12px;           /* Фигма: 12px на мобильном */
+    }
+
+    .exact-card-text {
+        font-size: 10px;           /* Фигма: 10px на мобильном */
+    }
+
+    .exact-card {
+        padding: 12px 14px;
     }
 }
