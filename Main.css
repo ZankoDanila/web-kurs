@@ -1,4 +1,6 @@
-/* Обнуление базовых отступов */
+/* ==========================================================
+   БАЗОВЫЙ ДЕСТКОПНЫЙ СТИЛЬ (Свыше 992px)
+========================================================== */
 * {
     margin: 0;
     padding: 0;
@@ -11,34 +13,58 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+/* Кнопки - анимации */
 [class^="btn-"], [class*=" btn-"] {
     transition: all 0.25s ease-in-out;
     cursor: pointer;
 }
-
-/* Эффект при наведении (кнопка слегка приподнимается, становится ярче, а тень глубже) */
 [class^="btn-"]:hover, [class*=" btn-"]:hover {
     filter: brightness(1.15);
     transform: translateY(-2px);
     box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4);
 }
-
-/* Эффект при клике (кнопка "вжимается" обратно) */
 [class^="btn-"]:active, [class*=" btn-"]:active {
     transform: translateY(0);
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* ==========================================================
-   ГЛАВНЫЙ ЭКРАН (HERO SECTION) И ОСНОВНОЙ КОНТЕНТ
-========================================================== */
+html {
 
-/* Главный контейнер первого экрана по размерам макета */
+scroll-behavior: smooth;
+
+}
+
+
+
+/* Задаем отступ сверху при скролле к секциям.
+
+Шапка имеет высоту 61px + отступ 27px = 88px.
+
+Делаем зазор в 105px для идеального отображения.
+
+*/
+
+#hero,
+
+#experience,
+
+#complectation,
+
+#team,
+
+#news {
+
+scroll-margin-top: 105px;
+
+}
+
+/* ==========================================================
+   1. ДЕСТКОПНЫЙ СТИЛЬ (Базовый, от 993px и выше)
+========================================================== */
 .hero-section {
     width: 100%;
-    height: 699.03px;
-    margin: 0 auto; /* Центрируем макет на больших экранах */
-    /* Затемнение 40% поверх фонового изображения */
+    min-height: 699px;
+    margin: 0 auto;
     background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
                 url('img/main_fraim.png') no-repeat center center;
     background-size: cover;
@@ -50,120 +76,244 @@ body {
     width: 100%;
     height: 100%;
     position: relative;
+    max-width: 1440px;
+    margin: 0 auto;
 }
 
-/* --- ПОВЕДЕНИЕ СТРАНИЦЫ ПРИ СКРОЛЛЕ К ЯКОРЯМ --- */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Задаем отступ сверху при скролле к секциям. 
-   Шапка имеет высоту 61px + отступ 27px = 88px.
-   Делаем зазор в 105px для идеального отображения.
-*/
-#hero,
-#experience,
-#complectation,
-#team,
-#news {
-    scroll-margin-top: 105px;
-}
-
-/* --- ГЛАВНЫЙ КОНТЕНТ (HERO CONTENT) --- */
 .hero-content {
-    margin-top: 125px; /* Отступ от шапки */
-    margin-left: 140px; /* Отступ слева */
+    padding: 125px 140px 60px;
     display: flex;
     flex-direction: column;
+    min-height: 699px;
 }
 
 .hero-title {
     font-family: 'Montserrat', sans-serif;
-    font-weight: 700; /* Bold */
-    font-size: 56px;
+    font-weight: 700;
+    font-size: clamp(40px, 4vw, 56px);
     color: #2AB6FC;
     line-height: 1.1;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin: 0;
 }
 
 .hero-subtitle {
     font-family: 'Inter', sans-serif;
-    font-weight: 600; /* Semi Bold */
-    font-size: 36px;
+    font-weight: 600;
+    font-size: clamp(24px, 2.8vw, 36px);
     color: #FFFFFF;
     line-height: 1.2;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin: 8px 0 0 0;
 }
 
-/* Блок с характеристиками и линией */
+/* Обертка для линии и карточек */
 .features-wrapper {
     display: flex;
     margin-top: 35px;
-    margin-left: 8px;
+    gap: 28px;
+    align-items: flex-start;
 }
 
-/* Синяя вертикальная полоса */
 .vertical-line {
     width: 4px;
-    height: 173px;
+    height: 92px; /* Высота под размер текстовых боксов на десктопе */
     background-color: #0055A4;
     flex-shrink: 0;
+    border-radius: 2px;
 }
 
-/* Колонки с текстом */
+.features-scroll-container {
+    width: 100%;
+}
+
 .features-columns {
     display: flex;
-    margin-left: 28px; /* Отступ слева от синей полоски */
-    margin-top: 7px; /* Отступ сверху от синей полоски */
+    gap: 37px;
 }
 
-.feature-col-left {
-    display: flex;
-    flex-direction: column;
-}
-
-/* Общий класс для плашек с текстом */
 .feature-box {
-    background: rgba(0, 0, 0, 0.41); /* Черный 41% */
+    background: rgba(0, 0, 0, 0.41);
     border-radius: 6px;
     color: #FFFFFF;
     font-family: 'Roboto', sans-serif;
-    font-weight: 400; /* Regular */
+    font-weight: 400;
     font-size: 16px;
-    padding: 5px 8px; /* Внутренние отступы для текста */
+    padding: 12px 16px;
+    line-height: 1.4;
 }
 
-.box-1 {
-    width: 308px;
-    height: 92px;
-}
+.box-1 { width: 100%; max-width: 308px; }
+.box-2 { width: 100%; max-width: 393px; }
 
-.box-2 {
-    width: 393px;
-    height: 92px;
-    margin-left: 37px; /* Отступ слева от первой колонки */
-}
-
-/* Кнопка СВЯЗАТЬСЯ ДЛЯ ЗАКАЗА */
+/* Кнопка на десктопе (выровнена под первой карточкой: 4px линия + 28px gap = 32px) */
 .btn-order-hero {
     width: 282px;
     height: 50px;
     background-color: #004A8F;
     border-radius: 6px;
-    margin-top: 18px; /* Отступ под первым текстом */
     color: #FFFFFF;
     font-family: 'Roboto Slab', serif;
-    font-weight: 500; /* Medium */
+    font-weight: 500;
     font-size: 16px;
     text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.3s ease;
+    margin-top: 18px;
+    margin-left: 32px; 
+    transition: all 0.25s ease-in-out;
 }
 
-.btn-order-hero:hover {
-    background-color: #00366d; /* Интерактив при наведении */
+
+/* ==========================================================
+   2. ПЛАНШЕТНЫЙ СТИЛЬ (max-width: 992px)
+   Полное соответствие второму макету (Ширина 762px)
+========================================================== */
+@media (max-width: 992px) {
+    .hero-section {
+        min-height: 451px;
+        height: 451px;
+    }
+
+    .hero-content {
+        padding: 142px 24px 0 24px; /* Отступы сверху 142px и слева 24px из Фигмы */
+        min-height: 451px;
+    }
+
+    .hero-title {
+        font-size: 40px;
+        max-width: 547px;
+    }
+
+    .hero-subtitle {
+        font-size: 26px;
+        margin-top: 4px;
+    }
+
+    .features-wrapper {
+        margin-top: 15px; /* Идеальный подгон под top: 263px для карточек */
+        position: relative;
+        gap: 0;
+    }
+
+    /* Синяя линия по макету: left: 25px, top: 263px, высота 140px.
+       Так как у родителя левый отступ 24px, сдвигаем линию на 1px */
+    .vertical-line {
+        position: absolute;
+        left: 1px;
+        top: 0;
+        height: 140px; /* Увеличена, чтобы доходить до низа кнопки */
+    }
+
+    /* Сдвиг блока карточек: left: 39px в макете (39 - 24 = 15px от родителя) */
+    .features-columns {
+        margin-left: 15px;
+        gap: 42px; /* Расстояние между карточками (341px - 299px) */
+    }
+
+    .feature-box {
+        background: transparent; /* Убираем черный фон по макету планшета */
+        font-size: 14px;
+        padding: 0;
+    }
+
+    .box-1 { max-width: 260.26px; }
+    .box-2 { max-width: 325px; }
+
+    /* Кнопка на планшете: left: 39px, top: 349px. 
+       Встает автоматически и ровно за счет правильного потока документа */
+    .btn-order-hero {
+        margin-top: 7px; /* (top 349px кнопки) - (top 263px карточек + 79px высота карточки) = 7px */
+        margin-left: 15px; /* Выравнивание по левой границе карточек (left 39px) */
+        width: 282px;
+        height: 50px;
+        font-size: 16px;
+    }
 }
 
+
+/* ==========================================================
+   ИСПРАВЛЕННЫЙ МОБИЛЬНЫЙ СТИЛЬ (ПОД МАКЕТ 320px)
+========================================================== */
+@media (max-width: 576px) {
+    .hero-section {
+        min-height: 294px;
+        height: 294px;
+    }
+
+    .hero-content {
+        padding: 77px 20px 0 20px; /* Выравниваем базовый левый отступ под 20px из макета */
+        min-height: 294px;
+        position: relative;
+    }
+
+    .hero-title {
+        font-size: 22px;
+        max-width: 302px;
+        line-height: 1.1;
+    }
+
+    .hero-subtitle {
+        font-size: 18px;
+        margin-top: 2px;
+        line-height: 1.2;
+    }
+
+    /* Обертка для карточек */
+    .features-wrapper {
+        margin-top: 7px; /* Сдвигает блок на top: 154px (77px padding + 70px заголовки + 7px) */
+        width: 100vw;
+        margin-left: -20px; /* Компенсируем паддинг родителя для красивого свайпа в край экрана */
+        display: flex;
+    }
+
+    /* Контейнер горизонтальной прокрутки */
+    .features-scroll-container {
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding-left: 20px; /* Чтобы первая карточка встала ровно на левую границу (left: 20px) */
+        padding-right: 20px;
+        scrollbar-width: none;
+    }
+    
+    .features-scroll-container::-webkit-scrollbar {
+        display: none;
+    }
+
+    .features-columns {
+        gap: 42px; /* Зазор между карточками по макету (322px - 280px) */
+    }
+
+    .feature-box {
+        font-size: 12px;
+        flex-shrink: 0;
+        scroll-snap-align: start;
+        background: transparent;
+        padding-left: 20px;
+        line-height: 1.3;
+    }
+
+    .box-1 { width: 260.26px; }
+    .box-2 { width: 325px; }
+
+
+
+    /* КНОПКА ЗАКАЗА (ИСПРАВЛЕНО) */
+    .btn-order-hero {
+        position: absolute;
+        left: 20px; 
+        top: 242px; /* Точное положение из вашего макета — теперь она строго ПОД текстом */
+        width: 230px;
+        height: 32px;
+        margin-top: 0;
+        margin-left: 0;
+        font-size: 14px;
+        border-radius: 6px;
+        background-color: #004A8F;
+    }
+}
 
 /* === ОПЫТ ВНЕДРЕНИЯ === === ОПЫТ ВНЕДРЕНИЯ === === ОПЫТ ВНЕДРЕНИЯ === === ОПЫТ ВНЕДРЕНИЯ ===*/
 .experience-section {
@@ -354,6 +504,8 @@ html {
 .dot.active {
     background-color: #FFFFFF;
 }
+
+
 
 /* --- ОБЕРТКА СЕКЦИИ --- */
 .complectation-section {
@@ -664,78 +816,6 @@ html {
 }
 
 
-/* =========================================
-   АДАПТИВНОСТЬ ДЛЯ ДАННОГО БЛОКА (768px / 320px)
-   ========================================= */
-
-/* Планшетная версия (до 992px) */
-@media (max-width: 992px) {
-    .mobile-app-content {
-        grid-template-columns: 1fr; /* Перестраиваем в 1 колонку */
-        gap: 60px;
-    }
-
-    .mobile-app-header-wrap {
-        justify-content: center; /* Центрируем заголовок */
-    }
-
-    .mobile-app-text-col {
-        text-align: center;
-    }
-    
-    .mobile-app-description {
-        text-align: center;
-    }
-
-    .phones-stack-container {
-        height: 360px;
-        max-width: 400px;
-    }
-
-    .phone-mockup {
-        height: 310px;
-    }
-
-    .phone-center {
-        height: 330px;
-    }
-}
-
-/* Мобильная версия (до 480px) */
-@media (max-width: 480px) {
-    .mobile-app-title {
-        font-size: 22px;
-        padding: 10px 25px;
-    }
-
-    .mobile-app-subtitle {
-        font-size: 20px;
-    }
-
-    /* На маленьких экранах сильный наклон мешает, уменьшаем его */
-    .phone-left {
-        transform: rotate(-6deg);
-        left: -10px;
-    }
-
-    .phone-right {
-        transform: rotate(6deg);
-        right: -10px;
-    }
-    
-    .phones-stack-container {
-        height: 290px;
-        max-width: 300px;
-    }
-
-    .phone-mockup {
-        height: 250px;
-    }
-
-    .phone-center {
-        height: 270px;
-    }
-}
 
 /* =========================================
    СЕКЦИЯ: WEB-ПРИЛОЖЕНИЕ (Точная копия Figma)
@@ -850,18 +930,6 @@ html {
     line-height: 1.4;
 }
 
-/* --- Быстрая адаптивность, чтобы на телефонах верстка не развалилась --- */
-@media (max-width: 1300px) {
-    .web-container { padding: 0 20px; }
-    .web-header, .web-content-row, .left-col .web-subtitle, .right-col .web-subtitle {
-        margin-left: 0; 
-        width: auto;
-    }
-    .web-content-row { flex-direction: column; gap: 40px; }
-    .web-col.left-col, .web-col.right-col { width: 100%; }
-    .left-col .web-subtitle { text-align: left; }
-    .web-line { display: none; }
-}
 
 /* =========================================
    СЕКЦИЯ: ПРЕИМУЩЕСТВА И ПРИМЕНЕНИЕ
@@ -1156,44 +1224,6 @@ html {
 }
 .btn-consult:hover { background: rgba(0, 74, 143, 0.05); }
  
-/* =========================================
-   АДАПТИВНОСТЬ
-   ========================================= */
- 
-@media (max-width: 1200px) {
-    .benefits-container {
-        grid-template-columns: 1fr;
-        gap: 50px;
-        padding: 0 30px;
-        max-width: 680px;
-    }
-    .scope-card, .results-card, .advantages-card {
-        height: auto;
-    }
-    .card-main-title, .card-inner-title {
-        position: static;
-        width: 100%;
-        text-align: left;
-        margin-bottom: 12px;
-        white-space: normal;
-    }
-    .decorative-blue-line {
-        position: static;
-        margin: 0 0 16px 0;
-    }
-    .advantage-description {
-        padding-left: 0;
-    }
-}
- 
-@media (max-width: 480px) {
-    .benefits-container { padding: 0 15px; }
-    .card-main-title, .card-inner-title, .advantages-main-title { font-size: 24px; }
-    .advantage-title { font-size: 22px; }
-    .badge-circle { width: 55px; height: 55px; font-size: 44px; }
-    .benefits-actions { flex-direction: column; }
-    .btn-action { width: 100%; }
-}
 
 /* =========================================
    СЕКЦИЯ: О НАШЕЙ КОМАНДЕ
@@ -1362,43 +1392,6 @@ html {
     box-shadow:  rgba(0, 0, 0, 0.15);
 }
 
-
-/* =========================================
-   АДАПТИВНОСТЬ
-   ========================================= */
-@media (max-width: 1300px) {
-    .team-container { max-width: 768px; }
-    
-    .team-content-wrapper {
-        flex-direction: column;
-        align-items: center; /* На узких экранах всё выстраиваем по центру */
-        gap: 40px;
-    }
-    .team-left-col { width: 100%; }
-    .team-main-photo-block {
-        width: 100%;
-        height: auto;
-        margin-left: 0; /* Убираем отрицательный отступ */
-    }
-    
-    .team-blue-card { height: auto; padding: 35px; }
-    .blue-card-inner-content {
-        flex-direction: column;
-        gap: 30px;
-    }
-    .text-and-button-group { width: 100%; }
-}
-
-@media (max-width: 768px) {
-    .team-main-title { font-size: 42px; }
-    .team-header-block { padding-left: 0; }
-}
-
-@media (max-width: 480px) {
-    .team-main-title { font-size: 32px; }
-    .team-description-text { font-size: 16px; }
-    .btn-team-more { font-size: 16px; height: 50px; }
-}
 
 /* =========================================
    СЕКЦИЯ: БЛОГ И НОВОСТИ (СЛАЙДЕР)
@@ -1591,30 +1584,165 @@ html {
     color: #e6cb3c; /* Сделан чуть насыщеннее для читаемости на белом фоне */
 }
 
-
-/* =========================================
-   АДАПТИВНОСТЬ ДЛЯ СЛАЙДЕРА НОВОСТЕЙ
-   ========================================= */
-
-@media (max-width: 1200px) {
-    .news-header-badge {
-        width: 100%;
-        max-width: 500px;
-        padding-left: 30px;
-    }
-    .news-main-title { font-size: 44px; }
-    .slider-btn { width: 70px; height: 70px; }
+/* =============================================
+   СЕКЦИЯ ОТЗЫВОВ
+============================================= */
+ 
+.reviews-section {
+  width: 100%;
+  padding-top: 60px;
+  overflow: hidden;
+  position: relative;
+}
+ 
+ 
+ 
+/* ── Обёртка карусели ── */
+.reviews-carousel-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+ 
+/* ── Кнопки стрелок ── */
+.reviews-arrow {
+  flex-shrink: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+ 
+.reviews-arrow svg {
+  width: 40px;
+  height: 40px;
+  fill: none;
+  stroke: #004A8F;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+ 
+.reviews-arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+ 
+/* ── Трек — показывает 3 карточки ── */
+.reviews-track {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+ 
+/* ── Карточка отзыва ── */
+.review-card {
+  width: 403px;
+  min-height: 300px;
+  flex-shrink: 0;
+  background: linear-gradient(133deg, #0071D9 3%, #003C73 100%);
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  padding: 20px 24px 20px 24px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+ 
+/* Название продукта (чёрный, сверху по центру) */
+.review-product {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 24px;
+  color: #000000;
+  text-align: center;
+  margin-bottom: 6px;
+}
+ 
+/* Название компании (белый, крупный) */
+.review-company {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+  color: #FFFFFF;
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+ 
+/* Имя автора */
+.review-author-name {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  color: #FEEF9E;
+  line-height: 20px;
+  margin-bottom: 2px;
+}
+ 
+/* Должность автора */
+.review-author-role {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  color: #00FFFB;
+  line-height: 20px;
+  margin-bottom: 12px;
+}
+ 
+/* Текст отзыва */
+.review-text {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #FFFFFF;
+  text-align: justify;
+  line-height: 1.45;
+  flex-grow: 1;
+  margin-bottom: 16px;
+}
+ 
+/* Нижняя строка: звезда + рейтинг + дата */
+.review-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+ 
+.review-star {
+  width: 28px;
+  height: 26px;
+  background: #FAC412;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  flex-shrink: 0;
+}
+ 
+.review-rating {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 24px;
+  color: #FEEF9E;
+  line-height: 20px;
+  flex-grow: 1;
+}
+ 
+.review-date {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  color: #FEEF9E;
+  line-height: 20px;
+  white-space: nowrap;
 }
 
-@media (max-width: 768px) {
-    .news-header-badge { max-width: 100%; height: 70px; }
-    .news-main-title { font-size: 36px; }
-    
-    /* Скрываем стрелки на мобилках (листать можно будет свайпом) */
-    .slider-btn { display: none; } 
-    
-    .news-carousel-viewport {
-        overflow-x: auto; /* Позволяет скроллить карточки пальцем */
-        padding-bottom: 15px;
-    }
-}
+
+

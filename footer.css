@@ -1,0 +1,137 @@
+/* ==========================================================
+   ФУТЕР - БАЗОВЫЕ ДЕСТКОПНЫЕ СТИЛИ (Экраны от 1025px)
+========================================================== */
+.main-footer {
+    width: 100%;
+    background-color: #FFFFFF;
+    border-top: 1px solid #000000; /* Верхняя линия из макета */
+    padding: 40px 0;
+    box-sizing: border-box;
+}
+
+.footer-container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 max(20px, 4%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    box-sizing: border-box;
+}
+
+/* Блок логотипа (ссылка на сайт БРУ) */
+.footer-logo-block {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+    max-width: 450px;
+}
+
+.footer-logo-block:hover {
+    opacity: 0.85;
+}
+
+.footer-logo-img {
+    width: 34px;
+    height: 48px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.footer-brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 20px;
+}
+
+.brand-university {
+    color: #000000;
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.brand-system {
+    color: #0055A4; /* Ваш фирменный синий */
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+/* Навигационное меню (Сетка 2 ряда по 3 колонки, как в шапке) */
+.footer-nav {
+    flex-shrink: 0;
+}
+
+.footer-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, auto); /* 3 колонки */
+    gap: 12px 40px; /* 12px между строками, 40px между колонками */
+}
+
+.footer-link {
+    color: #000000;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    display: inline-block;
+}
+
+.footer-link:hover {
+    color: #0055A4; /* Плавное окрашивание при наведении */
+}
+
+
+/* ==========================================================
+   АДАПТИВ ПОД ПЛАНШЕТЫ (max-width: 1024px)
+========================================================== */
+@media (max-width: 1024px) {
+    .footer-container {
+        flex-direction: column; /* Элементы встают друг под друга */
+        align-items: flex-start; /* Выравнивание по левому краю */
+        gap: 30px;
+    }
+    
+    .footer-menu {
+        gap: 16px 30px; /* Чуть сужаем зазоры */
+    }
+}
+
+
+/* ==========================================================
+   АДАПТИВ ПОД МОБИЛЬНЫЕ ТЕЛЕФОНЫ (max-width: 576px)
+========================================================== */
+@media (max-width: 576px) {
+    .main-footer {
+        padding: 30px 0;
+    }
+
+    .footer-logo-block {
+        align-items: flex-start;
+    }
+
+    .brand-university, 
+    .brand-system {
+        font-size: 15px; /* Аккуратное уменьшение шрифта под мобилку */
+        line-height: 18px;
+    }
+
+    .footer-menu {
+        /* На телефонах перестраиваем меню в 2 колонки, чтобы ссылки не сжимались */
+        grid-template-columns: repeat(2, auto); 
+        gap: 16px 35px;
+    }
+
+    .footer-link {
+        font-size: 14px;
+    }
+}

@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&family=Montserrat:wght@700&family=Roboto+Slab:wght@500&family=Roboto:wght@400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="Main.css">
     <link rel="stylesheet" href="header.css"> </head>
+    <link rel="stylesheet" href="footer.css">
 </head>
 <body>
 
@@ -16,33 +17,33 @@
 
     <main class="main-content">
         
-        <section class="hero-section" id="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <h1 class="hero-title">Мобильный регистратор</h1>
-                    <h2 class="hero-subtitle">для контроля параметров<br>сварочных процессов</h2>
-                    
-                    <div class="features-wrapper">
-                        <div class="vertical-line"></div>
-                        
-                        <div class="features-columns">
-                            <div class="feature-col-left">
-                                <div class="feature-box box-1">
-                                    повышение качества сварки ответственных конструкций путём контроля за соблюдением технологии при производстве сварочных работ
-                                </div>
-                                <a href="#" class="btn-order-hero">Связаться для заказа</a>
-                            </div>
-                            
-                            <div class="feature-col-right">
-                                <div class="feature-box box-2">
-                                    повышение эффективности управления сварочным производством за счёт оперативного предоставления точной информации о работе оборудования и сварщика
-                                </div>
-                            </div>
+<section class="hero-section" id="hero">
+    <div class="container">
+        <div class="hero-content">
+            
+            <h1 class="hero-title">Мобильный регистратор</h1>
+            <h2 class="hero-subtitle">для контроля параметров<br>сварочных процессов</h2>
+            
+            <div class="features-wrapper">
+                <div class="vertical-line"></div>
+                
+                <div class="features-scroll-container">
+                    <div class="features-columns">
+                        <div class="feature-box box-1">
+                            повышение качества сварки ответственных конструкций путём контроля за соблюдением технологии при производстве сварочных работ
+                        </div>
+                        <div class="feature-box box-2">
+                            повышение эффективности управления сварочным производством за счёт оперативного предоставления точной информации о работе оборудования и сварщика
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+            
+            <a href="#" class="btn-order-hero">Связаться для заказа</a>
+            
+        </div>
+    </div>
+</section>
 
         <section class="experience-section" id="experience">
     <div class="experience-header">
@@ -66,6 +67,20 @@
         </div>
     </div>
 </section>
+
+<section class="reviews-section" id="reviews">
+            <div class="reviews-carousel-wrapper">
+                <button class="reviews-arrow" id="reviews-prev" aria-label="Назад">
+                    <svg viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+                </button>
+                <div class="reviews-track" id="reviews-track">
+                    <!-- заполняется из db.json через Main.js -->
+                </div>
+                <button class="reviews-arrow" id="reviews-next" aria-label="Вперёд">
+                    <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+        </section>
 
         <section class="complectation-section" id="complectation">
             <div class="complectation-container">
@@ -399,5 +414,6 @@
 
     <script src="Main.js"></script>
     <script src="header.js"></script>
+    <script src="footer.js" defer></script>
 </body>
 </html>
