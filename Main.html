@@ -17,70 +17,97 @@
 
     <main class="main-content">
         
-<section class="hero-section" id="hero">
-    <div class="container">
-        <div class="hero-content">
-            
-            <h1 class="hero-title">Мобильный регистратор</h1>
-            <h2 class="hero-subtitle">для контроля параметров<br>сварочных процессов</h2>
-            
-            <div class="features-wrapper">
-                <div class="vertical-line"></div>
-                
-                <div class="features-scroll-container">
-                    <div class="features-columns">
-                        <div class="feature-box box-1">
-                            повышение качества сварки ответственных конструкций путём контроля за соблюдением технологии при производстве сварочных работ
-                        </div>
-                        <div class="feature-box box-2">
-                            повышение эффективности управления сварочным производством за счёт оперативного предоставления точной информации о работе оборудования и сварщика
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <a href="#" class="btn-order-hero">Связаться для заказа</a>
-            
+<section class="hero" id="hero">
+  <div class="hero__bg">
+    <img
+      class="hero__bg-img"
+      src="img/main_fraim.png"
+      alt="Фоновое изображение сварки"
+    />
+    <div class="hero__bg-overlay"></div>
+  </div>
+
+  <div class="hero__container">
+    <div class="hero__content">
+
+      <h1 class="hero__title">Мобильный регистратор</h1>
+      <h2 class="hero__subtitle">
+        для контроля параметров<br>сварочных процессов
+      </h2>
+
+      <div class="hero__features">
+        <div class="hero__features-line"></div>
+
+        <div class="hero__features-list">
+          <div class="hero__feature">
+            повышение качества сварки ответственных конструкций путём контроля за соблюдением технологии при производстве сварочных работ
+          </div>
+          <div class="hero__feature">
+            повышение эффективности управления сварочным производством за счёт оперативного предоставления точной информации о работе оборудования и сварщика
+          </div>
         </div>
+      </div>
+
+      <a href="#" class="hero__btn">Связаться для заказа</a>
+
     </div>
+  </div>
 </section>
 
-        <section class="experience-section" id="experience">
-    <div class="experience-header">
-        <div class="experience-title-blue">ОПЫТ ВНЕДРЕНИЯ</div>
-        <div class="experience-subtitle">Где уже работают<br>наши регистраторы</div>
+
+
+        <section class="experience-section">
+  <div class="exp-header">
+    <h2 class="exp-main-title">Опыт внедрения</h2>
+    <div class="exp-subtitle-badge">Где уже работают<br>наши регистраторы</div>
+  </div>
+
+  <div class="exp-content-wrapper">
+    
+    <div id="exp-slider-container"></div>
+
+    <div class="exp-actions-sidebar">
+      <div class="exp-buttons-group">
+        <button class="exp-btn exp-btn-primary">ЗАКАЗАТЬ</button>
+        <button class="exp-btn exp-btn-secondary">ПОДРОБНЕЕ</button>
+      </div>
+      
+      <div class="exp-slider-controls">
+        <button id="exp-prev-btn" class="exp-arrow-btn" aria-label="Назад"></button>
+        <div id="exp-dots-container"></div>
+        <button id="exp-next-btn" class="exp-arrow-btn" aria-label="Вперед"></button>
+      </div>
     </div>
 
-    <div class="experience-content">
-        <div class="slider-cards" id="slider-container"></div>
-
-        <div class="experience-controls">
-            <button class="btn-primary">ЗАКАЗАТЬ</button>
-            
-            <button class="btn-secondary" onclick="window.location.href='details.html'">ПОДРОБНЕЕ</button>
-            
-            <div class="slider-nav">
-                <button class="nav-arrow" id="prev-btn">&#10094;</button>
-                <div class="slider-dots" id="dots-container"></div>
-                <button class="nav-arrow" id="next-btn">&#10095;</button>
-            </div>
-        </div>
-    </div>
+  </div>
 </section>
 
-<section class="reviews-section" id="reviews">
-            <div class="reviews-carousel-wrapper">
-                <button class="reviews-arrow" id="reviews-prev" aria-label="Назад">
-                    <svg viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
-                </button>
-                <div class="reviews-track" id="reviews-track">
-                    <!-- заполняется из db.json через Main.js -->
-                </div>
-                <button class="reviews-arrow" id="reviews-next" aria-label="Вперёд">
-                    <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
-                </button>
-            </div>
-        </section>
+<section class="reviews" id="reviews">
+
+  <div class="reviews__inner">
+
+    <button class="reviews__arrow reviews__arrow--prev"
+            id="reviews-prev"
+            type="button"
+            aria-label="Предыдущий отзыв">
+    </button>
+
+    <div class="reviews__track"
+         id="reviews-track"
+         role="region"
+         aria-label="Отзывы клиентов">
+      <!-- .reviews__card — рендерятся через JS из db.json → reviews -->
+    </div>
+
+    <button class="reviews__arrow reviews__arrow--next"
+            id="reviews-next"
+            type="button"
+            aria-label="Следующий отзыв">
+    </button>
+
+  </div>
+
+</section>
 
         <section class="complectation-section" id="complectation">
             <div class="complectation-container">

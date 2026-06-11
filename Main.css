@@ -58,455 +58,704 @@ scroll-margin-top: 105px;
 
 }
 
-/* ==========================================================
-   1. ДЕСТКОПНЫЙ СТИЛЬ (Базовый, от 993px и выше)
-========================================================== */
-.hero-section {
-    width: 100%;
-    min-height: 699px;
-    margin: 0 auto;
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
-                url('img/main_fraim.png') no-repeat center center;
-    background-size: cover;
-    position: relative;
-    overflow: hidden;
+/* =============================================
+   CSS-переменные — значения из оригинального кода
+   ============================================= */
+:root {
+  --hero-accent:       #2AB6FC;
+  --hero-blue-dark:    #004A8F;
+  --hero-line-color:   #0055A4;
+  --hero-overlay:      rgba(0, 0, 0, 0.40);
+  --hero-feature-bg:   rgba(0, 0, 0, 0.41);
+
+  --font-display:  'Montserrat', sans-serif;
+  --font-subtitle: 'Inter', sans-serif;
+  --font-body:     'Roboto', sans-serif;
+  --font-btn:      'Roboto Slab', serif;
 }
 
-.container {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    max-width: 1440px;
-    margin: 0 auto;
+/* =============================================
+   Сброс и base
+   ============================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.hero-content {
-    padding: 125px 140px 60px;
-    display: flex;
-    flex-direction: column;
-    min-height: 699px;
+/* =============================================
+   Секция — растягивается на весь вьюпорт
+   ============================================= */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 699px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
 }
 
-.hero-title {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    font-size: clamp(40px, 4vw, 56px);
-    color: #2AB6FC;
-    line-height: 1.1;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    margin: 0;
+/* =============================================
+   Фон: картинка + тёмная плашка поверх
+   ============================================= */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
 }
 
-.hero-subtitle {
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: clamp(24px, 2.8vw, 36px);
-    color: #FFFFFF;
-    line-height: 1.2;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    margin: 8px 0 0 0;
+.hero__bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-/* Обертка для линии и карточек */
-.features-wrapper {
-    display: flex;
-    margin-top: 35px;
-    gap: 28px;
-    align-items: flex-start;
+.hero__bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--hero-overlay);
 }
 
-.vertical-line {
-    width: 4px;
-    height: 92px; /* Высота под размер текстовых боксов на десктопе */
-    background-color: #0055A4;
-    flex-shrink: 0;
-    border-radius: 2px;
+/* =============================================
+   Контейнер — центрирует контент, задаёт отступы
+   ============================================= */
+.hero__container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 120px;
 }
 
-.features-scroll-container {
-    width: 100%;
+/* =============================================
+   Колонка с контентом
+   ============================================= */
+.hero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 28px;
 }
 
-.features-columns {
-    display: flex;
-    gap: 37px;
+/* =============================================
+   Заголовки
+   ============================================= */
+.hero__title {
+  color: var(--hero-accent);
+  font-family: var(--font-display);
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1.15;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-.feature-box {
-    background: rgba(0, 0, 0, 0.41);
-    border-radius: 6px;
-    color: #FFFFFF;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    font-size: 16px;
-    padding: 12px 16px;
-    line-height: 1.4;
+.hero__subtitle {
+  color: #fff;
+  font-family: var(--font-subtitle);
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1.25;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin-top: -16px; /* визуально «склеиваем» с заголовком */
 }
 
-.box-1 { width: 100%; max-width: 308px; }
-.box-2 { width: 100%; max-width: 393px; }
-
-/* Кнопка на десктопе (выровнена под первой карточкой: 4px линия + 28px gap = 32px) */
-.btn-order-hero {
-    width: 282px;
-    height: 50px;
-    background-color: #004A8F;
-    border-radius: 6px;
-    color: #FFFFFF;
-    font-family: 'Roboto Slab', serif;
-    font-weight: 500;
-    font-size: 16px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 18px;
-    margin-left: 32px; 
-    transition: all 0.25s ease-in-out;
+/* =============================================
+   Блок с фичами: вертикальная линия + два блока текста
+   ============================================= */
+.hero__features {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 0;
 }
 
-
-/* ==========================================================
-   2. ПЛАНШЕТНЫЙ СТИЛЬ (max-width: 992px)
-   Полное соответствие второму макету (Ширина 762px)
-========================================================== */
-@media (max-width: 992px) {
-    .hero-section {
-        min-height: 451px;
-        height: 451px;
-    }
-
-    .hero-content {
-        padding: 142px 24px 0 24px; /* Отступы сверху 142px и слева 24px из Фигмы */
-        min-height: 451px;
-    }
-
-    .hero-title {
-        font-size: 40px;
-        max-width: 547px;
-    }
-
-    .hero-subtitle {
-        font-size: 26px;
-        margin-top: 4px;
-    }
-
-    .features-wrapper {
-        margin-top: 15px; /* Идеальный подгон под top: 263px для карточек */
-        position: relative;
-        gap: 0;
-    }
-
-    /* Синяя линия по макету: left: 25px, top: 263px, высота 140px.
-       Так как у родителя левый отступ 24px, сдвигаем линию на 1px */
-    .vertical-line {
-        position: absolute;
-        left: 1px;
-        top: 0;
-        height: 140px; /* Увеличена, чтобы доходить до низа кнопки */
-    }
-
-    /* Сдвиг блока карточек: left: 39px в макете (39 - 24 = 15px от родителя) */
-    .features-columns {
-        margin-left: 15px;
-        gap: 42px; /* Расстояние между карточками (341px - 299px) */
-    }
-
-    .feature-box {
-        background: transparent; /* Убираем черный фон по макету планшета */
-        font-size: 14px;
-        padding: 0;
-    }
-
-    .box-1 { max-width: 260.26px; }
-    .box-2 { max-width: 325px; }
-
-    /* Кнопка на планшете: left: 39px, top: 349px. 
-       Встает автоматически и ровно за счет правильного потока документа */
-    .btn-order-hero {
-        margin-top: 7px; /* (top 349px кнопки) - (top 263px карточек + 79px высота карточки) = 7px */
-        margin-left: 15px; /* Выравнивание по левой границе карточек (left 39px) */
-        width: 282px;
-        height: 50px;
-        font-size: 16px;
-    }
+/* Вертикальный синий разделитель */
+.hero__features-line {
+  flex-shrink: 0;
+  width: 4px;
+  border-radius: 2px;
+  background-color: var(--hero-line-color);
+  margin-right: 24px;
+  /* высота тянется автоматически по flex-контейнеру */
 }
 
-
-/* ==========================================================
-   ИСПРАВЛЕННЫЙ МОБИЛЬНЫЙ СТИЛЬ (ПОД МАКЕТ 320px)
-========================================================== */
-@media (max-width: 576px) {
-    .hero-section {
-        min-height: 294px;
-        height: 294px;
-    }
-
-    .hero-content {
-        padding: 77px 20px 0 20px; /* Выравниваем базовый левый отступ под 20px из макета */
-        min-height: 294px;
-        position: relative;
-    }
-
-    .hero-title {
-        font-size: 22px;
-        max-width: 302px;
-        line-height: 1.1;
-    }
-
-    .hero-subtitle {
-        font-size: 18px;
-        margin-top: 2px;
-        line-height: 1.2;
-    }
-
-    /* Обертка для карточек */
-    .features-wrapper {
-        margin-top: 7px; /* Сдвигает блок на top: 154px (77px padding + 70px заголовки + 7px) */
-        width: 100vw;
-        margin-left: -20px; /* Компенсируем паддинг родителя для красивого свайпа в край экрана */
-        display: flex;
-    }
-
-    /* Контейнер горизонтальной прокрутки */
-    .features-scroll-container {
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        padding-left: 20px; /* Чтобы первая карточка встала ровно на левую границу (left: 20px) */
-        padding-right: 20px;
-        scrollbar-width: none;
-    }
-    
-    .features-scroll-container::-webkit-scrollbar {
-        display: none;
-    }
-
-    .features-columns {
-        gap: 42px; /* Зазор между карточками по макету (322px - 280px) */
-    }
-
-    .feature-box {
-        font-size: 12px;
-        flex-shrink: 0;
-        scroll-snap-align: start;
-        background: transparent;
-        padding-left: 20px;
-        line-height: 1.3;
-    }
-
-    .box-1 { width: 260.26px; }
-    .box-2 { width: 325px; }
-
-
-
-    /* КНОПКА ЗАКАЗА (ИСПРАВЛЕНО) */
-    .btn-order-hero {
-        position: absolute;
-        left: 20px; 
-        top: 242px; /* Точное положение из вашего макета — теперь она строго ПОД текстом */
-        width: 230px;
-        height: 32px;
-        margin-top: 0;
-        margin-left: 0;
-        font-size: 14px;
-        border-radius: 6px;
-        background-color: #004A8F;
-    }
+/* Список фичей — горизонтальный ряд */
+.hero__features-list {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 }
 
-/* === ОПЫТ ВНЕДРЕНИЯ === === ОПЫТ ВНЕДРЕНИЯ === === ОПЫТ ВНЕДРЕНИЯ === === ОПЫТ ВНЕДРЕНИЯ ===*/
-.experience-section {
-    background-color: #E9E9E9; /* Не забываем наш серый фон */
-    padding-top: 149px;
-    padding-left: 131px;
+/* Один блок фичи */
+.hero__feature {
+  background: var(--hero-feature-bg);
+  opacity: 0.5;
+  border-radius: 6px;
+  padding: 12px 16px;
+  color: #FFFFFF;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  /* Первый блок шире примерно 298px, второй 372px.
+     Задаём пропорциональные flex-basis */
+  flex: 1 1 0;
+  z-index: 10;
 }
 
-.experience-header {
-    display: flex;
-    align-items: center; /* Выравнивает оба блока строго по одной горизонтальной линии */
+/* Кнопка */
+.hero__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 282px;
+  height: 50px;
+  padding: 0 24px;
+  background: var(--hero-blue-dark);
+  border-radius: 6px;
+  color: #fff;
+  font-family: var(--font-btn);
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s ease;
 }
 
-/* ОПЫТ ВНЕДРЕНИЯ — Высота 62px, Inter, Semi-Bold, 48px */
-.experience-title-blue {
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 48px;
-    color: #FFFFFF;
-    background: linear-gradient(90deg, #004A8F 0%, #08355F 100%);
-    
-    /* Точные размеры по Figma */
-    height: 62px; 
-    padding: 0 24px; /* Внутренние боковые отступы */
-    display: flex;
-    align-items: center; /* Центрирует текст по вертикали внутри 62px */
-    box-sizing: border-box;
+.hero__btn:hover,
+.hero__btn:focus-visible {
+  background: #005db8;
+  outline: none;
 }
 
-/* Где уже работают — Высота 62px, Рамка 1px, Inter, Bold, 24px */
-.experience-subtitle {
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-    font-size: 24px;
-    color: #004A8F;
-    line-height: 1.2;
+/* ══════════════════════════════════════════════════════
+   АДАПТИВ HERO-СЕКЦИИ
+   Брейкпоинты: 1024px → 762px (планшет) → 480px → 320px
+   ══════════════════════════════════════════════════════ */
 
-    /* Точные размеры и рамка по Figma */
-    height: 62px;
-    border: 2px solid #004A8F; /* Толщина 1px как на скриншоте */
-    border-left: none; /* Убираем левую границу, так как блок стыкуется с синим заголовком */
-    padding: 0 19px; /* Боковые отступы */
-    
-    display: flex;
-    align-items: center; /* Центрирует текст по вертикали */
-    box-sizing: border-box;
-}
-/* Контейнер карточек и кнопок - отступ сверху 54px от названия */
-.experience-content {
-    margin-top: 54px;
-    display: flex;
-    gap: 22px; /* Расстояние между блоком 2 (карточками) и кнопками */
-    align-items: flex-start;
+/* ──────────────────────────────────────────────────────
+   1024px: только сжимаем отступы контейнера,
+   все элементы ещё в исходном размере
+   ────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .hero__container {
+    padding: 0 60px;
+  }
 }
 
-/* Слайдер карточек - между картинками 51px */
-.slider-cards {
-    display: flex;
-    gap: 51px;
+/* ──────────────────────────────────────────────────────
+   762px (планшет):
+   — шрифты уменьшаются до планшетных значений из макета
+   — feature-блоки остаются в ряд, но уменьшаем gap и padding
+   — контейнер получает боковые отступы 24px
+   — высота секции адаптируется под 451px
+   ────────────────────────────────────────────────────── */
+@media (max-width: 762px) {
+  .hero {
+    min-height: 451px;
+  }
+
+  .hero__container {
+    padding: 0 24px;
+  }
+
+  .hero__content {
+    gap: 20px;
+  }
+
+  /* Планшетные размеры шрифтов из спагетти-кода */
+  .hero__title {
+    font-size: 40px;
+  }
+
+  .hero__subtitle {
+    font-size: 26px;
+    margin-top: -10px;
+  }
+
+  /* Feature-блоки: ряд сохраняем, но уменьшаем отступы между ними */
+  .hero__features-list {
+    gap: 12px;
+  }
+
+  .hero__feature {
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+
+  /* Кнопка: размер сохраняем (282×50px — влезает на 762px) */
 }
 
-.sensor-card {
-    width: 430px;
-    display: flex;
-    flex-direction: column;
-}
+/* ──────────────────────────────────────────────────────
+   480px (мобильный переход):
+   — feature-блоки переходят в CSS scroll-snap слайдер:
+     контейнер становится горизонтально прокручиваемым,
+     каждый блок занимает 100% ширины (один экран = один слайд)
+   — вертикальная синяя линия скрывается (не актуальна для слайдера)
+   — добавляем scrollbar-скрытие для чистого вида
+   ────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .hero {
+    min-height: 294px;
+    padding: 32px 0;
+  }
 
-.sensor-card img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    z-index: 2; /* Чтобы картинка была поверх подложки */
-}
+  .hero__container {
+    padding: 0 20px;
+  }
 
-.sensor-card img:hover {
-    transform: scale(1.02);
-}
+  .hero__content {
+    gap: 14px;
+  }
 
-/* Серая подложка - скрыта по умолчанию */
-.sensor-info {
-    background-color: #D9D9D9;
-    padding: 20px;
-    text-align: center;
-    border-radius: 0 0 12px 12px;
-    margin-top: -12px; /* Чтобы "приклеиться" к низу фото */
-    display: none; /* Скрыто до клика */
-    z-index: 1;
-}
+  .hero__title {
+    font-size: 22px;
+  }
 
-/* Показываем подложку при добавлении класса */
-.sensor-info.active {
-    display: block;
-    animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Название (главное) - Inter, Semi-Bold, 24px */
-.sensor-title {
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 24px;
-    color: #000000;
-    margin-bottom: 8px;
-}
-
-/* Название предприятия - Roboto, Regular, 20px */
-.sensor-company {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    font-size: 20px;
-    color: #333333;
-}
-
-/* Блок кнопок */
-.experience-controls {
-    display: flex;
-    flex-direction: column;
-    width: 282px;
-}
-
-.experience-controls button {
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
+  .hero__subtitle {
     font-size: 18px;
-    border-radius: 6px;
-    padding: 15px 0;
-    text-align: center;
-}
+    margin-top: -6px;
+  }
 
-.btn-primary {
-    background-color: #004A8F;
-    color: #FFFFFF;
-    border: none;
-    margin-bottom: 25px; /* Отступ между кнопками */
-}
+  /* Скрываем вертикальную линию — на мобиле её нет в макете */
+  .hero__features-line {
+    display: none;
+  }
 
-.btn-secondary {
-    background-color: transparent;
-    color: #004A8F;
-    border: 2px solid #004A8F;
-    margin-bottom: 36px; /* Отступ между 'Подробнее' и стрелками */
-}
+  /* ── CSS Scroll-Snap слайдер (замена JS-слайдера) ──
+     Контейнер становится горизонтальной прокруткой.
+     scroll-snap-type: обеспечивает магнитный эффект —
+     при свайпе экран "прилипает" к ближайшему слайду.
+  ── */
+  .hero__features {
+    width: 100%;
+  }
 
-/* Навигация слайдера */
-.slider-nav {
+  .hero__features-list {
+    /* Растягиваем на полную ширину контейнера,
+       выходим за padding через negative margin */
     display: flex;
+    flex-direction: row;          /* слайды идут горизонтально */
+    flex-wrap: nowrap;
+    gap: 0;
+
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory; /* магнитная прокрутка по X */
+    -webkit-overflow-scrolling: touch; /* плавность на iOS */
+
+    /* Скрываем полосу прокрутки визуально, но функция сохраняется */
+    scrollbar-width: none;        /* Firefox */
+    -ms-overflow-style: none;     /* IE/Edge */
+
+    /* Растягиваем список на полную ширину вьюпорта,
+       игнорируя padding контейнера */
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    /* Последний слайд не "прилипает" к правому краю контейнера —
+       добавляем правый padding как последний "зазор" */
+    scroll-padding-left: 20px;
+  }
+
+  /* Webkit-скрытие скроллбара (Chrome, Safari) */
+  .hero__features-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Каждый слайд = 100% ширины видимой области */
+  .hero__feature {
+    flex: 0 0 calc(100vw - 40px); /* ширина вьюпорта минус padding */
+    min-width: 0;
+    max-width: calc(100vw - 40px);
+    scroll-snap-align: start;    /* слайд прилипает к левому краю */
+    font-size: 12px;
+    padding: 10px 14px;
+    opacity: 0.5;
+    margin-right: 12px;          /* зазор между слайдами */
+  }
+
+  /* Последний слайд без правого отступа */
+  .hero__feature:last-child {
+    margin-right: 0;
+  }
+
+  /* Кнопка на мобиле: уменьшенная высота и шрифт из макета 320px */
+  .hero__btn {
+    min-width: 230px;
+    height: 32px;
+    font-size: 14px;
+    padding: 0 20px;
+  }
+}
+
+/* ──────────────────────────────────────────────────────
+   320px: финальная точка — всё уже адаптировано выше,
+   только фиксируем минимальные отступы
+   ────────────────────────────────────────────────────── */
+@media (max-width: 320px) {
+  .hero__container {
+    padding: 0 12px;
+  }
+
+  .hero__features-list {
+    margin-left: -12px;
+    margin-right: -12px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .hero__feature {
+    flex: 0 0 calc(100vw - 24px);
+    max-width: calc(100vw - 24px);
+  }
+
+  .hero__btn {
+    min-width: 0;
+    width: 100%;
+  }
+}
+
+
+.experience-section {
+  font-family: 'Inter', sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.experience-section * {
+  box-sizing: border-box;
+}
+
+/* --- Шапка секции (Десктоп и Планшет) --- */
+.experience-section .exp-header {
+  display: flex;
+  align-items: stretch;
+  margin-bottom: 40px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  width: fit-content;
+}
+
+.experience-section .exp-main-title {
+  background: linear-gradient(117deg, #004A8F 0%, #08355F 100%);
+  color: white;
+  font-size: 48px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 0 30px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  height: 62px;
+}
+
+.experience-section .exp-subtitle-badge {
+  border: 2px #09345D solid;
+  color: #09345D;
+  font-size: 24px;
+  font-weight: 700;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  height: 62px;
+}
+
+/* --- Контентная область (Общая сетка) --- */
+.experience-section .exp-content-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 282px; /* Справа всегда панель кнопок */
+  gap: 40px;
+  align-items: start;
+}
+
+/* --- Слайдер (Контейнер карточек) --- */
+#exp-slider-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* На ПК по 2 карточки */
+  gap: 30px;
+}
+
+/* Базовые стили карточки */
+.experience-section .exp-sensor-card {
+  background: #D9D9D9;
+  border-radius: 20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 430px;
+  justify-self: center;
+}
+
+.experience-section .exp-sensor-card img {
+  width: 100%;
+  height: 249px;
+  object-fit: cover;
+  background: #ccc;
+}
+
+.experience-section .exp-sensor-info {
+  padding: 25px 20px;
+  text-align: center;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.experience-section .exp-sensor-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: black;
+}
+
+.experience-section .exp-sensor-company {
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: black;
+  line-height: 1.3;
+}
+
+/* --- Сайдбар с кнопками и стрелками --- */
+.experience-section .exp-actions-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.experience-section .exp-buttons-group {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* Кнопки */
+.experience-section .exp-btn {
+  font-family: 'Roboto Slab', serif;
+  font-size: 20px;
+  font-weight: 500;
+  height: 60px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease-in-out;
+  text-align: center;
+  width: 100%;
+}
+
+.experience-section .exp-btn-primary {
+  background: #004A8F;
+  color: white;
+}
+
+.experience-section .exp-btn-primary:hover {
+  background: #08355F;
+}
+
+.experience-section .exp-btn-secondary {
+  background: transparent;
+  border: 1px #004A8F solid;
+  color: #004A8F;
+}
+
+.experience-section .exp-btn-secondary:hover {
+  background: rgba(0, 74, 143, 0.08);
+}
+
+/* Элементы управления слайдером */
+.experience-section .exp-slider-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+#exp-dots-container {
+  display: flex;
+  background: #000000;
+  padding: 6px 14px;
+  border-radius: 100px;
+  gap: 6px;
+  align-items: center;
+  height: 20px;
+}
+
+.experience-section .exp-dot {
+  width: 7.62px;
+  height: 8px;
+  background: #777777;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.experience-section .exp-dot.active {
+  background: #D9D9D9;
+}
+
+/* Стрелки слайдера */
+.experience-section .exp-arrow-btn {
+  background: transparent;
+  border: none;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  cursor: pointer;
+}
+
+.experience-section .exp-arrow-btn::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-top: 5px solid #004A8F;
+  border-right: 5px solid #004A8F;
+  top: 50%;
+  left: 50%;
+}
+
+#exp-prev-btn::before {
+  transform: translate(-30%, -50%) rotate(-135deg);
+}
+
+#exp-next-btn::before {
+  transform: translate(-70%, -50%) rotate(45deg);
+}
+
+#exp-prev-btn.disabled,
+#exp-next-btn.disabled {
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+/* ════════════════════════════════════════════
+   АДАПТИВНОСТЬ: ПЛАНШЕТ (До 1024px включительно)
+   Соответствует Скриншоту 1
+   ════════════════════════════════════════════ */
+@media (max-width: 1024px) and (min-width: 768px) {
+  .experience-section .exp-content-wrapper {
+    grid-template-columns: 430px 1fr; /* Сайдбар остается справа */
+    gap: 30px;
+  }
+
+  #exp-slider-container {
+    grid-template-columns: 1fr; /* Строго ОДИН датчик на экране */
+  }
+
+  .experience-section .exp-sensor-card {
+    max-width: 430px; /* Фиксированная ширина из макета */
+  }
+}
+
+/* ════════════════════════════════════════════
+   АДАПТИВНОСТЬ: МОБИЛЬНЫЕ (До 767px включительно)
+   Соответствует Скриншоту 2 (320px)
+   ════════════════════════════════════════════ */
+@media (max-width: 767px) {
+  .experience-section {
+    padding: 20px 10px;
+  }
+
+  /* Шапка становится вертикальной и адаптивной */
+  .experience-section .exp-header {
+    flex-direction: column;
+    width: 100%;
+    box-shadow: none;
+    margin-bottom: 25px;
+  }
+
+  .experience-section .exp-main-title {
+    font-size: 30px;
+    height: 36px;
+    padding: 0 15px;
+    width: 100%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  .experience-section .exp-subtitle-badge {
+    font-size: 15px;
+    height: 25px;
+    padding: 0 10px;
+    width: 100%;
+    border-top: none;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Контент встает в один столбец */
+  .experience-section .exp-content-wrapper {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    justify-items: center;
+  }
+
+  #exp-slider-container {
+    grid-template-columns: 1fr; /* Строго один датчик */
+    width: 100%;
+    justify-items: center;
+  }
+
+  /* Карточка сжимается под мобильные пропорции (293x170 для картинки) */
+  .experience-section .exp-sensor-card {
+    max-width: 293px;
+  }
+
+  .experience-section .exp-sensor-card img {
+    height: 170px;
+  }
+
+  .experience-section .exp-sensor-info {
+    padding: 15px 10px;
+  }
+
+  .experience-section .exp-sensor-title {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+
+  .experience-section .exp-sensor-company {
+    font-size: 16px;
+  }
+
+  /* Изменение порядка элементов управления в сайдбаре */
+  .experience-section .exp-actions-sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 25px;
     align-items: center;
-    justify-content: center;
-    gap: 15px;
+  }
+
+  .experience-section .exp-slider-controls {
+    order: 1; /* Стрелки и точки встают СРАЗУ под карточку */
+    max-width: 293px;
+    margin: 0 auto;
+  }
+
+  .experience-section .exp-buttons-group {
+    order: 2; /* Кнопки падают в самый низ */
+    flex-direction: column; /* Кнопки друг под другом */
+    gap: 17px;
+    width: 100%;
+    align-items: center;
+  }
+
+  /* Размеры кнопок на мобильном (229x49px) */
+  .experience-section .exp-btn {
+    font-size: 16px;
+    height: 49px;
+    max-width: 229px;
+  }
 }
-
-.nav-arrow {
-    width: 48.82px;
-    background: none;
-    border: none;
-    color: #004A8F;
-    font-size: 32px;
-    cursor: pointer;
-}
-
-.nav-arrow.disabled {
-    color: #A0A0A0;
-    cursor: default;
-}
-
-.slider-dots {
-    display: flex;
-    gap: 6px;
-    background: #000000;
-    padding: 8px 12px;
-    border-radius: 20px;
-}
-
-.dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: #555555;
-}
-
-.dot.active {
-    background-color: #FFFFFF;
-}
-
-
-
 /* --- ОБЕРТКА СЕКЦИИ --- */
 .complectation-section {
     width: 100%;

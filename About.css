@@ -140,6 +140,182 @@ body {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+/* ══════════════════════════════════════════════════
+   АДАПТИВ СЕКЦИИ "О УНИВЕРСИТЕТЕ"
+   ══════════════════════════════════════════════════ */
+
+/* ── 1100px: сжимаем только gap и padding контейнера,
+   все блоки ещё в исходном размере ── */
+@media (max-width: 1100px) {
+  .about-container {
+    gap: 24px;
+  }
+}
+
+/* ── 900px: правая колонка начинает мешать —
+   уменьшаем её ширину, сжимаем gap.
+   Сами картинки не трогаем ── */
+@media (max-width: 900px) {
+  .about-container {
+    gap: 16px;
+    align-items: center;
+  }
+
+  .about-collage-right {
+    width: 220px;
+    height: 420px;
+    flex-shrink: 0;
+  }
+}
+
+/* ══════════════════════════════════════════════════
+   762px — ПЛАНШЕТНЫЙ БРЕЙКПОИНТ (из Figma-макета)
+   ГЛАВНАЯ ПЕРЕСТРОЙКА:
+   — заголовок 36px → 24px
+   — текст 16px → 14px
+   — коллаж перестаёт быть position:relative/absolute,
+     перестраивается во flex-колонку шириной 192px
+   — два фото выстраиваются друг под другом
+   — about-cards-row остаётся в ряд (как в макете)
+   ══════════════════════════════════════════════════ */
+@media (max-width: 995px) {
+  .about-hero-section {
+    padding: 40px 16px;
+    min-height: auto;
+  }
+
+  .about-container {
+    gap: 24px;
+    align-items: flex-start;
+    margin-top: 70px;
+  }
+
+  /* Заголовок: 36px → 24px */
+  .about-title {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+
+  /* Текст карточек: 16px → 14px */
+  .about-card p {
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  /* Внутренние отступы карточек чуть меньше */
+  .about-card {
+    padding: 12px 16px;
+  }
+
+  .wide-card {
+    margin-bottom: 12px;
+  }
+
+  /* about-cards-row: два блока остаются в ряд,
+     только gap уменьшается */
+  .about-cards-row {
+    gap: 12px;
+  }
+
+  /* ── ПРАВАЯ КОЛОНКА: отказываемся от position:absolute-коллажа,
+     перестраиваем во flex-колонку как в планшетном макете ── */
+  .about-collage-right {
+    /* Сбрасываем фиксированные размеры position-контейнера */
+    position: static;
+    width: 192px;
+    height: auto;
+    flex-shrink: 0;
+
+    /* Flex-колонка: два фото + логотип */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 16px;
+  }
+
+  /* Переводим картинки из absolute в обычный поток */
+  .collage-img {
+    position: static;
+    width: 192px;
+    height: auto;
+    aspect-ratio: 255 / 170; /* сохраняем пропорцию десктопного оригинала */
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  /* img-middle: та же ширина, чуть меньшее соотношение */
+  .img-middle {
+    aspect-ratio: 255 / 142;
+  }
+
+  /* Логотип-ссылка: из absolute в обычный поток */
+  .img-bottom-link {
+    position: static;
+    width: 86px;
+    height: auto;
+    aspect-ratio: 105 / 144;
+    align-self: flex-end;
+  }
+
+  .logo-link-img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* ── 600px: левая колонка и коллаж перестают помещаться
+   рядом — перестраиваем в одну колонку ── */
+@media (max-width: 600px) {
+  .about-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .about-content-left {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  /* Галерея на мобиле: горизонтальный ряд из фото + бейдж */
+  .about-collage-right {
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .collage-img {
+    width: calc(50% - 6px);  /* два фото в ряд */
+  }
+
+  .img-bottom-link {
+    width: 80px;
+    align-self: center;
+  }
+}
+
+/* ── 480px: два малых блока в about-cards-row
+   больше не помещаются рядом — стекаем в колонку ── */
+@media (max-width: 480px) {
+  .about-cards-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .about-title {
+    font-size: 20px;
+  }
+
+  /* Фото в галерее — каждое на всю ширину */
+  .collage-img {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
 /* =========================================
    СЕКЦИЯ РУКОВОДИТЕЛЯ ПРОЕКТА
 ========================================= */
@@ -195,7 +371,6 @@ body {
     font-weight: 400;
     text-transform: uppercase;
     text-align: justify;
-    line-height: 1.3;
 }
 
 /* --- Шахматный порядок текста и иконок --- */
@@ -301,6 +476,209 @@ body {
     font-weight: 400;
     text-transform: uppercase;
     line-height: 1.2;
+}
+
+/* =========================================
+   АДАПТИВ: ПЛАНШЕТНЫЙ РЕЖИМ (max-width: 1024px)
+   Сетка перестраивается в колонку. Портрет уходит наверх.
+========================================= */
+
+/* =========================================
+   ПРОМЕЖУТОЧНЫЙ АДАПТИВ (1370px — 1025px)
+   Спасаем верстку от переполнения и обрезания краев
+========================================= */
+@media (max-width: 1370px) and (min-width: 1025px) {
+    
+    .team-leader-section {
+        /* Делаем боковые отступы, чтобы контент не лип к краям экрана */
+        padding: 40px 20px;
+        gap: 20px; /* Немного уменьшаем зазор между колонками */
+        justify-content: space-between;
+    }
+
+    /* --- ЛЕВАЯ КОЛОНКА --- */
+    .leader-info-left {
+        /* Позволяем колонке гибко сжиматься, но не меньше 55% ширины */
+        flex: 1 1 55%; 
+        max-width: 834px;
+    }
+
+    .leader-intro-box {
+        /* КРИТИЧЕСКИ: убираем фиксированную высоту десктопа! 
+           Теперь блок будет автоматически растягиваться под высоту текста */
+        height: auto; 
+        min-height: 213px;
+        padding: 15px;
+    }
+
+    .leader-intro-text {
+        /* Слегка уменьшаем шрифт, чтобы текст занимал меньше места */
+        font-size: 15px; 
+        line-height: 1.4;
+    }
+
+    .history-step-text {
+        /* Делаем текстовые блоки истории резиновыми */
+        max-width: 75%; 
+    }
+
+    /* --- ПРАВАЯ КОЛОНКА (ПОРТРЕТ) --- */
+    .leader-portrait-right {
+        /* Позволяем блоку сжиматься, отдаем ему до 40% ширины экрана */
+        flex: 1 1 40%;
+        max-width: 550px;
+        height: auto;
+        /* Сохраняем идеальные пропорции лица при любом разрешении в этом диапазоне */
+        aspect-ratio: 602 / 670; 
+        margin-left: 0;
+    }
+
+    /* Делаем плашку с именем адаптивной внутри сжимающегося портрета */
+    .portrait-overlay {
+        width: 90%; 
+        height: auto;
+        padding: 15px 10px;
+    }
+
+    .portrait-name {
+        font-size: 30px; /* Чуть уменьшаем, чтобы имя не разбивалось на три строки */
+    }
+    
+    .portrait-surname {
+        font-size: 32px;
+    }
+
+    .portrait-title {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 1130px) {
+    .team-leader-section {
+        flex-direction: column;
+        align-items: center;
+        padding-left: 0; /* Сбрасываем десктопный сдвиг */
+        padding: 40px 20px;
+        gap: 40px;
+    }
+
+    /* Поднимаем блок с портретом наверх без изменения HTML */
+    .leader-portrait-right {
+        order: -1;
+        margin-left: 0;
+        width: 100%;
+        max-width: 487px; /* Размер из промежуточного спагетти-кода */
+        height: auto;
+        aspect-ratio: 487 / 547; /* Сохраняем пропорции при сжатии */
+    }
+
+    /* Адаптируем подложку с именем */
+    .portrait-overlay {
+        width: 96%;
+        max-width: 467px;
+        height: 153px;
+        bottom: 12px;
+    }
+
+    /* Шрифты планшета (вытащены из первой части кода Figma) */
+    .portrait-name { font-size: 38px; }
+    .portrait-surname { font-size: 32px; }
+    .portrait-title { font-size: 20px; }
+
+    /* Левая колонка теперь занимает всю ширину по центру */
+    .leader-info-left {
+        max-width: 742px;
+        align-items: center;
+    }
+
+    .leader-intro-box {
+        width: 100%;
+        height: auto;
+        min-height: 151px;
+    }
+
+    .leader-intro-text {
+        font-size: 14px;
+    }
+
+    .history-step-row {
+        width: 100%;
+    }
+
+    .history-step-text {
+        font-size: 12px;
+        max-width: 540px;
+    }
+}
+
+/* =========================================
+   АДАПТИВ: МОБИЛЬНЫЙ РЕЖИМ (max-width: 600px)
+   Критическая точка. Сжатие элементов и перестроение карточек.
+========================================= */
+@media (max-width: 600px) {
+    .leader-portrait-right {
+        max-width: 320px; /* Размер из мобильного спагетти-кода */
+        aspect-ratio: 320 / 359;
+    }
+
+    .portrait-overlay {
+        max-width: 307px;
+        height: 101px;
+        padding: 5px;
+    }
+
+    /* Шрифты смартфона */
+    .portrait-name { font-size: 26px; }
+    .portrait-surname { font-size: 20px; }
+    .portrait-title { font-size: 15px; }
+
+    /* Зеленый блок интро больше не вмещает фото и текст в ряд — перестраиваем в колонку */
+    .leader-intro-box {
+        flex-direction: column;
+        max-width: 295px;
+        padding: 20px 15px;
+        gap: 15px;
+    }
+
+    .leader-small-photo {
+        width: 100%;
+        max-width: 253px;
+        height: auto;
+        aspect-ratio: 253 / 211;
+    }
+
+    .leader-intro-text {
+        font-size: 12px;
+    }
+
+    /* Сбрасываем шахматный порядок. В мобильном макете все иконки стоят слева (left: 10px) */
+    .history-step-row,
+    .history-step-row.reverse-row {
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 15px;
+    }
+
+    /* Уменьшаем зеленые квадраты иконок */
+    .history-icon-box {
+        width: 118px;
+        min-height: 63px;
+        flex-shrink: 0; /* Строгий запрет на сжатие квадрата текстом */
+    }
+
+    .step-icon {
+        max-width: 40px;
+        max-height: 40px;
+    }
+
+    /* Извлечено из мобильного макета. Внимание: 8px — это экстремально мало для web, 
+       но строго соответствует предоставленному спагетти-коду */
+    .history-step-text {
+        font-size: 8px; 
+        max-width: 100%;
+        line-height: 1.3;
+    }
 }
 
 /* =========================================
