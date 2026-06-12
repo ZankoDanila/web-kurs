@@ -1,81 +1,137 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>Панель Администратора | ООО БЕЛАЗ</title>
-    <link rel="stylesheet" href="admin.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Панель Администратора — БЕЛАЗ и Партнёры</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="admin.css" />
 </head>
 <body>
 
-    <header class="admin-header">
-        <div class="logo">Панель Администратора | ООО БЕЛАЗ и Партнеры</div>
-        <div class="admin-profile">
-            <span>Администратор: Главный</span>
-            <button class="btn-exit">Выйти</button>
-        </div>
-    </header>
-
-    <main class="admin-container">
-        <section class="card">
-            <h2>Поступившие заявки на регистраторы</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th><th>Компания</th><th>Прибор</th><th>Сумма</th><th>Статус</th><th>Действие</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td><td>ООО "БЕЛАЗ"</td><td>СМСО-БРУ-01</td><td>500 000</td>
-                        <td><span class="badge pending">pending</span></td>
-                        <td><button class="btn-action" onclick="openModal(1)">Выставить счет</button></td>
-                    </tr>
-                    <tr>
-                        <td>3</td><td>БРУ</td><td>РСП-БРУ-01</td><td>45 000</td>
-                        <td><span class="badge approved">approved</span></td>
-                        <td>
-                            <select>
-                                <option>В производстве</option>
-                                <option>Готово к отгрузке</option>
-                            </select>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <div class="bottom-grid">
-            <section class="card">
-                <h2>Зарегистрированное оборудование</h2>
-                <div class="sensor-list">
-                    <div class="company-item">
-                        <strong>РУП "Белоруснефть"</strong>
-                        <p>RSP-01-9923 (РСП-БРУ-01)</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="card">
-                <h2>Обратная связь</h2>
-                <div class="review-item">
-                    <p><strong>ООО "БЕЛАЗ"</strong> — Петров И.И.</p>
-                    <p>"Система полностью оправдала ожидания..."</p>
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <div id="modal" class="overlay">
-        <div class="modal-box">
-            <h3>Выставить счет</h3>
-            <input type="number" placeholder="Введите сумму (руб.)">
-            <button class="btn-primary" onclick="closeModal()">Отправить клиенту</button>
-        </div>
+<header class="header">
+  <div class="header__brand">
+    <div class="header__logo">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="22" height="22" rx="3" fill="#00529b"/>
+        <text x="5" y="16" font-family="Inter,sans-serif" font-weight="700" font-size="14" fill="#fff">Б</text>
+      </svg>
     </div>
+    <span class="header__title">Панель Администратора<span> | ООО БЕЛАЗ и Партнёры</span></span>
+  </div>
+  <div class="header__right">
+    <span class="header__admin">Администратор: <strong id="admin-name">Главный</strong></span>
+    <button class="btn-logout" id="logout-btn">Выйти</button>
+  </div>
+</header>
 
-    <script>
-        function openModal(id) { document.getElementById('modal').style.display = 'flex'; }
-        function closeModal() { document.getElementById('modal').style.display = 'none'; }
-    </script>
+<main class="workspace">
+
+  <!-- БЛОК 1: Заявки на заказы (orders) -->
+  <section class="card card--wide" id="block-orders">
+    <div class="card__header">
+      <div class="card__title">
+        <div class="card__title-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+        Заявки на регистраторы (ожидают сметы)
+      </div>
+      <span class="card__count" id="orders-count">0</span>
+    </div>
+    <div class="card__body">
+      <div class="table-wrap">
+        <table id="orders-table">
+          <thead><tr><th>ID</th><th>Компания</th><th>Прибор</th><th>Кол-во</th><th>Помещений</th><th>Доп. модули</th><th>Дата</th><th>Статус</th><th>Действие</th></tr></thead>
+          <tbody id="orders-tbody"><tr><td colspan="9">Загрузка...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- БЛОК 2: Заявки на доработки (upgrade_requests) -->
+  <section class="card card--wide" id="block-upgrades">
+    <div class="card__header">
+      <div class="card__title">
+        <div class="card__title-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+        Заявки на доработки
+      </div>
+      <span class="card__count" id="upgrades-count">0</span>
+    </div>
+    <div class="card__body">
+      <div class="table-wrap">
+        <table id="upgrades-table">
+          <thead><tr><th>ID</th><th>Компания</th><th>Тип</th><th>Описание</th><th>Дата</th><th>Статус</th><th>Действие</th></tr></thead>
+          <tbody id="upgrades-tbody"><tr><td colspan="7">Загрузка...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- БЛОК 3: Текущие заказы (estimates) со статусами производства -->
+  <section class="card card--wide" id="block-estimates">
+    <div class="card__header">
+      <div class="card__title">
+        <div class="card__title-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></div>
+        Заказы в работе (производство)
+      </div>
+      <span class="card__count" id="estimates-count">0</span>
+    </div>
+    <div class="card__body">
+      <div class="table-wrap">
+        <table id="estimates-table">
+          <thead><tr><th>ID</th><th>Компания</th><th>Прибор</th><th>Кол-во</th><th>Сумма</th><th>Статус производства</th><th>Действие</th></tr></thead>
+          <tbody id="estimates-tbody"><tr><td colspan="7">Загрузка...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- БЛОК 4: База оборудования клиентов (из my_sensors) -->
+  <section class="card" id="block-sensors">
+    <div class="card__header">
+      <div class="card__title">
+        <div class="card__title-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></div>
+        Оборудование клиентов
+      </div>
+      <span class="card__count" id="clients-count">0</span>
+    </div>
+    <div class="card__body">
+      <ul class="client-list" id="client-list"></ul>
+    </div>
+  </section>
+
+</main>
+
+<!-- Модальное окно для выставления сметы (общее для заказов и доработок) -->
+<div class="modal-overlay" id="estimate-modal">
+  <div class="modal">
+    <div class="modal__header">
+      <div class="modal__title">Выставить смету</div>
+      <button class="modal__close" id="close-estimate-modal">&times;</button>
+    </div>
+    <div class="modal__body">
+      <div class="modal__info-row">
+        <div class="modal__info-item"><div class="modal__info-label">Клиент</div><div class="modal__info-value" id="modal-client">—</div></div>
+        <div class="modal__info-item"><div class="modal__info-label">Заявка ID</div><div class="modal__info-value" id="modal-item-id">—</div></div>
+      </div>
+      <div class="form-group">
+        <label for="estimate-amount">Сумма сметы (руб.)</label>
+        <input type="number" id="estimate-amount" class="form-input" min="0" step="1000" placeholder="0" />
+      </div>
+      <div class="form-group">
+        <label for="estimate-comment">Комментарий (опционально)</label>
+        <textarea id="estimate-comment" rows="2" class="form-input"></textarea>
+      </div>
+    </div>
+    <div class="modal__footer">
+      <button class="btn btn--cancel" id="cancel-estimate">Отмена</button>
+      <button class="btn btn--primary" id="submit-estimate">Отправить клиенту</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast уведомление -->
+<div class="toast" id="toast"><span id="toast-msg">Действие выполнено</span></div>
+
+<script src="admin.js"></script>
 </body>
 </html>

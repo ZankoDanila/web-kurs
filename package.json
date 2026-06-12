@@ -1,0 +1,26 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZankoDanila/web-kurs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ZankoDanila/web-kurs/issues"
+  },
+  "homepage": "https://github.com/ZankoDanila/web-kurs#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "json-server": "^1.0.0-beta.15"
+  }
+}

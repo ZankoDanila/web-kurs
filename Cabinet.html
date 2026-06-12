@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Личный кабинет — ООО «БЕЛАЗ»</title>
+  <title>Личный кабинет</title>
   <link rel="stylesheet" href="Cabinet.css" />
 </head>
 <body>
@@ -11,14 +11,13 @@
 <div class="layout">
 
   <aside class="sidebar">
-
-    <button type="button" class="sidebar__logout">Выйти из профиля</button>
+    <button type="button" class="sidebar__logout" id="logout-btn">Выйти из профиля</button>
 
     <div class="sidebar__user">
-      <div class="sidebar__avatar" aria-hidden="true">П</div>
+      <div class="sidebar__avatar" aria-hidden="true" id="sidebar-avatar">П</div>
       <div class="sidebar__user-info">
-        <span class="sidebar__company">ООО "БЕЛАЗ"</span>
-        <span class="sidebar__surname">ПЕТРОВ</span>
+        <span class="sidebar__company" id="sidebar-company">—</span>
+        <span class="sidebar__surname" id="sidebar-surname">—</span>
       </div>
     </div>
 
@@ -50,11 +49,9 @@
     </nav>
 
     <a href="Main.html" class="sidebar__home-link">На главную страницу</a>
-
     <a href="http://bru.by" target="_blank" class="sidebar__logo-link">
       <img src="img/BRU_logo2.png" class="sidebar__logo" alt="BRU" />
     </a>
-
   </aside>
 
   <main class="dashboard" id="profile">
@@ -63,55 +60,47 @@
     <div class="dashboard__top-row">
 
       <section class="profile-card" aria-label="Данные профиля">
-        <div class="profile-card__avatar">П</div>
-        
-        <h2 class="profile-card__company">ООО "БЕЛАЗ"</h2>
-        
+        <div class="profile-card__avatar" id="profile-avatar">П</div>
+        <h2 class="profile-card__company" id="profile-company">—</h2>
         <div class="profile-card__info-bg">
-          <div class="profile-card__name">Петров Иннокентий Иванович</div>
-          <div class="profile-card__role">Менеджер по закупкам</div>
-          <div class="profile-card__contact">belaz_super228@gmail.com</div>
-          <div class="profile-card__contact">+375 33 333 3333</div>
+          <div class="profile-card__name" id="profile-name">—</div>
+          <div class="profile-card__role" id="profile-role">—</div>
+          <div class="profile-card__contact" id="profile-email">—</div>
+          <div class="profile-card__contact" id="profile-phone">—</div>
           <span class="profile-card__extra">дополнительно</span>
         </div>
-        
         <img class="profile-card__banner" src="img/image 13.png" alt="Карьерный самосвал БЕЛАЗ" />
-        <button type="button" class="profile-card__btn-edit">РЕДАКТИРОВАТЬ</button>
+        <button type="button" class="profile-card__btn-edit" id="edit-profile-btn">РЕДАКТИРОВАТЬ</button>
       </section>
 
       <section class="order-card" aria-label="Текущий заказ">
         <h2 class="order-card__title">Мой заказ</h2>
-
-        <span class="order-card__status">проектируем</span>
+        <span class="order-card__status" id="order-status">—</span>
 
         <div class="order-card__item" id="current-order-item">
-          <img src="img/image.svg" class="order-card__item-icon" alt="VibroMaster VM-450" />
+          <img src="img/image.svg" class="order-card__item-icon" alt="Регистратор" id="order-item-img" />
           <div class="order-card__item-info">
-            <p class="order-card__item-name" id="order-item-name">VibroMaster VM-450</p>
-            <p class="order-card__item-serial" id="order-item-serial">C/H: VM-450-2023-1542</p>
+            <p class="order-card__item-name" id="order-item-name">—</p>
+            <p class="order-card__item-serial" id="order-item-serial">—</p>
           </div>
-          <p class="order-card__item-price" id="order-item-price">50 000 рублей</p>
+          <p class="order-card__item-price" id="order-item-price">—</p>
         </div>
 
         <div class="order-card__qty">
           <p class="order-card__qty-label">Количество:</p>
           <ul class="order-card__qty-list" id="order-qty-list">
-            <li>10 регистраторов</li>
-            <li>3 помещения</li>
+            <li>—</li>
           </ul>
         </div>
 
         <div class="order-card__desc">
           <p class="order-card__desc-label">Описание:</p>
-          <p class="order-card__desc-text" id="order-description">
-            Прямая интеграция с любым типом сварочного оборудования, встроенная система защиты
-            и мгновенная аппаратная синхронизация с мобильным приложением управления.
-          </p>
+          <p class="order-card__desc-text" id="order-description">—</p>
         </div>
 
         <div class="order-card__total">
-          <span class="order-card__total-unit" id="order-unit-price">50 000 х10</span>
-          <span class="order-card__total-sum" id="order-total-sum">итого: 500 000 рублей</span>
+          <span class="order-card__total-unit" id="order-unit-price">—</span>
+          <span class="order-card__total-sum" id="order-total-sum">—</span>
         </div>
       </section>
 
@@ -119,44 +108,102 @@
 
     <section class="orders-history" aria-label="История заказов">
       <h2 class="orders-history__title">История заказов</h2>
-
       <div class="orders-history__table-wrap">
-        <table class="orders-history__table" aria-label="Таблица истории заказов">
+        <table class="orders-history__table">
           <thead>
             <tr>
-              <th scope="col" class="orders-history__th orders-history__th--registrator">Регистратор</th>
-              <th scope="col" class="orders-history__th orders-history__th--qty-reg">кол-во<br/>регистраторов</th>
-              <th scope="col" class="orders-history__th orders-history__th--qty-room">кол-во<br/>помещений</th>
-              <th scope="col" class="orders-history__th orders-history__th--extra">что-то добавить</th>
-              <th scope="col" class="orders-history__th orders-history__th--date-in">дата оформления</th>
-              <th scope="col" class="orders-history__th orders-history__th--date-out">дата получения</th>
-              <th scope="col" class="orders-history__th orders-history__th--total">Итого</th>
+              <th>Регистратор</th>
+              <th>кол-во регистраторов</th>
+              <th>кол-во помещений</th>
+              <th>что-то добавить</th>
+              <th>дата оформления</th>
+              <th>дата получения</th>
+              <th>Итого</th>
             </tr>
           </thead>
           <tbody id="orders-table-body">
-            <tr>
-              <td class="orders-history__td">
-                <div class="orders-history__device">
-                  <img src="img/icon.svg" class="orders-history__device-icon" alt="" />
-                  <div>
-                    <p class="orders-history__device-name">VibroMaster VM-450</p>
-                    <p class="orders-history__device-serial">C/H: VM-450-2023-1542</p>
-                  </div>
-                </div>
-              </td>
-              <td class="orders-history__td orders-history__td--num">х10</td>
-              <td class="orders-history__td orders-history__td--num">х3</td>
-              <td class="orders-history__td">что-то</td>
-              <td class="orders-history__td orders-history__td--date orders-history__td--green">10.12.2024</td>
-              <td class="orders-history__td orders-history__td--date orders-history__td--green">10.12.2024</td>
-              <td class="orders-history__td orders-history__td--sum">500 000 рублей</td>
-            </tr>
+            <tr><td colspan="7">Загрузка...</td></tr>
           </tbody>
         </table>
       </div>
     </section>
-
   </main>
 </div>
+
+<!-- Модальное окно заказа -->
+<div class="modal-overlay" id="order-modal">
+  <div class="modal">
+    <div class="modal__header">
+      <span class="modal__title">Оформить заказ на регистраторы</span>
+      <button class="modal__close" id="close-order-modal">&times;</button>
+    </div>
+    <div class="modal__body">
+      <form id="order-form">
+        <div class="form-group">
+          <label>Тип регистратора</label>
+          <select id="order-sensor" required></select>
+        </div>
+        <div class="form-group">
+          <label>Количество регистраторов</label>
+          <input type="number" id="order-reg-count" min="1" value="1" required>
+        </div>
+        <div class="form-group">
+          <label>Количество помещений</label>
+          <input type="number" id="order-rooms-count" min="1" value="1" required>
+        </div>
+        <div class="form-group">
+          <label>Дополнительные модули (опционально)</label>
+          <input type="text" id="order-modules" placeholder="RFID, моб. приложение...">
+        </div>
+        <div class="form-group">
+          <label>Описание / пожелания</label>
+          <textarea id="order-desc" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn--primary">Отправить заявку</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Модальное окно доработки -->
+<div class="modal-overlay" id="upgrade-modal">
+  <div class="modal">
+    <div class="modal__header">
+      <span class="modal__title">Запрос на доработку</span>
+      <button class="modal__close" id="close-upgrade-modal">&times;</button>
+    </div>
+    <div class="modal__body">
+      <form id="upgrade-form">
+        <div class="form-group">
+          <label>Тип доработки</label>
+          <select id="upgrade-type" required>
+            <option value="web">Веб-часть (интерфейс, аналитика)</option>
+            <option value="hardware">Аппаратная часть (модернизация прибора)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Описание требуемой доработки</label>
+          <textarea id="upgrade-desc" rows="4" placeholder="Опишите, что нужно изменить или добавить..." required></textarea>
+        </div>
+        <button type="submit" class="btn--primary">Отправить запрос</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Модальное окно смет -->
+<div class="modal-overlay" id="estimates-modal">
+  <div class="modal modal--wide">
+    <div class="modal__header">
+      <span class="modal__title">Предложенные сметы</span>
+      <button class="modal__close" id="close-estimates-modal">&times;</button>
+    </div>
+    <div class="modal__body" id="estimates-list-container">
+      <p>Загрузка...</p>
+    </div>
+  </div>
+</div>
+
+<script src="Cabinet.js"></script>
 </body>
 </html>

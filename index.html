@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>БЕЛАЗ — B2B Портал</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <div class="auth-card" id="auth-card">
+        
+        <div id="login-view" class="auth-view active-view fade-in">
+            <h1 class="auth-title">Вход в систему</h1>
+            <p class="auth-subtitle">B2B-портал ООО «БЕЛАЗ»</p>
+            
+            <div class="error-message" id="login-error">Неверный логин или пароль</div>
+
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email или Логин</label>
+                    <input type="text" id="login-email" name="login-email" placeholder="Введите email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="login-password">Пароль</label>
+                    <input type="password" id="login-password" name="login-password" placeholder="Введите пароль" required>
+                </div>
+
+                <button type="submit" class="btn-primary">Войти</button>
+            </form>
+
+            <a href="#" class="toggle-link" id="go-to-register">Ещё нет аккаунта? Зарегистрироваться</a>
+        </div>
+
+        <div id="register-view" class="auth-view hidden fade-in">
+            <h1 class="auth-title">Регистрация компании</h1>
+            <p class="auth-subtitle">Заполните данные для создания B2B-аккаунта</p>
+
+            <div class="error-message" id="register-error">Пожалуйста, заполните все обязательные поля</div>
+
+            <form id="register-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="reg-fio">ФИО представителя</label>
+                        <input type="text" id="reg-fio" name="fio" placeholder="Иванов Иван Иванович" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg-position">Должность</label>
+                        <input type="text" id="reg-position" name="position" placeholder="Директор по закупкам" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg-email">Email</label>
+                        <input type="email" id="reg-email" name="email" placeholder="company@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg-phone">Телефон</label>
+                        <input type="tel" id="reg-phone" name="phone" placeholder="+375 (XX) XXX-XX-XX" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg-password">Пароль</label>
+                        <input type="password" id="reg-password" name="password" placeholder="Надежный пароль" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg-unp">УНП</label>
+                        <input type="text" id="reg-unp" name="unp" placeholder="123456789" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg-address">Юридический адрес</label>
+                        <input type="text" id="reg-address" name="address" placeholder="г. Минск, ул. Примерная, 1" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg-deps">Кол-во структурных подразделений</label>
+                        <input type="number" id="reg-deps" name="departments_count" placeholder="Например: 3" min="0" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary">Зарегистрировать компанию</button>
+            </form>
+
+            <a href="#" class="toggle-link" id="go-to-login">Уже есть аккаунт? Войти</a>
+        </div>
+
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>

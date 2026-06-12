@@ -671,3 +671,128 @@ img {
   .profile-card__info-bg, .profile-card__banner, .profile-card__btn-edit { width: 100%; }
   .order-card { width: 100%; }
 }
+
+/* ===== Стили для модальных окон ===== */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modal-overlay.open {
+  display: flex;
+}
+.modal {
+  background: #fff;
+  border-radius: 12px;
+  width: 500px;
+  max-width: 90%;
+  padding: 0;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+.modal--wide {
+  width: 700px;
+  max-width: 95%;
+}
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e2e8f0;
+}
+.modal__title {
+  font-weight: 700;
+  font-size: 18px;
+}
+.modal__close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #64748b;
+}
+.modal__close:hover {
+  color: #1e293b;
+}
+.modal__body {
+  padding: 20px;
+}
+.form-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.form-group label {
+  font-weight: 500;
+  font-size: 14px;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 8px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 14px;
+}
+.btn--primary {
+  background: #00529b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.btn--primary:hover {
+  background: #003d73;
+}
+.estimate-item {
+  border-bottom: 1px solid #e2e8f0;
+  padding: 15px 0;
+  margin-bottom: 10px;
+}
+.estimate-item:last-child {
+  border-bottom: none;
+}
+.estimate-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+.btn--confirm {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+.btn--confirm:hover {
+  background: #059669;
+}
+.btn--reject {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+.btn--reject:hover {
+  background: #dc2626;
+}
+.btn--small {
+  font-size: 12px;
+}
