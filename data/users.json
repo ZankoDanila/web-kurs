@@ -1,0 +1,129 @@
+{
+  "clients": [
+    {
+      "id": 1,
+      "company": "ООО \"БЕЛАЗ\"",
+      "fio": "Петров Иннокентий Иванович",
+      "position": "Менеджер по закупкам",
+      "email": "belaz_super222@gmail.com",
+      "phone": "+375333333333",
+      "password_hash": "belaz_pass2026",
+      "unp": "600024315",
+      "address": "РБ, Минская обл., г. Жодино, ул. 40 лет Октября, д. 4",
+      "departments_count": 3,
+      "my_sensors": [
+        {
+          "sensor_id": 2,
+          "quantity": 5,
+          "serial_numbers": [
+            "SMSO-01-0001",
+            "SMSO-01-0002",
+            "SMSO-01-0003",
+            "SMSO-01-0004",
+            "SMSO-01-0005"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "company": "РУП «Производственное объединение «Белоруснефть»",
+      "fio": "Иванов Сергей Петрович",
+      "position": "Главный сварщик",
+      "email": "ivanov@belorusneft.by",
+      "phone": "+375291112233",
+      "password_hash": "neft_secure77",
+      "unp": "400051112",
+      "address": "г. Гомель, ул. Рогачевская, д. 9",
+      "departments_count": 5,
+      "my_sensors": [
+        {
+          "sensor_id": 1,
+          "quantity": 3,
+          "serial_numbers": [
+            "RSP-01-9923",
+            "RSP-01-9924",
+            "RSP-01-9925"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "company": "Белорусско-Российский университет",
+      "fio": "Ковалев Андрей Николаевич",
+      "position": "Заведующий лабораторией КИПиА",
+      "email": "kovalev@bru.by",
+      "phone": "+375222234567",
+      "password_hash": "bru_lab_2026",
+      "unp": "700013245",
+      "address": "г. Могилев, пр-т Мира, д. 43",
+      "departments_count": 2,
+      "my_sensors": [
+        {
+          "sensor_id": 1,
+          "quantity": 1,
+          "serial_numbers": [
+            "RSP-01-7711"
+          ]
+        },
+        {
+          "sensor_id": 3,
+          "quantity": 1,
+          "serial_numbers": [
+            "MRSP-01-7712"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "company": "ООО «ОЛИВЕР»",
+      "fio": "Дмитриев Максим Игоревич",
+      "position": "Технический директор",
+      "email": "dmitriev@oliver.by",
+      "phone": "+375172223344",
+      "password_hash": "oliver_weld_99",
+      "unp": "190564312",
+      "address": "г. Минск, ул. Машиностроителей, д. 29",
+      "departments_count": 4,
+      "my_sensors": [
+        {
+          "sensor_id": 4,
+          "quantity": 1,
+          "serial_numbers": [
+            "MRSP-02-0041"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "company": "Белорусский инновационный фонд",
+      "fio": "Васильев Алексей Сергеевич",
+      "position": "Эксперт по инновациям",
+      "email": "vasiliev@bif.by",
+      "phone": "+375173344556",
+      "password_hash": "innovate_pass_5",
+      "unp": "101184512",
+      "address": "г. Минск, ул. Академическая, д. 12",
+      "departments_count": 1,
+      "my_sensors": [
+        {
+          "sensor_id": 5,
+          "quantity": 1,
+          "serial_numbers": [
+            "MRSP-03-5501"
+          ]
+        }
+      ]
+    }
+  ],
+  "admins": [
+    {
+      "id": 1,
+      "username": "admin_main",
+      "password_hash": "root_password_2026"
+    }
+  ]
+}
