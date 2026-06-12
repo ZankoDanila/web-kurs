@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cabinet</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Montserrat:wght@500&family=Roboto+Slab:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="Cabinet.css">
+</head>
+<body>
+
+<div class="cabinet-layout">
+
+    <!-- Бургер-кнопка — видна только на мобиле/планшете -->
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Открыть меню">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- Оверлей — затемнение за сайдбаром -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+
+    <button class="sidebar__logout">Выйти из профиля</button>
+
+    <header class="sidebar__header">
+        <div class="sidebar__avatar">П</div>
+        <div class="sidebar__user">
+            <h1 class="sidebar__company">ООО «БЕЛАЗ»</h1>
+            <div class="sidebar__name">Петров</div>
+        </div>
+    </header>
+
+    <nav class="sidebar__nav">
+        <ul class="sidebar__menu">
+
+            <li class="sidebar__item">
+                <a href="/cabinet/profile" class="sidebar__link sidebar__link--active">
+                    <img src="img/icons/profile.svg" alt="" class="sidebar__icon" aria-hidden="true">
+                    <span>Профиль</span>
+                </a>
+            </li>
+
+            <li class="sidebar__item">
+                <a href="/cabinet/sensors" class="sidebar__link">
+                    <img src="img/icons/sensors.svg" alt="" class="sidebar__icon" aria-hidden="true">
+                    <span>Регистраторы</span>
+                </a>
+            </li>
+
+            <li class="sidebar__item">
+                <a href="/cabinet/repair" class="sidebar__link">
+                    <img src="img/icons/repair.svg" alt="" class="sidebar__icon" aria-hidden="true">
+                    <span>Ремонт</span>
+                </a>
+            </li>
+
+            <li class="sidebar__item">
+                <a href="/cabinet/order" class="sidebar__link">
+                    <img src="img/icons/order.svg" alt="" class="sidebar__icon" aria-hidden="true">
+                    <span>Заказ</span>
+                </a>
+            </li>
+
+            <li class="sidebar__item">
+                <a href="/cabinet/updates" class="sidebar__link">
+                    <img src="img/icons/updates.svg" alt="" class="sidebar__icon" aria-hidden="true">
+                    <span>Доработки</span>
+                </a>
+            </li>
+
+            <li class="sidebar__item">
+                <a href="/cabinet/estimate" class="sidebar__link">
+                    <img src="img/icons/estimate.svg" alt="" class="sidebar__icon" aria-hidden="true">
+                    <span>Смета</span>
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+
+    <div class="sidebar__footer">
+        <a href="Main.html" class="sidebar__home">На главную страницу</a>
+        <img src="img/BRU_logo2.png" alt="Логотип БРУ" class="sidebar__photo">
+    </div>
+
+</aside>
+
+    <!-- Main Content -->
+    <main class="dashboard__content">
+ 
+    <!-- Заголовок страницы -->
+    <header class="dashboard__header">
+      <h1 class="dashboard__title">Профиль</h1>
+      <span class="dashboard__breadcrumb">Главная / Профиль</span>
+    </header>
+ 
+    <!-- ─── Верхний ряд: карточка компании + блок заказа ─── -->
+    <section class="dashboard__top-row" aria-label="Информация о компании и текущий заказ">
+ 
+      <!-- Карточка компании -->
+      <article class="profile-card">
+        <div class="profile-card__header">
+          <div class="profile-card__avatar" aria-label="Инициалы компании">П</div>
+          <div class="profile-card__company-info">
+            <h2 class="profile-card__company-name">ООО «БЕЛАЗ»</h2>
+            <p class="profile-card__manager-title">Менеджер по закупкам</p>
+            <p class="profile-card__manager-name">Петров Иннокентий Иванович</p>
+          </div>
+        </div>
+ 
+        <div class="profile-card__contacts">
+          <a href="mailto:belaz_super228@gmail.com" class="profile-card__contact-link">
+            belaz_super228@gmail.com
+          </a>
+          <a href="tel:+375333333333" class="profile-card__contact-link">
+            +375 33 333 3333
+          </a>
+          <button class="profile-card__extra-btn" type="button">дополнительно ›</button>
+        </div>
+ 
+        <div class="profile-card__image-wrap">
+          <img
+            src="img/image 13.png"
+            alt="Карьерный самосвал БЕЛАЗ"
+            class="profile-card__image"
+            loading="lazy"
+            width="320"
+            height="200"
+          />
+        </div>
+ 
+        <button class="btn btn--primary profile-card__edit-btn" type="button">
+          РЕДАКТИРОВАТЬ
+        </button>
+      </article>
+ 
+      <!-- Блок «Мой заказ» -->
+      <article class="order-card">
+        <div class="order-card__header">
+          <h2 class="order-card__title">Мой заказ</h2>
+          <span class="order-card__status">Проектируем</span>
+        </div>
+ 
+        <!-- Товарная строка -->
+        <div class="order-card__item">
+          <div class="order-card__item-thumb" aria-label="Превью товара">
+            <svg viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="1" y="1" width="40" height="40" rx="3" stroke="var(--color-primary)" stroke-width="2"/>
+              <path d="M8 28 L16 16 L22 22 L28 14 L36 28 Z" fill="var(--color-primary)" opacity="0.25"/>
+              <circle cx="12" cy="14" r="3" fill="var(--color-primary)" opacity="0.5"/>
+            </svg>
+          </div>
+          <div class="order-card__item-details">
+            <p class="order-card__item-name">VibroMaster VM-450</p>
+            <p class="order-card__item-serial">С/Н: VM-450-2023-1542</p>
+          </div>
+          <p class="order-card__item-price">50 000 ₽</p>
+        </div>
+ 
+        <!-- Детали заказа -->
+        <div class="order-card__details">
+          <p class="order-card__detail-label">Количество:</p>
+          <ul class="order-card__detail-list">
+            <li>10 регистраторов</li>
+            <li>3 помещения</li>
+          </ul>
+ 
+          <p class="order-card__detail-label">Описание:</p>
+          <p class="order-card__detail-text">
+            Прямая интеграция с любым типом сварочного оборудования, встроенная система защиты
+            и мгновенная аппаратная синхронизация с мобильным приложением управления.
+          </p>
+        </div>
+ 
+        <!-- Итоговая плашка -->
+        <div class="order-card__footer">
+          <span class="order-card__footer-qty">50 000 × 10</span>
+          <span class="order-card__footer-total">Итого: 500 000 ₽</span>
+        </div>
+      </article>
+ 
+    </section>
+ 
+    <!-- ─── Нижний блок: История заказов ─── -->
+    <section class="orders-history" aria-label="История заказов">
+      <h2 class="orders-history__title">История заказов</h2>
+ 
+      <div class="orders-history__table-wrap">
+        <table class="orders-table">
+          <thead class="orders-table__head">
+            <tr>
+              <th class="orders-table__th" scope="col">Регистратор</th>
+              <th class="orders-table__th" scope="col">Кол-во<br>регистраторов</th>
+              <th class="orders-table__th" scope="col">Кол-во<br>помещений</th>
+              <th class="orders-table__th" scope="col">Статус<br>монтажа</th>
+              <th class="orders-table__th" scope="col">Дата<br>оформления</th>
+              <th class="orders-table__th" scope="col">Дата<br>получения</th>
+              <th class="orders-table__th orders-table__th--total" scope="col">Итого</th>
+            </tr>
+          </thead>
+          <tbody class="orders-table__body">
+            <tr class="orders-table__row">
+              <td class="orders-table__td orders-table__td--product">
+                <div class="orders-table__product">
+                  <div class="orders-table__product-thumb" aria-hidden="true">
+                    <svg viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="1" y="1" width="35" height="35" rx="2" stroke="var(--color-primary)" stroke-width="2"/>
+                      <path d="M6 26 L13 15 L18 20 L23 12 L31 26 Z" fill="var(--color-primary)" opacity="0.2"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="orders-table__product-name">VibroMaster VM-450</p>
+                    <p class="orders-table__product-serial">С/Н: VM-450-2023-1542</p>
+                  </div>
+                </div>
+              </td>
+              <td class="orders-table__td orders-table__td--value">×10</td>
+              <td class="orders-table__td orders-table__td--value">×3</td>
+              <td class="orders-table__td">
+                <span class="orders-table__badge orders-table__badge--done">Смонтировано</span>
+              </td>
+              <td class="orders-table__td orders-table__td--date">10.12.2024</td>
+              <td class="orders-table__td orders-table__td--date">10.12.2024</td>
+              <td class="orders-table__td orders-table__td--total">500 000 ₽</td>
+            </tr>
+            <tr class="orders-table__row">
+              <td class="orders-table__td orders-table__td--product">
+                <div class="orders-table__product">
+                  <div class="orders-table__product-thumb" aria-hidden="true">
+                    <svg viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="1" y="1" width="35" height="35" rx="2" stroke="var(--color-primary)" stroke-width="2"/>
+                      <path d="M6 26 L13 15 L18 20 L23 12 L31 26 Z" fill="var(--color-primary)" opacity="0.2"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="orders-table__product-name">VibroMaster VM-300</p>
+                    <p class="orders-table__product-serial">С/Н: VM-300-2022-0881</p>
+                  </div>
+                </div>
+              </td>
+              <td class="orders-table__td orders-table__td--value">×5</td>
+              <td class="orders-table__td orders-table__td--value">×2</td>
+              <td class="orders-table__td">
+                <span class="orders-table__badge orders-table__badge--pending">В обработке</span>
+              </td>
+              <td class="orders-table__td orders-table__td--date">03.09.2023</td>
+              <td class="orders-table__td orders-table__td--date">—</td>
+              <td class="orders-table__td orders-table__td--total">250 000 ₽</td>
+            </tr>
+            <tr class="orders-table__row">
+              <td class="orders-table__td orders-table__td--product">
+                <div class="orders-table__product">
+                  <div class="orders-table__product-thumb" aria-hidden="true">
+                    <svg viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="1" y="1" width="35" height="35" rx="2" stroke="var(--color-primary)" stroke-width="2"/>
+                      <path d="M6 26 L13 15 L18 20 L23 12 L31 26 Z" fill="var(--color-primary)" opacity="0.2"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="orders-table__product-name">SensorKit SK-12</p>
+                    <p class="orders-table__product-serial">С/Н: SK-12-2022-0044</p>
+                  </div>
+                </div>
+              </td>
+              <td class="orders-table__td orders-table__td--value">×12</td>
+              <td class="orders-table__td orders-table__td--value">×4</td>
+              <td class="orders-table__td">
+                <span class="orders-table__badge orders-table__badge--done">Смонтировано</span>
+              </td>
+              <td class="orders-table__td orders-table__td--date">14.05.2022</td>
+              <td class="orders-table__td orders-table__td--date">30.06.2022</td>
+              <td class="orders-table__td orders-table__td--total">384 000 ₽</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+ 
+  </main>
+</div>
+
+</body>
+</html>

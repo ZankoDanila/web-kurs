@@ -1,0 +1,162 @@
+:root {
+  --color-primary: #004A8F;
+  --color-primary-hover: #003366;
+  --color-bg-page: #F4F6F9;
+  --color-bg-card: #FFFFFF;
+  --color-text-main: #333333;
+  --color-text-muted: #888888;
+  --color-border: #E2E8F0;
+  --color-error-bg: #FEE2E2;
+  --color-error-text: #B91C1C;
+  --color-success-bg: #D1FAE5;
+  --color-success-text: #065F46;
+  --shadow-card: 0 10px 25px rgba(0, 0, 0, 0.05);
+  --font-main: 'Inter', 'Roboto', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-bg-page);
+  color: var(--color-text-main);
+}
+
+/* Центрирование страницы */
+.auth-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Карточка авторизации */
+.auth-card {
+  width: 100%;
+  max-width: 440px;
+  background-color: var(--color-bg-card);
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+  padding: 40px 30px;
+}
+
+.auth-card__header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.auth-card__title {
+  color: var(--color-primary);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+/* Вкладки (Tabs) */
+.auth-card__tabs {
+  display: flex;
+  background-color: var(--color-bg-page);
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.auth-card__tab {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: transparent;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.auth-card__tab--active {
+  background-color: var(--color-bg-card);
+  color: var(--color-primary);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Блок уведомлений */
+.auth-card__alert {
+  padding: 12px 15px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.auth-card__alert--error {
+  background-color: var(--color-error-bg);
+  color: var(--color-error-text);
+}
+
+.auth-card__alert--success {
+  background-color: var(--color-success-bg);
+  color: var(--color-success-text);
+}
+
+.auth-card__alert--hidden {
+  display: none;
+}
+
+/* Формы */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.auth-form--hidden {
+  display: none;
+}
+
+.auth-form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.auth-form__label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+.auth-form__input {
+  padding: 12px 15px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.auth-form__input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.auth-form__btn {
+  background-color: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.2s;
+}
+
+.auth-form__btn:hover {
+  background-color: var(--color-primary-hover);
+}
