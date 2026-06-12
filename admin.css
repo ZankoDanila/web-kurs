@@ -1,0 +1,31 @@
+:root {
+    --bg-color: #D4D4D4;
+    --primary: #00529b;
+    --text: #333;
+}
+
+body { font-family: sans-serif; background: var(--bg-color); margin: 0; }
+
+.admin-header { background: var(--primary); color: white; padding: 15px 30px; display: flex; justify-content: space-between; }
+
+.admin-container { padding: 20px; display: flex; flex-direction: column; gap: 20px; }
+
+.card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+
+table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+th { background: #f4f4f4; text-align: left; padding: 12px; border-bottom: 2px solid #ddd; }
+td { padding: 12px; border-bottom: 1px solid #eee; }
+
+/* Бэйджи статусов */
+.badge { padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; }
+.pending { background: #fff3cd; color: #856404; }
+.approved { background: #d4edda; color: #155724; }
+
+.bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+/* Модальное окно */
+.overlay { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; }
+.modal-box { background: white; padding: 30px; border-radius: 8px; width: 300px; display: flex; flex-direction: column; gap: 15px; }
+
+.btn-primary { background: var(--primary); color: white; border: none; padding: 10px; cursor: pointer; }
+.btn-action { background: #e1e1e1; border: none; padding: 5px 10px; cursor: pointer; }

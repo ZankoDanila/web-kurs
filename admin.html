@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Панель Администратора | ООО БЕЛАЗ</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <header class="admin-header">
+        <div class="logo">Панель Администратора | ООО БЕЛАЗ и Партнеры</div>
+        <div class="admin-profile">
+            <span>Администратор: Главный</span>
+            <button class="btn-exit">Выйти</button>
+        </div>
+    </header>
+
+    <main class="admin-container">
+        <section class="card">
+            <h2>Поступившие заявки на регистраторы</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th><th>Компания</th><th>Прибор</th><th>Сумма</th><th>Статус</th><th>Действие</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td><td>ООО "БЕЛАЗ"</td><td>СМСО-БРУ-01</td><td>500 000</td>
+                        <td><span class="badge pending">pending</span></td>
+                        <td><button class="btn-action" onclick="openModal(1)">Выставить счет</button></td>
+                    </tr>
+                    <tr>
+                        <td>3</td><td>БРУ</td><td>РСП-БРУ-01</td><td>45 000</td>
+                        <td><span class="badge approved">approved</span></td>
+                        <td>
+                            <select>
+                                <option>В производстве</option>
+                                <option>Готово к отгрузке</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <div class="bottom-grid">
+            <section class="card">
+                <h2>Зарегистрированное оборудование</h2>
+                <div class="sensor-list">
+                    <div class="company-item">
+                        <strong>РУП "Белоруснефть"</strong>
+                        <p>RSP-01-9923 (РСП-БРУ-01)</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>Обратная связь</h2>
+                <div class="review-item">
+                    <p><strong>ООО "БЕЛАЗ"</strong> — Петров И.И.</p>
+                    <p>"Система полностью оправдала ожидания..."</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div id="modal" class="overlay">
+        <div class="modal-box">
+            <h3>Выставить счет</h3>
+            <input type="number" placeholder="Введите сумму (руб.)">
+            <button class="btn-primary" onclick="closeModal()">Отправить клиенту</button>
+        </div>
+    </div>
+
+    <script>
+        function openModal(id) { document.getElementById('modal').style.display = 'flex'; }
+        function closeModal() { document.getElementById('modal').style.display = 'none'; }
+    </script>
+</body>
+</html>

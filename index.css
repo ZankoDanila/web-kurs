@@ -1,0 +1,168 @@
+/* ================= БАЗОВЫЕ НАСТРОЙКИ И ПЕРЕМЕННЫЕ ================= */
+:root {
+    --bg-color: #D4D4D4;
+    --primary-color: #00529b;
+    --primary-hover: #003d75;
+    --card-bg: #ffffff;
+    --text-main: #333333;
+    --text-muted: #666666;
+    --border-color: #cccccc;
+    --error-color: #d93025;
+    --font-family: 'Inter', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-color);
+    font-family: var(--font-family);
+    color: var(--text-main);
+}
+
+/* ================= КАРТОЧКА АВТОРИЗАЦИИ ================= */
+.auth-card {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    padding: 40px;
+    width: 100%;
+    max-width: 400px; /* По умолчанию ширина для Входа */
+    transition: max-width 0.4s ease-in-out;
+}
+
+/* Модификатор ширины для формы регистрации (чтобы вместить 2 колонки) */
+.auth-card.expanded {
+    max-width: 650px;
+}
+
+/* ================= ТИПОГРАФИКА ================= */
+.auth-title {
+    margin: 0 0 8px 0;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    color: var(--primary-color);
+}
+
+.auth-subtitle {
+    margin: 0 0 24px 0;
+    font-size: 14px;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+/* ================= ЭЛЕМЕНТЫ ФОРМЫ ================= */
+.form-group {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: var(--text-main);
+}
+
+input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: var(--font-family);
+    box-sizing: border-box;
+    background-color: #fafafa;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(0, 82, 155, 0.1);
+}
+
+/* Сетка для регистрации (2 колонки) */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0 16px;
+}
+
+@media (min-width: 500px) {
+    .auth-card.expanded .form-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* ================= КНОПКИ И ССЫЛКИ ================= */
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: var(--font-family);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.toggle-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 13px;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.toggle-link:hover {
+    text-decoration: underline;
+    color: var(--primary-hover);
+}
+
+/* ================= СЛУЖЕБНЫЕ КЛАССЫ ================= */
+.error-message {
+    color: var(--error-color);
+    font-size: 13px;
+    text-align: center;
+    margin-bottom: 16px;
+    font-weight: 500;
+    display: none; /* Скрыто по умолчанию */
+}
+
+/* Классы для переключения вьюшек */
+.auth-view {
+    display: none;
+}
+
+.auth-view.active-view {
+    display: block;
+}
+
+/* Плавное появление */
+.fade-in {
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
