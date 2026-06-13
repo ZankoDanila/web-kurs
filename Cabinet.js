@@ -1,4 +1,4 @@
-// Cabinet.js – полная логика: профиль, история, заказы, доработки, сметы
+// Cabinet.js – полная логика: профиль, история, заказы, доработки, сметы, редактирование профиля
 (function() {
     const API_URL = 'http://localhost:3000';
 
@@ -49,14 +49,15 @@
                 sidebarSurname.textContent = client.fio ? client.fio.split(' ')[0].toUpperCase() : '—';
             }
 
-            // 2. История заказов (таблица estimates)
+            // 2. История заказов (таблица estimates) – сортируем по дате создания (новые сверху)
+            const sortedEstimates = [...estimates].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
             const tbody = document.getElementById('orders-table-body');
             if (tbody) {
                 tbody.innerHTML = '';
-                if (estimates.length === 0) {
+                if (sortedEstimates.length === 0) {
                     tbody.innerHTML = '<tr><td colspan="7">У вас пока нет завершённых заказов</td></tr>';
                 } else {
-                    estimates.forEach(order => {
+                    sortedEstimates.forEach(order => {
                         const sensor = sensors.find(s => s.id == order.sensor_id);
                         const sensorName = sensor ? sensor.title : 'Неизвестный прибор';
                         const sensorLogo = sensor?.image || sensor?.logo || 'img/icon.svg';
@@ -70,7 +71,7 @@
                                         <p class="orders-history__device-serial">ID: ${order.sensor_id}</p>
                                     </div>
                                 </div>
-                             </td>
+                            </td>
                             <td class="orders-history__td orders-history__td--num">х${order.registrators_count || 0}</td>
                             <td class="orders-history__td orders-history__td--num">х${order.rooms_count || 0}</td>
                             <td class="orders-history__td">${escapeHtml(order.additional_modules || '—')}</td>
@@ -83,9 +84,9 @@
                 }
             }
 
-            // 3. Карточка "Мой заказ" – последний подтверждённый заказ (из estimates)
-            if (estimates.length > 0) {
-                const current = estimates[estimates.length - 1];
+            // 3. Карточка "Мой заказ" – последний заказ (самый новый created_at)
+            if (sortedEstimates.length > 0) {
+                const current = sortedEstimates[0]; // первый = самый новый
                 const sensor = sensors.find(s => s.id == current.sensor_id);
                 const sensorName = sensor ? sensor.title : 'Регистратор';
                 const sensorLogo = sensor?.image || sensor?.logo || 'img/image.svg';
@@ -201,7 +202,6 @@
         if (!currentUser) return;
         const userId = currentUser.userId || currentUser.id;
 
-        // Получаем все заявки клиента (без фильтрации на бэкенде)
         const [ordersRes, upgradesRes] = await Promise.all([
             fetch(`${API_URL}/orders?client_id=${userId}`),
             fetch(`${API_URL}/upgrade_requests?client_id=${userId}`)
@@ -209,7 +209,6 @@
         let orders = await ordersRes.json();
         let upgrades = await upgradesRes.json();
 
-        // Фильтруем: статус 'on_approval' и estimate_amount задан
         orders = orders.filter(o => o.status === 'on_approval' && o.estimate_amount != null);
         upgrades = upgrades.filter(u => u.status === 'on_approval' && u.estimate_amount != null);
 
@@ -219,7 +218,6 @@
         }
 
         let html = '';
-        // Обработка заказов
         for (let order of orders) {
             const sensorRes = await fetch(`${API_URL}/sensors/${order.sensor_id}`);
             const sensor = await sensorRes.json();
@@ -229,12 +227,11 @@
                     <div>Кол-во: ${order.registrators_count} шт., помещений: ${order.rooms_count}</div>
                     <div>Предложенная сумма: <strong>${formatNumber(order.estimate_amount)} руб.</strong></div>
                     <div class="estimate-actions">
-                        <button class="btn--confirm btn--small" onclick="confirmEstimate(${order.id}, 'order')">✅ Подтвердить</button>
-                        <button class="btn--reject btn--small" onclick="rejectEstimate(${order.id}, 'order')">❌ Отказаться</button>
+                        <button class="btn--confirm btn--small" onclick="window.confirmEstimate(${order.id}, 'order')">✅ Подтвердить</button>
+                        <button class="btn--reject btn--small" onclick="window.rejectEstimate(${order.id}, 'order')">❌ Отказаться</button>
                     </div>
                 </div>`;
         }
-        // Обработка доработок
         for (let req of upgrades) {
             html += `
                 <div class="estimate-item" data-id="${req.id}" data-type="upgrade">
@@ -242,8 +239,8 @@
                     <div>Описание: ${escapeHtml(req.description)}</div>
                     <div>Предложенная сумма: <strong>${formatNumber(req.estimate_amount)} руб.</strong></div>
                     <div class="estimate-actions">
-                        <button class="btn--confirm btn--small" onclick="confirmEstimate(${req.id}, 'upgrade')">✅ Подтвердить</button>
-                        <button class="btn--reject btn--small" onclick="rejectEstimate(${req.id}, 'upgrade')">❌ Отказаться</button>
+                        <button class="btn--confirm btn--small" onclick="window.confirmEstimate(${req.id}, 'upgrade')">✅ Подтвердить</button>
+                        <button class="btn--reject btn--small" onclick="window.rejectEstimate(${req.id}, 'upgrade')">❌ Отказаться</button>
                     </div>
                 </div>`;
         }
@@ -263,7 +260,6 @@
         const res = await fetch(`${API_URL}/${endpoint}/${id}`);
         const item = await res.json();
         if (type === 'order') {
-            // Переносим в estimates
             const newEstimate = {
                 client_id: item.client_id,
                 sensor_id: item.sensor_id,
@@ -283,12 +279,11 @@
             });
             await fetch(`${API_URL}/${endpoint}/${id}`, { method: 'DELETE' });
         } else {
-            // Для доработок – удаляем (или можно создать отдельную коллекцию)
             await fetch(`${API_URL}/${endpoint}/${id}`, { method: 'DELETE' });
         }
         alert('Смета подтверждена! Заказ передан в производство.');
         estimatesModal.classList.remove('open');
-        loadCabinet(); // обновить историю
+        loadCabinet();
     };
 
     window.rejectEstimate = async (id, type) => {
@@ -298,6 +293,80 @@
         estimatesModal.classList.remove('open');
         loadCabinet();
     };
+
+    // ========== РЕДАКТИРОВАНИЕ ПРОФИЛЯ ==========
+    const editModal = document.getElementById('edit-profile-modal');
+    let currentClientData = null;
+
+    function fillEditForm(client) {
+        document.getElementById('edit-company').value = client.company || '';
+        document.getElementById('edit-fio').value = client.fio || '';
+        document.getElementById('edit-position').value = client.position || '';
+        document.getElementById('edit-email').value = client.email || '';
+        document.getElementById('edit-phone').value = client.phone || '';
+        document.getElementById('edit-unp').value = client.unp || '';
+        document.getElementById('edit-address').value = client.address || '';
+        document.getElementById('edit-departments').value = client.departments_count || 0;
+        currentClientData = client;
+    }
+
+    document.getElementById('edit-profile-btn')?.addEventListener('click', async () => {
+        const userId = currentUser?.userId || currentUser?.id;
+        if (!userId) return;
+        try {
+            const res = await fetch(`${API_URL}/clients/${userId}`);
+            const client = await res.json();
+            fillEditForm(client);
+            editModal.classList.add('open');
+        } catch (err) {
+            console.error(err);
+            alert('Не удалось загрузить данные профиля');
+        }
+    });
+
+    document.getElementById('close-edit-modal')?.addEventListener('click', () => editModal.classList.remove('open'));
+    document.getElementById('cancel-edit')?.addEventListener('click', () => editModal.classList.remove('open'));
+
+    document.getElementById('save-edit')?.addEventListener('click', async () => {
+        const userId = currentUser?.userId || currentUser?.id;
+        if (!userId) return;
+
+        const updatedData = {
+            company: document.getElementById('edit-company').value,
+            fio: document.getElementById('edit-fio').value,
+            position: document.getElementById('edit-position').value,
+            email: document.getElementById('edit-email').value,
+            phone: document.getElementById('edit-phone').value,
+            unp: document.getElementById('edit-unp').value,
+            address: document.getElementById('edit-address').value,
+            departments_count: parseInt(document.getElementById('edit-departments').value) || 0
+        };
+
+        try {
+            const res = await fetch(`${API_URL}/clients/${userId}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updatedData)
+            });
+            if (!res.ok) throw new Error('Ошибка при сохранении');
+
+            if (currentUser) {
+                currentUser.fio = updatedData.fio;
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            }
+
+            alert('Профиль успешно обновлён!');
+            editModal.classList.remove('open');
+            loadCabinet();
+        } catch (err) {
+            console.error(err);
+            alert('Не удалось сохранить изменения');
+        }
+    });
+
+    editModal?.addEventListener('click', (e) => {
+        if (e.target === editModal) editModal.classList.remove('open');
+    });
 
     // Выход
     document.querySelector('.sidebar__logout')?.addEventListener('click', () => {

@@ -1643,219 +1643,481 @@ scroll-margin-top: 105px;
 
 
 /* =========================================
-   СЕКЦИЯ: БЛОГ И НОВОСТИ (СЛАЙДЕР)
-   ========================================= */
+   СЕКЦИЯ
+========================================= */
 
 .news-section {
-    padding: 60px 0 80px 0; /* Отступы сверху и снизу перед футером */
     width: 100%;
-    box-sizing: border-box;
-    overflow: hidden; /* Безопасность от горизонтальной прокрутки */
+    padding: 60px 0 80px;
+    overflow: hidden;
 }
 
 .news-container {
     max-width: 1440px;
     margin: 0 auto;
-    padding: 0 15px;
-    box-sizing: border-box;
+    padding: 0 20px;
 }
 
-/* --- Градиентная плашка заголовка --- */
+/* =========================================
+   ЗАГОЛОВОК
+========================================= */
+
 .news-header-badge {
     width: 689px;
-    height: 86px;
-    background: linear-gradient(117deg, #004A8F 0%, #08355F 100%);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    min-height: 86px;
+
     display: flex;
     align-items: center;
-    padding-left: 145px; /* Смещение текста влево из Figma */
-    box-sizing: border-box;
-    margin-bottom: 40px;
+
+    padding: 20px 40px 20px 145px;
+    margin-bottom: 60px;
+
+    background: linear-gradient(
+        117deg,
+        #004A8F 0%,
+        #08355F 100%
+    );
+
+    box-shadow: 0 4px 4px rgba(0,0,0,.25);
 }
 
 .news-main-title {
-    color: #FEFEFE;
-    font-size: 64px;
-    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+    font-family: Montserrat, sans-serif;
+    font-size: 48px;
     font-weight: 700;
     margin: 0;
-    line-height: 1.1;
 }
 
-/* --- Обертка слайдера (Стрелки + Окно просмотра) --- */
+/* =========================================
+   СЛАЙДЕР
+========================================= */
+
 .news-slider-wrapper {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    width: 100%;
+    justify-content: center;
+    gap: 30px;
 }
 
-/* --- Кнопки навигации (Стрелки круглые) --- */
+.news-carousel-viewport {
+    width: 944px;
+    overflow: hidden;
+}
+
+.news-carousel-track {
+    display: flex;
+    gap: 40px;
+    transition: transform .4s ease;
+}
+
+/* =========================================
+   СТРЕЛКИ
+========================================= */
+
 .slider-btn {
     width: 92px;
     height: 92px;
-    background: #ffffff;
-    border: 3px solid #004A8F;
-    border-radius: 50%;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
     display: flex;
     align-items: center;
     justify-content: center;
+
+    background: #fff;
+
+    border: 3px solid #004A8F;
+    border-radius: 50%;
+
     cursor: pointer;
+
     flex-shrink: 0;
-    transition: all 0.2s ease;
+
+    transition: .3s;
 }
 
 .slider-btn:hover {
     background: #004A8F;
 }
 
-/* Отрисовка стрелок (уголки из Figma) с помощью чистых CSS-границ */
 .arrow-icon {
     width: 24px;
     height: 24px;
+
     border-left: 6px solid #004A8F;
     border-bottom: 6px solid #004A8F;
-    display: block;
-    transition: border-color 0.2s ease;
+
+    transition: .3s;
 }
 
 .arrow-icon.left {
-    transform: translateX(4px) rotate(45deg); /* Направлена влево */
+    transform: rotate(45deg);
 }
 
 .arrow-icon.right {
-    transform: translateX(-4px) rotate(-135deg); /* Направлена вправо */
+    transform: rotate(-135deg);
 }
 
-/* Смена цвета стрелочки при наведении на круглую кнопку */
 .slider-btn:hover .arrow-icon {
-    border-color: #ffffff;
+    border-color: #fff;
 }
 
-/* --- Визуальное окно карусели (Viewport) --- */
-.news-carousel-viewport {
-    overflow: hidden;
-    width: 100%;
-    max-width: 1080px; /* Сумма ширин 4 карточек с зазорами */
-}
+/* =========================================
+   КАРТОЧКА
+========================================= */
 
-/* Трек, в котором лежат карточки (для JS-слайдера) */
-.news-carousel-track {
-    display: flex;
-    gap: 49px; /* Расстояние между карточками из ваших координат */
-}
-
-/* --- СТИЛИЗАЦИЯ КАРТОЧКИ НОВОСТИ --- */
 .news-card {
-    width: 206px; /* Фиксированная ширина карточки по макету */
-    height: 214px;
-    background: #ffffff;
+    position: relative;
+
+    width: 206px;
+    height: 280px;
+
+    flex-shrink: 0;
+}
+
+.news-card__date-bg {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 66px;
+
+    background: rgba(119,119,119,.85);
+
     border: 3px solid #004A8F;
     border-radius: 10px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.news-card__body {
+    position: absolute;
+
+    top: 66px;
+    left: 0;
+
+    width: 100%;
+    height: 214px;
+
+    background: #fff;
+
+    border: 3px solid #004A8F;
+    border-radius: 10px;
+
+    box-shadow: 0 4px 4px rgba(0,0,0,.25);
+}
+
+.news-card__image {
+    position: absolute;
+
+    top: 1px;
+    left: 0;
+
+    width: 206px;
+    height: 168px;
+
+    object-fit: cover;
+
+    border: 3px solid #004A8F;
+    border-radius: 10px;
+
+    box-shadow: 0 4px 4px rgba(0,0,0,.25);
+
+    z-index: 2;
+}
+
+.news-card__date {
+    position: absolute;
+
+    top: 10px;
+    left: 14px;
+
+    color: #fff;
+
+    font-size: 20px;
+    font-weight: 800;
+
+    line-height: 1.1;
+    text-align: center;
+
+    z-index: 3;
+}
+
+.news-card__title {
+    position: absolute;
+
+    top: 178px;
+    left: 14px;
+
+    width: 130px;
+
+    color: #004A8F;
+
+    font-size: 16px;
+    font-weight: 400;
+
+    line-height: 1.2;
+
+    margin: 0;
+
+    z-index: 3;
+}
+
+.news-card__link {
+    position: absolute;
+
+    left: 14px;
+    top: 232px;
+
+    background: transparent;
+    border: none;
+
+    cursor: pointer;
+
+    color: #FEEF9E;
+
+    font-size: 20px;
+    font-weight: 800;
+
+    z-index: 3;
+
+    transition: .3s;
+}
+
+.news-card__link:hover {
+    color: #FFD84A;
+}
+
+/* =========================================
+   МОДАЛЬНОЕ ОКНО
+========================================= */
+
+.news-modal {
+    position: fixed;
+    inset: 0;
+
     display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    flex-shrink: 0;
-    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: .3s;
+
+    z-index: 9999;
 }
 
-/* Верхняя область карточки с картинкой и датой */
-.card-image-block {
+.news-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.news-modal__overlay {
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0,0,0,.7);
+}
+
+.news-modal__content {
     position: relative;
-    width: 100%;
-    height: 124px; /* Почти 130px из макета с учетом рамок */
+
+    width: min(900px, 92vw);
+
+    background: #fff;
+
+    border-radius: 24px;
+
+    overflow: hidden;
+
+    z-index: 2;
 }
 
-.card-img {
+.news-modal__image {
     width: 100%;
-    height: 100%;
+    max-height: 500px;
+
     object-fit: cover;
 }
 
-/* Серая полупрозрачная плашка с датой */
-.card-date-badge {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 66px;
-    height: 66px;
-    background: rgba(119, 119, 119, 0.85);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
+.news-modal__title {
+    padding: 30px 35px 15px;
 
-.card-date-badge span {
-    color: #ffffff;
-    font-size: 20px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 800;
-    line-height: 1.1;
-}
-
-/* Нижняя текстовая часть карточки */
-.card-body {
-    padding: 10px 12px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: calc(100% - 124px);
-    box-sizing: border-box;
-}
-
-.card-title {
     color: #004A8F;
-    font-size: 15px; /* Слегка уменьшен для идеального входа в 206px */
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
+
+    font-size: 52px;
+    font-weight: 700;
+
     margin: 0;
-    line-height: 1.2;
 }
 
-.card-link-more {
-    color: #004A8F; /* Базовый цвет ссылки */
+.news-modal__text {
+    padding: 0 35px 35px;
+
     font-size: 20px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 800;
-    text-decoration: none;
-    text-align: left;
-    transition: color 0.2s ease;
-    display: inline-block;
-    margin-top: auto;
+    line-height: 1.7;
+
+    color: #444;
+
+    margin: 0;
 }
 
-/* При наведении ссылка подсвечивается вашим желтым цветом из Figma (#FEEF9E) */
-.card-link-more:hover {
-    color: #e6cb3c; /* Сделан чуть насыщеннее для читаемости на белом фоне */
+.news-modal__close {
+    position: absolute;
+
+    top: 14px;
+    right: 14px;
+
+    width: 60px;
+    height: 60px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #fff;
+
+    font-size: 40px;
+
+    cursor: pointer;
+
+    z-index: 3;
 }
 
-/* =============================================
-   СЕКЦИЯ ОТЗЫВОВ
-============================================= */
- 
-.reviews-section {
+/* =========================================
+   АДАПТИВ
+========================================= */
+
+@media (max-width: 1200px) {
+
+    .news-header-badge {
+        width: 100%;
+        padding-left: 40px;
+    }
+
+    .news-carousel-viewport {
+        width: 698px;
+    }
+
+    .news-main-title {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 992px) {
+
+    .news-carousel-viewport {
+        width: 452px;
+    }
+
+    .slider-btn {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .news-header-badge {
+        width: 100%;
+        min-height: auto;
+        padding: 20px;
+    }
+
+    .news-main-title {
+        font-size: 30px;
+    }
+
+    .slider-btn {
+        display: none;
+    }
+
+    .news-carousel-viewport {
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .news-carousel-track {
+        padding-bottom: 10px;
+    }
+
+    .news-modal__title {
+        font-size: 32px;
+    }
+
+    .news-modal__text {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 576px) {
+
+    .news-section {
+        padding: 40px 0 60px;
+    }
+
+    .news-main-title {
+        font-size: 26px;
+    }
+
+    .news-card {
+        width: 190px;
+        height: 260px;
+    }
+
+    .news-card__image {
+        width: 190px;
+        height: 150px;
+    }
+
+    .news-card__title {
+        top: 160px;
+        width: 150px;
+    }
+
+    .news-card__link {
+        top: 220px;
+    }
+
+    .news-modal__title {
+        font-size: 24px;
+        padding: 20px;
+    }
+
+    .news-modal__text {
+        padding: 0 20px 20px;
+    }
+
+    .news-modal__close {
+        width: 50px;
+        height: 50px;
+        font-size: 30px;
+    }
+}
+
+/* =========================================
+   СЕКЦИЯ ОТЗЫВОВ – карусель, сдвиг на 1 карточку
+   ========================================= */
+
+.reviews {
   width: 100%;
-  padding-top: 60px;
-  overflow: hidden;
-  position: relative;
+  padding: 60px 0;
+  background: #E9E9E9;
+  overflow: hidden;            /* скрываем выступающие части трека */
 }
- 
- 
- 
-/* ── Обёртка карусели ── */
-.reviews-carousel-wrapper {
+
+.reviews__inner {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 20px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
 }
- 
-/* ── Кнопки стрелок ── */
-.reviews-arrow {
+
+/* Кнопки стрелок – всегда видимы, если есть карточки */
+.reviews__arrow {
   flex-shrink: 0;
   background: transparent;
   border: none;
@@ -1866,48 +2128,51 @@ scroll-margin-top: 105px;
   justify-content: center;
   transition: opacity 0.2s;
 }
- 
-.reviews-arrow svg {
+.reviews__arrow svg {
   width: 40px;
   height: 40px;
-  fill: none;
-  stroke: #004A8F;
-  stroke-width: 4;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  display: block;
 }
- 
-.reviews-arrow:disabled {
+.reviews__arrow:disabled {
   opacity: 0.3;
   cursor: default;
 }
- 
-/* ── Трек — показывает 3 карточки ── */
-.reviews-track {
-  display: flex;
-  gap: 24px;
-  justify-content: center;
-  flex-wrap: nowrap;
-  overflow: hidden;
+.reviews__arrow:hover:not(:disabled) svg {
+  stroke: #FAC412;
 }
- 
-/* ── Карточка отзыва ── */
+
+/* Контейнер трека – ограничиваем видимую область */
+.reviews__track-wrapper {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Трек – все карточки в ряд, ширина = суммарная */
+.reviews__track {
+  display: flex;
+  gap: 16px;                    /* уменьшенный отступ */
+  transition: transform 0.3s ease;
+  width: max-content;
+  will-change: transform;
+}
+
+/* Карточка отзыва – фиксированная ширина, автовысота */
 .review-card {
-  width: 403px;
-  min-height: 300px;
-  flex-shrink: 0;
+  flex: 0 0 auto;
+  width: 400px;                 /* ширина карточки – можно подогнать */
   background: linear-gradient(133deg, #0071D9 3%, #003C73 100%);
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  padding: 20px 24px 20px 24px;
+  padding: 20px 24px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: relative;
+  min-height: 340px;
 }
- 
-/* Название продукта (чёрный, сверху по центру) */
+
+/* Остальные стили карточки – без изменений */
 .review-product {
   font-family: 'Inter', sans-serif;
   font-weight: 800;
@@ -1916,8 +2181,6 @@ scroll-margin-top: 105px;
   text-align: center;
   margin-bottom: 6px;
 }
- 
-/* Название компании (белый, крупный) */
 .review-company {
   font-family: 'Inter', sans-serif;
   font-weight: 800;
@@ -1925,9 +2188,8 @@ scroll-margin-top: 105px;
   color: #FFFFFF;
   line-height: 1.1;
   margin-bottom: 4px;
+  word-break: break-word;
 }
- 
-/* Имя автора */
 .review-author-name {
   font-family: 'Inter', sans-serif;
   font-weight: 800;
@@ -1936,8 +2198,6 @@ scroll-margin-top: 105px;
   line-height: 20px;
   margin-bottom: 2px;
 }
- 
-/* Должность автора */
 .review-author-role {
   font-family: 'Inter', sans-serif;
   font-weight: 800;
@@ -1946,8 +2206,6 @@ scroll-margin-top: 105px;
   line-height: 20px;
   margin-bottom: 12px;
 }
- 
-/* Текст отзыва */
 .review-text {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
@@ -1957,16 +2215,16 @@ scroll-margin-top: 105px;
   line-height: 1.45;
   flex-grow: 1;
   margin-bottom: 16px;
+  overflow-y: auto;
+  max-height: 220px;
 }
- 
-/* Нижняя строка: звезда + рейтинг + дата */
 .review-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+  margin-top: 8px;
 }
- 
 .review-star {
   width: 28px;
   height: 26px;
@@ -1974,16 +2232,14 @@ scroll-margin-top: 105px;
   clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
   flex-shrink: 0;
 }
- 
 .review-rating {
   font-family: 'Inter', sans-serif;
   font-weight: 800;
   font-size: 24px;
   color: #FEEF9E;
   line-height: 20px;
-  flex-grow: 1;
+  white-space: nowrap;
 }
- 
 .review-date {
   font-family: 'Inter', sans-serif;
   font-weight: 800;
@@ -1991,4 +2247,650 @@ scroll-margin-top: 105px;
   color: #FEEF9E;
   line-height: 20px;
   white-space: nowrap;
+}
+
+/* Адаптивность: на узких экранах уменьшаем ширину карточки */
+@media (max-width: 1200px) {
+  .review-card {
+    width: 360px;
+  }
+}
+@media (max-width: 1000px) {
+  .review-card {
+    width: 320px;
+  }
+}
+@media (max-width: 800px) {
+  .review-card {
+    width: 300px;
+  }
+}
+@media (max-width: 768px) {
+  .reviews__inner {
+    flex-direction: column;
+  }
+  .reviews__arrow {
+    display: none;   /* на мобильных скрываем стрелки, карточки идут вертикально */
+  }
+  .reviews__track-wrapper {
+    overflow-x: auto;
+    width: 100%;
+  }
+  .reviews__track {
+    width: max-content;
+    transform: none !important;   /* отключаем сдвиг */
+  }
+  .review-card {
+    width: 280px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   АДАПТИВНОСТЬ ДЛЯ ВСЕХ СЕКЦИЙ (планшет → мобильный)
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── 1. Блок "Опыт внедрения" (experience-section) ─── */
+@media (max-width: 1024px) {
+    .experience-section .exp-header {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .experience-section .exp-main-title {
+        font-size: 36px;
+        padding: 0 20px;
+        height: 50px;
+    }
+    .experience-section .exp-subtitle-badge {
+        font-size: 20px;
+        height: 50px;
+        padding: 0 15px;
+    }
+}
+
+@media (max-width: 762px) {
+    .experience-section .exp-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        box-shadow: none;
+    }
+    .experience-section .exp-main-title {
+        font-size: 30px;
+        height: 42px;
+        width: 100%;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        justify-content: center;
+    }
+    .experience-section .exp-subtitle-badge {
+        font-size: 18px;
+        height: 42px;
+        width: 100%;
+        justify-content: center;
+        border-top: none;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+    .experience-section .exp-content-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+    .experience-section .exp-actions-sidebar {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        width: 100%;
+    }
+    .experience-section .exp-buttons-group {
+        flex-direction: row;
+        order: 2;
+        gap: 16px;
+    }
+    .experience-section .exp-btn {
+        width: auto;
+        padding: 0 20px;
+        height: 50px;
+        font-size: 16px;
+    }
+    .experience-section .exp-slider-controls {
+        order: 1;
+        justify-content: flex-start;
+        gap: 12px;
+        margin: 0;
+        max-width: none;
+    }
+    .experience-section .exp-arrow-btn {
+        width: 32px;
+        height: 32px;
+    }
+    #exp-dots-container {
+        padding: 4px 10px;
+        gap: 4px;
+    }
+    .experience-section .exp-dot {
+        width: 6px;
+        height: 6px;
+    }
+}
+
+/* ─── 2. Блок "Комплектация" (complectation-section) ─── */
+@media (max-width: 1024px) {
+    .complectation-section .title-gradient-wrapper {
+        padding-left: 40px;
+        padding-right: 30px;
+    }
+    .complectation-section .title-line-1,
+    .complectation-section .title-line-2 {
+        font-size: 36px;
+        height: 50px;
+    }
+    .complectation-content {
+        flex-direction: column;
+        margin-top: 40px;
+    }
+    .complectation-section .left-column {
+        margin-left: 40px;
+        width: auto;
+        max-width: 500px;
+    }
+    .complectation-section .right-column {
+        margin-left: 40px;
+        margin-top: 40px;
+        min-height: 400px;
+    }
+    .complectation-section .blue-gradient-box {
+        width: 600px;
+        height: 280px;
+        left: 0;
+    }
+    .complectation-section .device-image-1,
+    .complectation-section .device-image-2 {
+        width: 180px;
+        height: 160px;
+    }
+    .complectation-section .device-image-1 { left: 20px; top: 40px; }
+    .complectation-section .device-image-2 { left: 280px; top: 30px; }
+    .complectation-section .yellow-line {
+        height: 400px;
+    }
+    .complectation-section .line-1 { left: 130px; top: 50px; }
+    .complectation-section .line-2 { left: 430px; top: 50px; }
+    .complectation-section .right-text {
+        font-size: 18px;
+    }
+    .complectation-section .text-1 { top: 280px; left: 120px; }
+    .complectation-section .text-2 { top: 260px; left: 420px; }
+}
+
+@media (max-width: 762px) {
+    .complectation-section .title-gradient-wrapper {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .complectation-section .title-line-1,
+    .complectation-section .title-line-2 {
+        font-size: 24px;
+        height: 36px;
+        white-space: normal;
+    }
+    .complectation-section .title-line-2 {
+        padding-left: 20px;
+    }
+    .complectation-section .left-column {
+        margin-left: 20px;
+        gap: 20px;
+    }
+    .feature-item {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .complectation-section .feature-icon {
+        width: 32px;
+    }
+    .complectation-section .feature-title {
+        font-size: 16px;
+    }
+    .complectation-section .feature-desc {
+        font-size: 14px;
+    }
+    .complectation-section .right-column {
+        margin-left: 20px;
+    }
+    .complectation-section .blue-gradient-box {
+        width: 90%;
+        height: auto;
+        aspect-ratio: 865 / 356;
+        transform: none;
+    }
+    .complectation-section .device-image-1,
+    .complectation-section .device-image-2 {
+        width: 40%;
+        height: auto;
+        transform: none;
+    }
+    .complectation-section .device-image-1 { left: 5%; top: 20%; }
+    .complectation-section .device-image-2 { left: 50%; top: 20%; }
+    .complectation-section .yellow-line {
+        display: none;
+    }
+    .complectation-section .right-text {
+        display: none;
+    }
+}
+
+/* ─── 3. Блок "Мобильное приложение" (mobile-app-section) ─── */
+@media (max-width: 1024px) {
+    .mobile-app-section {
+        padding-left: 40px;
+    }
+    .mobile-app-section .main-title {
+        font-size: 36px;
+        height: 50px;
+        padding: 0 30px;
+    }
+    .mobile-app-section .phones-gallery {
+        min-width: auto;
+    }
+    .mobile-app-section .phone-left,
+    .mobile-app-section .phone-right {
+        width: 180px;
+    }
+    .mobile-app-section .phone-center {
+        width: 190px;
+    }
+}
+
+@media (max-width: 762px) {
+    .mobile-app-section {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .mobile-app-section .header-container {
+        justify-content: center;
+    }
+    .mobile-app-section .main-title {
+        font-size: 28px;
+        height: 46px;
+        padding: 0 20px;
+    }
+    .mobile-app-section .content-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .mobile-app-section .text-content {
+        margin-left: 0;
+        max-width: 100%;
+        margin-bottom: 40px;
+    }
+    .mobile-app-section .text-content h3 {
+        font-size: 20px;
+    }
+    .mobile-app-section .text-content p {
+        font-size: 16px;
+    }
+    .mobile-app-section .phones-gallery {
+        justify-content: center;
+    }
+    .mobile-app-section .phone-left,
+    .mobile-app-section .phone-right {
+        width: 130px;
+    }
+    .mobile-app-section .phone-center {
+        width: 140px;
+    }
+}
+
+/* ─── 4. Блок "WEB-приложение" (web-app-section) ─── */
+@media (max-width: 1024px) {
+    .web-container {
+        max-width: 100%;
+        padding: 0 20px;
+    }
+    .web-header {
+        margin-left: 0;
+        width: 100%;
+        text-align: center;
+    }
+    .web-title {
+        font-size: 36px;
+        height: 50px;
+    }
+    .web-content-row {
+        flex-direction: column;
+        margin-left: 0;
+        gap: 40px;
+        align-items: center;
+    }
+    .web-col.left-col,
+    .web-col.right-col {
+        width: 90%;
+        max-width: 500px;
+    }
+    .left-col .web-subtitle {
+        text-align: center;
+        width: 100%;
+        margin-left: 0;
+    }
+    .right-col .web-subtitle {
+        text-align: center;
+        width: 100%;
+        margin-left: 0;
+    }
+    .web-line {
+        display: none;
+    }
+}
+
+@media (max-width: 762px) {
+    .web-title {
+        font-size: 28px;
+        height: 46px;
+    }
+    .web-subtitle {
+        font-size: 20px;
+    }
+    .web-card p {
+        font-size: 16px;
+    }
+}
+
+/* ─── 5. Блок "Преимущества" (benefits-section) ─── */
+@media (max-width: 1024px) {
+    .benefits-container {
+        grid-template-columns: 1fr;
+        gap: 60px;
+        max-width: 90%;
+    }
+    .benefits-left-column {
+        order: 2;
+    }
+    .benefits-right-column {
+        order: 1;
+    }
+    .benefits-card.advantages-card {
+        height: auto;
+        padding: 30px;
+    }
+    .advantages-main-title {
+        font-size: 28px;
+    }
+    .advantage-title {
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 762px) {
+    .benefits-container {
+        max-width: 95%;
+        gap: 40px;
+    }
+    .scope-card,
+    .results-card {
+        height: auto;
+        margin-top: 30px;
+        padding: 30px 20px 20px;
+    }
+    .card-main-title,
+    .card-inner-title {
+        position: static;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 28px;
+    }
+    .badge-circle {
+        width: 60px;
+        height: 60px;
+        font-size: 48px;
+    }
+    .scope-card .badge-circle,
+    .results-card .badge-circle {
+        position: absolute;
+        top: -30px;
+        left: 20px;
+    }
+    .advantages-card .badge-circle.badge-right {
+        top: -30px;
+        right: 20px;
+    }
+    .info-text {
+        font-size: 16px;
+    }
+    .advantage-item {
+        margin-bottom: 30px;
+    }
+    .advantage-header {
+        flex-wrap: wrap;
+    }
+    .advantage-text-block {
+        margin-left: 0;
+        padding-left: 12px;
+    }
+    .advantage-title {
+        font-size: 22px;
+        line-height: 1.2;
+    }
+    .advantage-description {
+        font-size: 14px;
+        line-height: 1.4;
+        margin-left: 0;
+    }
+    .benefits-actions {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    .btn-order,
+    .btn-consult {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
+/* ─── 6. Блок "О нашей команде" (team-section) ─── */
+@media (max-width: 1024px) {
+    .team-container {
+        padding: 0 20px;
+    }
+    .team-content-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+    .team-left-col {
+        width: 100%;
+        order: 2;
+        margin-top: 30px;
+    }
+    .team-main-photo-block {
+        width: 100%;
+        max-width: 580px;
+        height: auto;
+        margin-left: 0;
+        transform: none;
+        order: 1;
+    }
+    .team-main-photo {
+        object-fit: contain;
+    }
+    .team-header-block {
+        justify-content: center;
+        padding-left: 0;
+    }
+    .team-main-title {
+        font-size: 48px;
+        text-align: center;
+    }
+    .team-blue-card {
+        height: auto;
+        padding: 25px;
+    }
+    .blue-card-inner-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .text-and-button-group {
+        width: 100%;
+    }
+    .card-embedded-logo {
+        width: 100px;
+        height: 140px;
+    }
+}
+
+@media (max-width: 762px) {
+    .team-main-title {
+        font-size: 36px;
+    }
+    .team-description-text {
+        font-size: 16px;
+    }
+    .btn-team-more {
+        height: 50px;
+        font-size: 16px;
+    }
+    .card-embedded-logo {
+        width: 80px;
+        height: 112px;
+    }
+}
+
+/* ─── 7. Блок "Блог и новости" (news-section) ─── */
+@media (max-width: 1024px) {
+    .news-header-badge {
+        width: 90%;
+        max-width: 500px;
+        padding-left: 30px;
+        height: 70px;
+    }
+    .news-main-title {
+        font-size: 36px;
+    }
+    .news-carousel-viewport {
+        max-width: 700px;
+    }
+    .news-carousel-track {
+        gap: 24px;
+    }
+    .slider-btn {
+        width: 70px;
+        height: 70px;
+    }
+}
+
+@media (max-width: 762px) {
+    .news-header-badge {
+        width: 100%;
+        justify-content: center;
+        padding-left: 0;
+        height: 60px;
+    }
+    .news-main-title {
+        font-size: 28px;
+    }
+    .news-slider-wrapper {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .slider-btn {
+        display: none;          /* на планшетах стрелки скрыты, листание свайпом */
+    }
+    .news-carousel-viewport {
+        width: 100%;
+        overflow-x: auto;
+    }
+    .news-carousel-track {
+        padding-bottom: 10px;
+    }
+    .news-card {
+        width: 180px;
+        height: 260px;
+    }
+    .news-card__image {
+        width: 180px;
+        height: 140px;
+    }
+    .news-card__title {
+        top: 150px;
+        font-size: 14px;
+        width: 110px;
+    }
+    .news-card__link {
+        top: 210px;
+        font-size: 18px;
+    }
+}
+
+/* ─── 8. Секция отзывов (reviews) – доработка для планшетов ─── */
+@media (max-width: 1024px) {
+    .reviews__track-wrapper {
+        max-width: 100%;
+    }
+    .reviews__track {
+        gap: 12px;
+    }
+    .review-card {
+        width: 360px;
+        min-height: 320px;
+    }
+    .review-product {
+        font-size: 20px;
+    }
+    .review-company {
+        font-size: 24px;
+    }
+    .review-rating {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 762px) {
+    .reviews__inner {
+        flex-direction: column;
+        gap: 16px;
+    }
+    .reviews__arrow {
+        display: none;
+    }
+    .reviews__track-wrapper {
+        overflow-x: auto;
+        width: 100%;
+    }
+    .reviews__track {
+        transform: none !important;
+        width: max-content;
+        gap: 16px;
+    }
+    .review-card {
+        width: 320px;
+        min-height: 300px;
+        padding: 16px;
+    }
+    .review-text {
+        max-height: 160px;
+    }
+}
+
+/* ─── Общие адаптивные отступы для всех секций ─── */
+@media (max-width: 1024px) {
+    section {
+        scroll-margin-top: 80px;
+    }
+}
+
+@media (max-width: 762px) {
+    section {
+        scroll-margin-top: 70px;
+    }
+    .hero__container,
+    .experience-section,
+    .reviews,
+    .complectation-section,
+    .mobile-app-section,
+    .web-app-section,
+    .benefits-section,
+    .team-section,
+    .news-section {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
 }

@@ -1,14 +1,13 @@
-// admin.js – полная версия с обработкой через делегирование событий
+// admin.js – исправленная версия: поддержка строковых ID, надёжное обновление
 (function() {
     const API_URL = 'http://localhost:3000';
     let toastTimer = null;
-    let currentEstimateTarget = null; // { type: 'order' или 'upgrade', id: number }
+    let currentEstimateTarget = null;
 
-    // Вспомогательные функции
     const formatNumber = (num) => new Intl.NumberFormat('ru-RU').format(num);
     const formatDate = (dateStr) => dateStr ? dateStr.split('-').reverse().join('.') : '—';
     const escapeHtml = (str) => str ? String(str).replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]||m)) : '';
-    
+
     function showToast(msg) {
         const toast = document.getElementById('toast');
         if (!toast) return;
@@ -18,7 +17,7 @@
         toastTimer = setTimeout(() => toast.classList.remove('visible'), 3200);
     }
 
-    // Проверка авторизации (только админ)
+    // Проверка авторизации
     let currentUser = null;
     try { currentUser = JSON.parse(localStorage.getItem('currentUser')); } catch(e) {}
     if (!currentUser || currentUser.role !== 'admin') {
@@ -28,14 +27,13 @@
     const adminNameSpan = document.getElementById('admin-name');
     if (adminNameSpan) adminNameSpan.textContent = currentUser.username || 'Главный';
 
-    // Глобальные кэши
-    let clientsMap = {};   // id -> клиент
-    let sensorsMap = {};   // id -> датчик
+    // Кэши
+    let clientsMap = {};
+    let sensorsMap = {};
     let orders = [];
     let upgrades = [];
     let estimates = [];
 
-    // Загрузка всех данных
     async function loadAllData() {
         try {
             const [clientsRes, sensorsRes, ordersRes, upgradesRes, estimatesRes] = await Promise.all([
@@ -65,7 +63,6 @@
         }
     }
 
-    // Рендер таблицы заявок на заказы (status = pending)
     function renderOrdersTable() {
         const tbody = document.getElementById('orders-tbody');
         if (!tbody) return;
@@ -78,7 +75,7 @@
             const client = clientsMap[order.client_id] || { company: 'Неизвестно' };
             const sensor = sensorsMap[order.sensor_id] || { title: 'Неизвестный прибор' };
             return `
-                <tr data-id="${order.id}" data-type="order">
+                <tr data-id="${order.id}">
                     <td>${order.id}</td>
                     <td>${escapeHtml(client.company)}</td>
                     <td>${escapeHtml(sensor.title)}</td>
@@ -93,7 +90,6 @@
         }).join('');
     }
 
-    // Рендер заявок на доработки (status = pending)
     function renderUpgradesTable() {
         const tbody = document.getElementById('upgrades-tbody');
         if (!tbody) return;
@@ -105,7 +101,7 @@
         tbody.innerHTML = pendingUpgrades.map(req => {
             const client = clientsMap[req.client_id] || { company: 'Неизвестно' };
             return `
-                <tr data-id="${req.id}" data-type="upgrade">
+                <tr data-id="${req.id}">
                     <td>${req.id}</td>
                     <td>${escapeHtml(client.company)}</td>
                     <td>${req.type === 'web' ? 'Веб-часть' : 'Аппаратная часть'}</td>
@@ -118,7 +114,6 @@
         }).join('');
     }
 
-    // Рендер заказов в производстве (estimates)
     function renderEstimatesTable() {
         const tbody = document.getElementById('estimates-tbody');
         if (!tbody) return;
@@ -144,13 +139,12 @@
                             <option value="in_production" ${est.status === 'in_production' ? 'selected' : ''}>В производство</option>
                             <option value="ready" ${est.status === 'ready' ? 'selected' : ''}>Готов к отгрузке</option>
                         </select>
-                     </td>
+                    </td>
                 </tr>
             `;
         }).join('');
     }
 
-    // Оборудование клиентов (аккордеон)
     function renderClientsEquipment() {
         const container = document.getElementById('client-list');
         if (!container) return;
@@ -164,13 +158,7 @@
                 const sensor = sensorsMap[ms.sensor_id];
                 const sensorName = sensor ? sensor.title : `Датчик ID ${ms.sensor_id}`;
                 const serials = ms.serial_numbers ? ms.serial_numbers.join(', ') : '—';
-                return `
-                    <tr>
-                        <td>${escapeHtml(sensorName)}</td>
-                        <td class="serial">${escapeHtml(serials)}</td>
-                        <td>—</td>
-                    </tr>
-                `;
+                return `<tr><td>${escapeHtml(sensorName)}</td><td class="serial">${escapeHtml(serials)}</td><td>—</td></tr>`;
             }).join('');
             const hasSensors = sensorsList.length > 0;
             return `
@@ -197,17 +185,13 @@
     }
 
     function updateCounters() {
-        const ordersCountSpan = document.getElementById('orders-count');
-        const upgradesCountSpan = document.getElementById('upgrades-count');
-        const estimatesCountSpan = document.getElementById('estimates-count');
-        const clientsCountSpan = document.getElementById('clients-count');
-        if (ordersCountSpan) ordersCountSpan.textContent = orders.filter(o => o.status === 'pending').length;
-        if (upgradesCountSpan) upgradesCountSpan.textContent = upgrades.filter(u => u.status === 'pending').length;
-        if (estimatesCountSpan) estimatesCountSpan.textContent = estimates.length;
-        if (clientsCountSpan) clientsCountSpan.textContent = Object.keys(clientsMap).length;
+        document.getElementById('orders-count').textContent = orders.filter(o => o.status === 'pending').length;
+        document.getElementById('upgrades-count').textContent = upgrades.filter(u => u.status === 'pending').length;
+        document.getElementById('estimates-count').textContent = estimates.length;
+        document.getElementById('clients-count').textContent = Object.keys(clientsMap).length;
     }
 
-    // ---- Модальное окно сметы ----
+    // --- Модальное окно сметы ---
     function openEstimateModal(type, id, companyName) {
         currentEstimateTarget = { type, id };
         document.getElementById('modal-client').textContent = companyName;
@@ -233,18 +217,25 @@
         const { type, id } = currentEstimateTarget;
         const endpoint = type === 'order' ? 'orders' : 'upgrade_requests';
         try {
-            const patchRes = await fetch(`${API_URL}/${endpoint}/${id}`, {
+            const response = await fetch(`${API_URL}/${endpoint}/${id}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ status: 'on_approval', estimate_amount: amount, admin_comment: comment })
+                body: JSON.stringify({
+                    status: 'on_approval',
+                    estimate_amount: amount,
+                    admin_comment: comment
+                })
             });
-            if (!patchRes.ok) throw new Error('Ошибка обновления');
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`HTTP ${response.status}: ${errorText}`);
+            }
             showToast(`Смета на сумму ${formatNumber(amount)} руб. отправлена клиенту.`);
             closeEstimateModal();
-            loadAllData();
+            await loadAllData(); // перезагрузить таблицы
         } catch (err) {
-            console.error(err);
-            showToast('Ошибка отправки сметы');
+            console.error('Ошибка отправки сметы:', err);
+            showToast('Ошибка отправки сметы: ' + err.message);
         }
     }
 
@@ -258,14 +249,17 @@
             });
             if (res.ok) {
                 showToast(`Статус заказа #${estimateId} изменён на "${newStatus === 'in_production' ? 'В производстве' : 'Готов к отгрузке'}"`);
-                loadAllData();
-            } else throw new Error();
+                await loadAllData();
+            } else {
+                throw new Error('Не удалось обновить статус');
+            }
         } catch(err) {
+            console.error(err);
             showToast('Ошибка изменения статуса');
         }
     }
 
-    // Аккордеон для клиентов
+    // Аккордеон
     function toggleClient(clientItem) {
         const isOpen = clientItem.classList.contains('open');
         document.querySelectorAll('.client-item').forEach(el => {
@@ -280,15 +274,14 @@
         }
     }
 
-    // ---- Обработчики через делегирование ----
+    // Делегирование событий (без parseInt для ID)
     function setupEventDelegation() {
-        // Делегирование для кнопок "Выставить смету"
         document.body.addEventListener('click', (e) => {
             const btn = e.target.closest('.estimate-btn');
             if (btn) {
                 e.preventDefault();
                 const type = btn.getAttribute('data-type');
-                const id = parseInt(btn.getAttribute('data-id'));
+                const id = btn.getAttribute('data-id');   // сохраняем как строку
                 const company = btn.getAttribute('data-company');
                 if (type && id && company) {
                     openEstimateModal(type, id, company);
@@ -296,11 +289,10 @@
             }
         });
 
-        // Делегирование для select изменения статуса
         document.body.addEventListener('change', (e) => {
             const select = e.target.closest('.status-select');
             if (select) {
-                const estimateId = parseInt(select.getAttribute('data-id'));
+                const estimateId = select.getAttribute('data-id'); // строка
                 const newStatus = select.value;
                 if (estimateId && newStatus) {
                     changeEstimateStatus(estimateId, newStatus);
@@ -308,7 +300,6 @@
             }
         });
 
-        // Делегирование для аккордеона клиентов
         document.body.addEventListener('click', (e) => {
             const toggleBtn = e.target.closest('.client-toggle');
             if (toggleBtn) {
@@ -324,7 +315,7 @@
         window.location.href = 'index.html';
     });
 
-    // Модальное окно: закрытие
+    // Закрытие модалки
     document.getElementById('close-estimate-modal')?.addEventListener('click', closeEstimateModal);
     document.getElementById('cancel-estimate')?.addEventListener('click', closeEstimateModal);
     document.getElementById('submit-estimate')?.addEventListener('click', submitEstimate);
@@ -332,7 +323,6 @@
         if (e.target === document.getElementById('estimate-modal')) closeEstimateModal();
     });
 
-    // Инициализация
     setupEventDelegation();
     loadAllData();
 })();

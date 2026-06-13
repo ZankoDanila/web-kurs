@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&family=Montserrat:wght@700&family=Roboto+Slab:wght@500&family=Roboto:wght@400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="Main.css">
-    <link rel="stylesheet" href="header.css"> </head>
+    <link rel="stylesheet" href="header.css">
     <link rel="stylesheet" href="footer.css">
 </head>
 <body>
@@ -17,110 +17,85 @@
 
     <main class="main-content">
         
-<section class="hero" id="hero">
-  <div class="hero__bg">
-    <img
-      class="hero__bg-img"
-      src="img/main_fraim.png"
-      alt="Фоновое изображение сварки"
-    />
-    <div class="hero__bg-overlay"></div>
-  </div>
-
-  <div class="hero__container">
-    <div class="hero__content">
-
-      <h1 class="hero__title">Мобильный регистратор</h1>
-      <h2 class="hero__subtitle">
-        для контроля параметров<br>сварочных процессов
-      </h2>
-
-      <div class="hero__features">
-        <div class="hero__features-line"></div>
-
-        <div class="hero__features-list">
-          <div class="hero__feature">
-            повышение качества сварки ответственных конструкций путём контроля за соблюдением технологии при производстве сварочных работ
-          </div>
-          <div class="hero__feature">
-            повышение эффективности управления сварочным производством за счёт оперативного предоставления точной информации о работе оборудования и сварщика
-          </div>
-        </div>
-      </div>
-
-      <a href="#" class="hero__btn">Связаться для заказа</a>
-
-    </div>
-  </div>
-</section>
-
-
+        <section class="hero" id="hero">
+            <div class="hero__bg">
+                <img class="hero__bg-img" src="img/main_fraim.png" alt="Фоновое изображение сварки" />
+                <div class="hero__bg-overlay"></div>
+            </div>
+            <div class="hero__container">
+                <div class="hero__content">
+                    <h1 class="hero__title">Мобильный регистратор</h1>
+                    <h2 class="hero__subtitle">
+                        для контроля параметров<br>сварочных процессов
+                    </h2>
+                    <div class="hero__features">
+                        <div class="hero__features-line"></div>
+                        <div class="hero__features-list">
+                            <div class="hero__feature">
+                                повышение качества сварки ответственных конструкций путём контроля за соблюдением технологии при производстве сварочных работ
+                            </div>
+                            <div class="hero__feature">
+                                повышение эффективности управления сварочным производством за счёт оперативного предоставления точной информации о работе оборудования и сварщика
+                            </div>
+                        </div>
+                    </div>
+                    <!-- кнопка "Связаться для заказа" → авторизация -->
+                    <a href="index.html" class="hero__btn">Связаться для заказа</a>
+                </div>
+            </div>
+        </section>
 
         <section class="experience-section">
-  <div class="exp-header">
-    <h2 class="exp-main-title">Опыт внедрения</h2>
-    <div class="exp-subtitle-badge">Где уже работают<br>наши регистраторы</div>
-  </div>
+            <div class="exp-header">
+                <h2 class="exp-main-title">Опыт внедрения</h2>
+                <div class="exp-subtitle-badge">Где уже работают<br>наши регистраторы</div>
+            </div>
+            <div class="exp-content-wrapper">
+                <div id="exp-slider-container"></div>
+                <div class="exp-actions-sidebar">
+                    <div class="exp-buttons-group">
+                        <!-- кнопка "ЗАКАЗАТЬ" → авторизация -->
+                         <button class="exp-btn exp-btn-primary">
+                        <a href="index.html" class="exp-btn exp-btn-primary">ЗАКАЗАТЬ</a>
+                        </button>
+                        <button class="exp-btn exp-btn-secondary">ПОДРОБНЕЕ</button>
+                    </div>
+                    <div class="exp-slider-controls">
+                        <button id="exp-prev-btn" class="exp-arrow-btn" aria-label="Назад"></button>
+                        <div id="exp-dots-container"></div>
+                        <button id="exp-next-btn" class="exp-arrow-btn" aria-label="Вперед"></button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-  <div class="exp-content-wrapper">
-    
-    <div id="exp-slider-container"></div>
-
-    <div class="exp-actions-sidebar">
-      <div class="exp-buttons-group">
-        <button class="exp-btn exp-btn-primary">ЗАКАЗАТЬ</button>
-        <button class="exp-btn exp-btn-secondary">ПОДРОБНЕЕ</button>
-      </div>
-      
-      <div class="exp-slider-controls">
-        <button id="exp-prev-btn" class="exp-arrow-btn" aria-label="Назад"></button>
-        <div id="exp-dots-container"></div>
-        <button id="exp-next-btn" class="exp-arrow-btn" aria-label="Вперед"></button>
-      </div>
+        <section class="reviews" id="reviews">
+    <div class="reviews__inner">
+        <button class="reviews__arrow reviews__arrow--prev" id="reviews-prev" type="button" aria-label="Предыдущий отзыв">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#004A8F" stroke-width="4">
+                <path d="M15 19l-7-7 7-7"/>
+            </svg>
+        </button>
+        <div class="reviews__track-wrapper">
+            <div class="reviews__track" id="reviews-track"></div>
+        </div>
+        <button class="reviews__arrow reviews__arrow--next" id="reviews-next" type="button" aria-label="Следующий отзыв">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#004A8F" stroke-width="4">
+                <path d="M9 5l7 7-7 7"/>
+            </svg>
+        </button>
     </div>
-
-  </div>
-</section>
-
-<section class="reviews" id="reviews">
-
-  <div class="reviews__inner">
-
-    <button class="reviews__arrow reviews__arrow--prev"
-            id="reviews-prev"
-            type="button"
-            aria-label="Предыдущий отзыв">
-    </button>
-
-    <div class="reviews__track"
-         id="reviews-track"
-         role="region"
-         aria-label="Отзывы клиентов">
-      <!-- .reviews__card — рендерятся через JS из db.json → reviews -->
-    </div>
-
-    <button class="reviews__arrow reviews__arrow--next"
-            id="reviews-next"
-            type="button"
-            aria-label="Следующий отзыв">
-    </button>
-
-  </div>
-
 </section>
 
         <section class="complectation-section" id="complectation">
             <div class="complectation-container">
-                
                 <div class="complectation-header-area">
                     <div class="title-gradient-wrapper">
                         <div class="title-line-1">КОМПЛЕКТАЦИЯ</div>
                     </div>
                     <div class="title-line-2">МОБИЛЬНОГО РЕГИСТРАТОРА</div>
                 </div>
-
                 <div class="complectation-content">
-                    
                     <div class="left-column">
                         <div class="feature-item">
                             <img src="img/tick.png" alt="Тикет" class="feature-icon">
@@ -129,7 +104,6 @@
                                 <div class="feature-desc">работа с любым сварочным оборудованием. система поддерживает радиочастотную идентификацию сварщика по индивидуальному удостоверению для разграничения прав и учета.</div>
                             </div>
                         </div>
-
                         <div class="feature-item">
                             <img src="img/tick.png" alt="Тикет" class="feature-icon">
                             <div class="feature-text-content">
@@ -137,7 +111,6 @@
                                 <div class="feature-desc">измерение и сохранение параметров на внешний носитель. данные о сварочном токе, напряжении на дуге и температуре околошовной зоны передаются по wi-fi на мобильное устройство (планшет) в режиме реального времени.</div>
                             </div>
                         </div>
-
                         <div class="feature-item">
                             <img src="img/tick.png" alt="Тикет" class="feature-icon">
                             <div class="feature-text-content">
@@ -146,20 +119,16 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="right-column">
                         <div class="yellow-line line-1"></div>
                         <div class="yellow-line line-2"></div>
-                        
                         <div class="blue-gradient-box">
                             <img src="img/sensor.png" alt="Регистратор с блоком датчиков" class="device-image-1">
                             <img src="img/sensor.png" alt="Мобильное устройство" class="device-image-2">
                         </div>
-
                         <div class="right-text text-1">регистратор с<br>блоком датчиков</div>
                         <div class="right-text text-2">мобильное<br>устройство с<br>установленным<br>приложением</div>
                     </div>
-
                 </div>
             </div>
         </section>
@@ -169,7 +138,6 @@
                 <div class="header-container">
                     <h2 class="main-title">МОБИЛЬНОЕ ПРИЛОЖЕНИЕ</h2>
                 </div>
-
                 <div class="content-wrapper">
                     <div class="text-content">
                         <h3>безопасность и автоматизация</h3>
@@ -181,7 +149,6 @@
                             оперативно оповещает мастера о любых нарушениях режима сварки.
                         </p>
                     </div>
-
                     <div class="phones-gallery">
                         <img class="phone phone-left" src="img/phone_two.png" alt="Левый телефон">
                         <img class="phone phone-center" src="img/phone_one.png" alt="Центральный телефон">
@@ -195,11 +162,9 @@
             <div class="web-container">
                 <div class="web-line web-line-left"></div>
                 <div class="web-line web-line-right"></div>
-
                 <div class="web-header">
                     <h2 class="web-title">WEB-ПРИЛОЖЕНИЕ</h2>
                 </div>
-
                 <div class="web-content-row">
                     <div class="web-col left-col">
                         <h3 class="web-subtitle">Централизованная база данных и ресурсов</h3>
@@ -207,7 +172,6 @@
                             <p>Единое хранилище для управления реестром сотрудников, парком оборудования и технологическими инструкциями. Система позволяет оперативно назначать и контролировать задания на сварку в масштабе всего предприятия.</p>
                         </div>
                     </div>
-
                     <div class="web-col right-col">
                         <h3 class="web-subtitle">Цифровая паспортизация и отчетность</h3>
                         <div class="web-card">
@@ -220,12 +184,10 @@
 
         <section class="benefits-section">
             <div class="benefits-container">
-                
                 <div class="benefits-left-column">
                     <div class="benefits-card scope-card">
                         <div class="badge-circle">1</div>
                         <h2 class="card-main-title">Область применений</h2>
-                        
                         <div class="card-body-content">
                             <div class="info-row">
                                 <div class="icon-container">
@@ -241,12 +203,10 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="benefits-card results-card">
                         <div class="badge-circle">2</div>
                         <h2 class="card-inner-title">Ожидаемый результат</h2>
                         <div class="decorative-blue-line"></div>
-                        
                         <div class="card-body-content">
                             <div class="info-row">
                                 <div class="icon-container">
@@ -262,17 +222,15 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="benefits-actions">
-                        <button class="btn-action btn-order">Заказать</button>
-                        <button class="btn-action btn-consult">Получить консультацию</button>
+                        <!-- кнопки "Заказать" и "Получить консультацию" → авторизация -->
+                        <a href="index.html" class="btn-action btn-order">Заказать</a>
+                        <a href="index.html" class="btn-action btn-consult">Получить консультацию</a>
                     </div>
                 </div>
-
                 <div class="benefits-right-column advantages-card">
                     <div class="badge-circle badge-right">3</div>
                     <h2 class="advantages-main-title">ПРЕИМУЩЕСТВА</h2>
-                    
                     <div class="advantages-list">
                         <div class="advantage-item">
                             <div class="advantage-header">
@@ -285,7 +243,6 @@
                             </div>
                             <p class="advantage-description">Оперативный мониторинг процессов, оборудования и работы сварщиков в автоматическом режиме.</p>
                         </div>
-
                         <div class="advantage-item">
                             <div class="advantage-header">
                                 <div class="advantage-icon-block">
@@ -297,7 +254,6 @@
                             </div>
                             <p class="advantage-description">Снижение стоимости системы за счёт использования мобильных устройств и сокращения затрат на брак.</p>
                         </div>
-
                         <div class="advantage-item">
                             <div class="advantage-header">
                                 <div class="advantage-icon-block">
@@ -311,15 +267,12 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
 
         <section class="team-section" id="team">
             <div class="team-container">
-                
                 <div class="team-content-wrapper">
-                    
                     <div class="team-left-col">
                         <div class="team-header-block">
                             <div class="team-icon-wrapper">
@@ -327,120 +280,331 @@
                             </div>
                             <h2 class="team-main-title">О нашей команде</h2>
                         </div>
-
                         <div class="team-blue-card">
                             <div class="blue-card-inner-content">
-                                
                                 <div class="text-and-button-group">
                                     <p class="team-description-text">
                                         Мы объединяем научную базу Белорусско-Российского университета с передовыми технологиями мониторинга для автоматизации и контроля качества вашего производства.
                                     </p>
                                     <a href="about.html" class="btn-team-more">Подробнее о нашей команде</a> 
                                 </div>
-                                
                                 <div class="card-embedded-logo">
                                     <a href="http://bru.by" target="_blank" rel="noopener noreferrer">
                                         <img src="img/BRU_logo2.png" alt="Логотип БРУ" class="bru-card-img">
                                     </a>
                                 </div>
-                                
                             </div>
                         </div>
                     </div>
-
                     <div class="team-main-photo-block">
                         <img src="img/team-photo.png" alt="Лаборатория и робот" class="team-main-photo">
                     </div>
-
                 </div>
-
             </div>
         </section>
 
         <section class="news-section" id="news">
-            <div class="news-container">
-                
-                <div class="news-header-badge">
-                    <h2 class="news-main-title">Блог и новости</h2>
-                </div>
 
-                <div class="news-slider-wrapper">
-                    
-                    <button class="slider-btn btn-prev" aria-label="Предыдущий слайд">
-                        <span class="arrow-icon left"></span>
-                    </button>
+    <div class="news-container">
 
-                    <div class="news-carousel-viewport">
-                        <div class="news-carousel-track">
-                            
-                            <article class="news-card">
-                                <div class="card-image-block">
-                                    <img src="img/news-1.png" alt="Поставили первые датчики" class="card-img">
-                                    <div class="card-date-badge">
-                                        <span>14<br>апр</span>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <h3 class="card-title">поставили первые <br>датчики</h3>
-                                    <a href="#" class="card-link-more">читать</a>
-                                </div>
-                            </article>
+        <div class="news-header-badge">
+            <h2 class="news-main-title">
+                Блог и новости
+            </h2>
+        </div>
 
-                            <article class="news-card">
-                                <div class="card-image-block">
-                                    <img src="img/news-2.png" alt="Провели опыт на производстве" class="card-img">
-                                    <div class="card-date-badge">
-                                        <span>14<br>апр</span>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <h3 class="card-title">провели опыт <br>на производстве</h3>
-                                    <a href="#" class="card-link-more">читать</a>
-                                </div>
-                            </article>
+        <div class="news-slider-wrapper">
 
-                            <article class="news-card">
-                                <div class="card-image-block">
-                                    <img src="img/news-3.png" alt="Протестировали первые образцы" class="card-img">
-                                    <div class="card-date-badge">
-                                        <span>14<br>апр</span>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <h3 class="card-title">протестировали<br>первые образцы</h3>
-                                    <a href="#" class="card-link-more">читать</a>
-                                </div>
-                            </article>
+            <button class="slider-btn btn-prev" aria-label="Назад">
+                <span class="arrow-icon left"></span>
+            </button>
 
-                            <article class="news-card">
-                                <div class="card-image-block">
-                                    <img src="img/news-4.png" alt="Начали производство датчиков" class="card-img">
-                                    <div class="card-date-badge">
-                                        <span>14<br>апр</span>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <h3 class="card-title">начали производство<br>датчиков</h3>
-                                    <a href="#" class="card-link-more">читать</a>
-                                </div>
-                            </article>
+            <div class="news-carousel-viewport">
 
+                <div class="news-carousel-track">
+
+                    <!-- Карточка 1 -->
+
+                    <article class="news-card">
+
+                        <div class="news-card__date-bg"></div>
+
+                        <div class="news-card__body"></div>
+
+                        <img
+                            src="img/news-1.png"
+                            alt="Поставили первые датчики"
+                            class="news-card__image"
+                        >
+
+                        <div class="news-card__date">
+                            14<br>апр
                         </div>
-                    </div>
 
-                    <button class="slider-btn btn-next" aria-label="Следующий слайд">
-                        <span class="arrow-icon right"></span>
-                    </button>
+                        <h3 class="news-card__title">
+                            поставили первые<br>
+                            датчики
+                        </h3>
+
+                        <button
+                            class="news-card__link"
+                            data-title="Поставили первые датчики"
+                            data-image="img/news-1.png"
+                            data-text="На производственной площадке успешно завершён монтаж первой партии интеллектуальных датчиков контроля сварочных процессов. Оборудование подготовлено к опытной эксплуатации."
+                        >
+                            читать
+                        </button>
+
+                    </article>
+
+                    <!-- Карточка 2 -->
+
+                    <article class="news-card">
+
+                        <div class="news-card__date-bg"></div>
+
+                        <div class="news-card__body"></div>
+
+                        <img
+                            src="img/news-2.png"
+                            alt="Провели опыт на производстве"
+                            class="news-card__image"
+                        >
+
+                        <div class="news-card__date">
+                            14<br>апр
+                        </div>
+
+                        <h3 class="news-card__title">
+                            провели опыт<br>
+                            на производстве
+                        </h3>
+
+                        <button
+                            class="news-card__link"
+                            data-title="Провели опыт на производстве"
+                            data-image="img/news-2.png"
+                            data-text="На промышленной площадке проведён цикл испытаний оборудования в реальных производственных условиях. Получены положительные результаты по качеству контроля."
+                        >
+                            читать
+                        </button>
+
+                    </article>
+
+                    <!-- Карточка 3 -->
+
+                    <article class="news-card">
+
+                        <div class="news-card__date-bg"></div>
+
+                        <div class="news-card__body"></div>
+
+                        <img
+                            src="img/news-3.png"
+                            alt="Протестировали первые образцы"
+                            class="news-card__image"
+                        >
+
+                        <div class="news-card__date">
+                            14<br>апр
+                        </div>
+
+                        <h3 class="news-card__title">
+                            протестировали<br>
+                            первые образцы
+                        </h3>
+
+                        <button
+                            class="news-card__link"
+                            data-title="Протестировали первые образцы"
+                            data-image="img/news-3.png"
+                            data-text="Первые опытные образцы успешно прошли цикл лабораторных испытаний. Подтверждена устойчивость оборудования к промышленным нагрузкам."
+                        >
+                            читать
+                        </button>
+
+                    </article>
+
+                    <!-- Карточка 4 -->
+
+                    <article class="news-card">
+
+                        <div class="news-card__date-bg"></div>
+
+                        <div class="news-card__body"></div>
+
+                        <img
+                            src="img/news-4.png"
+                            alt="Начали производство датчиков"
+                            class="news-card__image"
+                        >
+
+                        <div class="news-card__date">
+                            14<br>апр
+                        </div>
+
+                        <h3 class="news-card__title">
+                            начали производство<br>
+                            датчиков
+                        </h3>
+
+                        <button
+                            class="news-card__link"
+                            data-title="Начали производство датчиков"
+                            data-image="img/news-4.png"
+                            data-text="Запущена серийная линия производства новых датчиков контроля сварочных процессов. Производственные мощности позволяют выпускать до нескольких сотен изделий ежемесячно."
+                        >
+                            читать
+                        </button>
+
+                    </article>
 
                 </div>
 
             </div>
-        </section>
+
+            <button class="slider-btn btn-next" aria-label="Вперёд">
+                <span class="arrow-icon right"></span>
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- МОДАЛЬНОЕ ОКНО -->
+
+<div class="news-modal" id="newsModal">
+
+    <div class="news-modal__overlay"></div>
+
+    <div class="news-modal__content">
+
+        <button class="news-modal__close">&times;</button>
+
+        <img
+            src=""
+            alt=""
+            class="news-modal__image"
+            id="modalImage"
+        >
+
+        <h3
+            class="news-modal__title"
+            id="modalTitle"
+        ></h3>
+
+        <p
+            class="news-modal__text"
+            id="modalText"
+        ></p>
+
+    </div>
+
+</div>
+
+</section>
 
     </main>
 
     <script src="Main.js"></script>
     <script src="header.js"></script>
     <script src="footer.js" defer></script>
+
+<div class="news-modal" id="newsModal">
+
+    <div class="news-modal__overlay"></div>
+
+    <div class="news-modal__content">
+
+        <button
+            class="news-modal__close"
+            id="closeNewsModal"
+        >
+            ×
+        </button>
+
+        <img
+            id="modalImage"
+            class="news-modal__image"
+            src=""
+            alt=""
+        >
+
+        <h3
+            id="modalTitle"
+            class="news-modal__title"
+        ></h3>
+
+        <p
+            id="modalText"
+            class="news-modal__text"
+        ></p>
+
+    </div>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const modal =
+        document.getElementById('newsModal');
+
+    const modalTitle =
+        document.getElementById('modalTitle');
+
+    const modalImage =
+        document.getElementById('modalImage');
+
+    const modalText =
+        document.getElementById('modalText');
+
+    const closeBtn =
+        document.getElementById('closeNewsModal');
+
+    document
+        .querySelectorAll('.news-card__link')
+        .forEach(btn => {
+
+            btn.addEventListener('click', () => {
+
+                modalTitle.textContent =
+                    btn.dataset.title;
+
+                modalImage.src =
+                    btn.dataset.image;
+
+                modalText.textContent =
+                    btn.dataset.text;
+
+                modal.classList.add('active');
+            });
+
+        });
+
+    closeBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+    });
+
+    document
+        .querySelector('.news-modal__overlay')
+        .addEventListener('click', () => {
+
+            modal.classList.remove('active');
+        });
+
+    document.addEventListener('keydown', e => {
+
+        if (e.key === 'Escape') {
+            modal.classList.remove('active');
+        }
+
+    });
+
+});
+</script>
+
 </body>
 </html>
