@@ -1,15 +1,12 @@
-// Cabinet.js – полная логика: профиль, история, заказы, доработки, сметы, редактирование профиля
 (function() {
     const API_URL = 'http://localhost:3000';
 
-    // Вспомогательные функции
     const formatNumber = (num) => new Intl.NumberFormat('ru-RU').format(num);
     const formatDate = (dateStr) => dateStr ? dateStr.split('-').reverse().join('.') : '—';
     const escapeHtml = (str) => str ? String(str).replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]||m)) : '';
 
     let currentUser = null;
 
-    // ----- Загрузка данных кабинета -----
     async function loadCabinet() {
         try {
             currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -55,7 +52,7 @@
             if (tbody) {
                 tbody.innerHTML = '';
                 if (sortedEstimates.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="7">У вас пока нет завершённых заказов</td></tr>';
+                    tbody.innerHTML = '<td><td colspan="7">У вас пока нет завершённых заказов</td></tr>';
                 } else {
                     sortedEstimates.forEach(order => {
                         const sensor = sensors.find(s => s.id == order.sensor_id);
@@ -84,9 +81,8 @@
                 }
             }
 
-            // 3. Карточка "Мой заказ" – последний заказ (самый новый created_at)
             if (sortedEstimates.length > 0) {
-                const current = sortedEstimates[0]; // первый = самый новый
+                const current = sortedEstimates[0];
                 const sensor = sensors.find(s => s.id == current.sensor_id);
                 const sensorName = sensor ? sensor.title : 'Регистратор';
                 const sensorLogo = sensor?.image || sensor?.logo || 'img/image.svg';
@@ -221,26 +217,28 @@
         for (let order of orders) {
             const sensorRes = await fetch(`${API_URL}/sensors/${order.sensor_id}`);
             const sensor = await sensorRes.json();
+            const safeOrderId = String(order.id).replace(/'/g, "\\'");
             html += `
                 <div class="estimate-item" data-id="${order.id}" data-type="order">
                     <div><strong>Заказ №${order.id}</strong> — ${escapeHtml(sensor.title)}</div>
                     <div>Кол-во: ${order.registrators_count} шт., помещений: ${order.rooms_count}</div>
                     <div>Предложенная сумма: <strong>${formatNumber(order.estimate_amount)} руб.</strong></div>
                     <div class="estimate-actions">
-                        <button class="btn--confirm btn--small" onclick="window.confirmEstimate(${order.id}, 'order')">✅ Подтвердить</button>
-                        <button class="btn--reject btn--small" onclick="window.rejectEstimate(${order.id}, 'order')">❌ Отказаться</button>
+                        <button class="btn--confirm btn--small" onclick="window.confirmEstimate('${safeOrderId}', 'order')">✅ Подтвердить</button>
+                        <button class="btn--reject btn--small" onclick="window.rejectEstimate('${safeOrderId}', 'order')">❌ Отказаться</button>
                     </div>
                 </div>`;
         }
         for (let req of upgrades) {
+            const safeReqId = String(req.id).replace(/'/g, "\\'");
             html += `
                 <div class="estimate-item" data-id="${req.id}" data-type="upgrade">
                     <div><strong>Доработка №${req.id}</strong> — ${req.type === 'web' ? 'Веб-часть' : 'Аппаратная часть'}</div>
                     <div>Описание: ${escapeHtml(req.description)}</div>
                     <div>Предложенная сумма: <strong>${formatNumber(req.estimate_amount)} руб.</strong></div>
                     <div class="estimate-actions">
-                        <button class="btn--confirm btn--small" onclick="window.confirmEstimate(${req.id}, 'upgrade')">✅ Подтвердить</button>
-                        <button class="btn--reject btn--small" onclick="window.rejectEstimate(${req.id}, 'upgrade')">❌ Отказаться</button>
+                        <button class="btn--confirm btn--small" onclick="window.confirmEstimate('${safeReqId}', 'upgrade')">✅ Подтвердить</button>
+                        <button class="btn--reject btn--small" onclick="window.rejectEstimate('${safeReqId}', 'upgrade')">❌ Отказаться</button>
                     </div>
                 </div>`;
         }
@@ -254,44 +252,54 @@
     });
     document.getElementById('close-estimates-modal')?.addEventListener('click', () => estimatesModal.classList.remove('open'));
 
-    // Глобальные функции для кнопок в модалке смет
     window.confirmEstimate = async (id, type) => {
         const endpoint = type === 'order' ? 'orders' : 'upgrade_requests';
-        const res = await fetch(`${API_URL}/${endpoint}/${id}`);
-        const item = await res.json();
-        if (type === 'order') {
-            const newEstimate = {
-                client_id: item.client_id,
-                sensor_id: item.sensor_id,
-                registrators_count: item.registrators_count,
-                rooms_count: item.rooms_count,
-                additional_modules: item.additional_modules,
-                created_at: item.created_at,
-                received_at: new Date().toISOString().slice(0,10),
-                amount: item.estimate_amount,
-                status: 'approved',
-                description: item.description
-            };
-            await fetch(`${API_URL}/estimates`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(newEstimate)
-            });
-            await fetch(`${API_URL}/${endpoint}/${id}`, { method: 'DELETE' });
-        } else {
-            await fetch(`${API_URL}/${endpoint}/${id}`, { method: 'DELETE' });
+        try {
+            const res = await fetch(`${API_URL}/${endpoint}/${id}`);
+            if (!res.ok) throw new Error('Не удалось загрузить данные заявки');
+            const item = await res.json();
+            if (type === 'order') {
+                const newEstimate = {
+                    client_id: item.client_id,
+                    sensor_id: item.sensor_id,
+                    registrators_count: item.registrators_count,
+                    rooms_count: item.rooms_count,
+                    additional_modules: item.additional_modules,
+                    created_at: item.created_at,
+                    received_at: new Date().toISOString().slice(0,10),
+                    amount: item.estimate_amount,
+                    status: 'approved',
+                    description: item.description
+                };
+                await fetch(`${API_URL}/estimates`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(newEstimate)
+                });
+                await fetch(`${API_URL}/${endpoint}/${id}`, { method: 'DELETE' });
+            } else {
+                await fetch(`${API_URL}/${endpoint}/${id}`, { method: 'DELETE' });
+            }
+            alert('Смета подтверждена! Заказ передан в производство.');
+            estimatesModal.classList.remove('open');
+            loadCabinet();
+        } catch (err) {
+            console.error('Ошибка подтверждения сметы:', err);
+            alert('Ошибка при подтверждении сметы');
         }
-        alert('Смета подтверждена! Заказ передан в производство.');
-        estimatesModal.classList.remove('open');
-        loadCabinet();
     };
 
     window.rejectEstimate = async (id, type) => {
         const endpoint = type === 'order' ? 'orders' : 'upgrade_requests';
-        await fetch(`${API_URL}/${endpoint}/${id}`, { method: 'DELETE' });
-        alert('Вы отказались от сметы.');
-        estimatesModal.classList.remove('open');
-        loadCabinet();
+        try {
+            await fetch(`${API_URL}/${endpoint}/${id}`, { method: 'DELETE' });
+            alert('Вы отказались от сметы.');
+            estimatesModal.classList.remove('open');
+            loadCabinet();
+        } catch (err) {
+            console.error('Ошибка отклонения сметы:', err);
+            alert('Ошибка при отказе от сметы');
+        }
     };
 
     // ========== РЕДАКТИРОВАНИЕ ПРОФИЛЯ ==========
@@ -368,7 +376,6 @@
         if (e.target === editModal) editModal.classList.remove('open');
     });
 
-    // Выход
     document.querySelector('.sidebar__logout')?.addEventListener('click', () => {
         localStorage.removeItem('currentUser');
         window.location.href = 'index.html';

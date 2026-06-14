@@ -117,6 +117,19 @@
           ]
         }
       ]
+    },
+    {
+      "id": "ZvXvhgsttug",
+      "company": "X",
+      "fio": "Иванов Иван Петрович",
+      "position": "Главный инженер",
+      "email": "ivanov@techno-swarka.by",
+      "phone": "+375291234567",
+      "password_hash": "TechPass123",
+      "unp": "123456789",
+      "address": "г. Минск, ул. Инженерная, д. 10",
+      "departments_count": 2,
+      "my_sensors": []
     }
   ],
   "admins": [
@@ -151,6 +164,19 @@
       "status": "approved",
       "description": "Нужна интеграция с 1С",
       "id": "MN4BNioNg8A"
+    },
+    {
+      "client_id": "ZvXvhgsttug",
+      "sensor_id": 1,
+      "registrators_count": 1,
+      "rooms_count": 1,
+      "additional_modules": "",
+      "created_at": "2026-06-13",
+      "received_at": "2026-06-13",
+      "amount": 84000,
+      "status": "in_production",
+      "description": "Большой и красивый",
+      "id": "n15ZPcBtIUU"
     }
   ],
   "client_reviews": [
@@ -440,7 +466,20 @@
       ]
     }
   ],
-  "orders": [],
+  "orders": [
+    {
+      "client_id": "ZvXvhgsttug",
+      "sensor_id": 4,
+      "registrators_count": 5,
+      "rooms_count": 3,
+      "additional_modules": "",
+      "description": "Большой, жужащий",
+      "status": "pending",
+      "created_at": "2026-06-14",
+      "estimate_amount": null,
+      "id": "zEkfzlKYamk"
+    }
+  ],
   "upgrade_requests": [
     {
       "id": "3",
@@ -450,6 +489,15 @@
       "status": "pending",
       "estimate_amount": null,
       "created_at": "2026-06-12"
+    },
+    {
+      "client_id": "ZvXvhgsttug",
+      "type": "web",
+      "description": "Добавить график изменения температуры в реальном времени на дашборд",
+      "status": "pending",
+      "created_at": "2026-06-13",
+      "estimate_amount": null,
+      "id": "8iR8-EKiEgg"
     }
   ],
   "team": {

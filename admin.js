@@ -1,4 +1,3 @@
-// admin.js – исправленная версия: поддержка строковых ID, надёжное обновление
 (function() {
     const API_URL = 'http://localhost:3000';
     let toastTimer = null;
@@ -6,7 +5,10 @@
 
     const formatNumber = (num) => new Intl.NumberFormat('ru-RU').format(num);
     const formatDate = (dateStr) => dateStr ? dateStr.split('-').reverse().join('.') : '—';
+    
     const escapeHtml = (str) => str ? String(str).replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]||m)) : '';
+   
+    const escapeAttr = (str) => str ? String(str).replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]||m)) : '';
 
     function showToast(msg) {
         const toast = document.getElementById('toast');
@@ -17,7 +19,6 @@
         toastTimer = setTimeout(() => toast.classList.remove('visible'), 3200);
     }
 
-    // Проверка авторизации
     let currentUser = null;
     try { currentUser = JSON.parse(localStorage.getItem('currentUser')); } catch(e) {}
     if (!currentUser || currentUser.role !== 'admin') {
@@ -27,7 +28,6 @@
     const adminNameSpan = document.getElementById('admin-name');
     if (adminNameSpan) adminNameSpan.textContent = currentUser.username || 'Главный';
 
-    // Кэши
     let clientsMap = {};
     let sensorsMap = {};
     let orders = [];
@@ -74,17 +74,18 @@
         tbody.innerHTML = pendingOrders.map(order => {
             const client = clientsMap[order.client_id] || { company: 'Неизвестно' };
             const sensor = sensorsMap[order.sensor_id] || { title: 'Неизвестный прибор' };
+            const companyAttr = client.company ? escapeAttr(client.company) : 'Клиент';
             return `
                 <tr data-id="${order.id}">
                     <td>${order.id}</td>
-                    <td>${escapeHtml(client.company)}</td>
+                    <td>${escapeHtml(client.company || 'Неизвестно')}</td>
                     <td>${escapeHtml(sensor.title)}</td>
                     <td>${order.registrators_count}</td>
                     <td>${order.rooms_count}</td>
                     <td>${escapeHtml(order.additional_modules || '—')}</td>
                     <td>${formatDate(order.created_at)}</td>
                     <td><span class="badge badge--pending">Новая</span></td>
-                    <td><button class="btn btn--primary btn--sm estimate-btn" data-type="order" data-id="${order.id}" data-company="${escapeHtml(client.company)}">Выставить смету</button></td>
+                    <td><button class="btn btn--primary btn--sm estimate-btn" data-type="order" data-id="${order.id}" data-company="${companyAttr}">Выставить смету</button></td>
                 </tr>
             `;
         }).join('');
@@ -100,15 +101,16 @@
         }
         tbody.innerHTML = pendingUpgrades.map(req => {
             const client = clientsMap[req.client_id] || { company: 'Неизвестно' };
+            const companyAttr = client.company ? escapeAttr(client.company) : 'Клиент';
             return `
                 <tr data-id="${req.id}">
                     <td>${req.id}</td>
-                    <td>${escapeHtml(client.company)}</td>
+                    <td>${escapeHtml(client.company || 'Неизвестно')}</td>
                     <td>${req.type === 'web' ? 'Веб-часть' : 'Аппаратная часть'}</td>
                     <td>${escapeHtml(req.description)}</td>
                     <td>${formatDate(req.created_at)}</td>
                     <td><span class="badge badge--pending">Новая</span></td>
-                    <td><button class="btn btn--primary btn--sm estimate-btn" data-type="upgrade" data-id="${req.id}" data-company="${escapeHtml(client.company)}">Выставить смету</button></td>
+                    <td><button class="btn btn--primary btn--sm estimate-btn" data-type="upgrade" data-id="${req.id}" data-company="${companyAttr}">Выставить смету</button></td>
                 </tr>
             `;
         }).join('');
@@ -128,7 +130,7 @@
             return `
                 <tr data-id="${est.id}">
                     <td>${est.id}</td>
-                    <td>${escapeHtml(client.company)}</td>
+                    <td>${escapeHtml(client.company || 'Неизвестно')}</td>
                     <td>${escapeHtml(sensor.title)}</td>
                     <td>${est.registrators_count}</td>
                     <td>${formatNumber(est.amount)} руб.</td>
@@ -191,18 +193,29 @@
         document.getElementById('clients-count').textContent = Object.keys(clientsMap).length;
     }
 
-    // --- Модальное окно сметы ---
     function openEstimateModal(type, id, companyName) {
+        console.log('openEstimateModal вызвана', type, id, companyName);
         currentEstimateTarget = { type, id };
-        document.getElementById('modal-client').textContent = companyName;
+        const modal = document.getElementById('estimate-modal');
+        if (!modal) {
+            console.error('Модальное окно с id="estimate-modal" не найдено!');
+            return;
+        }
+        document.getElementById('modal-client').textContent = companyName || 'Клиент';
         document.getElementById('modal-item-id').textContent = `${type.toUpperCase()}-${id}`;
         document.getElementById('estimate-amount').value = '';
         document.getElementById('estimate-comment').value = '';
-        document.getElementById('estimate-modal').classList.add('open');
+        modal.style.display = 'flex';
+        modal.classList.add('open');
+        console.log('Модальное окно открыто');
     }
 
     function closeEstimateModal() {
-        document.getElementById('estimate-modal').classList.remove('open');
+        const modal = document.getElementById('estimate-modal');
+        if (modal) {
+            modal.style.display = 'none';
+            modal.classList.remove('open');
+        }
         currentEstimateTarget = null;
     }
 
@@ -232,7 +245,7 @@
             }
             showToast(`Смета на сумму ${formatNumber(amount)} руб. отправлена клиенту.`);
             closeEstimateModal();
-            await loadAllData(); // перезагрузить таблицы
+            await loadAllData(); 
         } catch (err) {
             console.error('Ошибка отправки сметы:', err);
             showToast('Ошибка отправки сметы: ' + err.message);
@@ -259,7 +272,6 @@
         }
     }
 
-    // Аккордеон
     function toggleClient(clientItem) {
         const isOpen = clientItem.classList.contains('open');
         document.querySelectorAll('.client-item').forEach(el => {
@@ -274,17 +286,20 @@
         }
     }
 
-    // Делегирование событий (без parseInt для ID)
     function setupEventDelegation() {
         document.body.addEventListener('click', (e) => {
             const btn = e.target.closest('.estimate-btn');
             if (btn) {
                 e.preventDefault();
                 const type = btn.getAttribute('data-type');
-                const id = btn.getAttribute('data-id');   // сохраняем как строку
-                const company = btn.getAttribute('data-company');
-                if (type && id && company) {
+                const id = btn.getAttribute('data-id');
+                let company = btn.getAttribute('data-company');
+                if (!company) company = 'Клиент'; // fallback
+                console.log('Клик по estimate-btn', { type, id, company });
+                if (type && id) {
                     openEstimateModal(type, id, company);
+                } else {
+                    console.warn('Не хватает атрибутов:', { type, id, company });
                 }
             }
         });
@@ -292,7 +307,7 @@
         document.body.addEventListener('change', (e) => {
             const select = e.target.closest('.status-select');
             if (select) {
-                const estimateId = select.getAttribute('data-id'); // строка
+                const estimateId = select.getAttribute('data-id');
                 const newStatus = select.value;
                 if (estimateId && newStatus) {
                     changeEstimateStatus(estimateId, newStatus);
@@ -309,13 +324,11 @@
         });
     }
 
-    // Выход
     document.getElementById('logout-btn')?.addEventListener('click', () => {
         localStorage.removeItem('currentUser');
         window.location.href = 'index.html';
     });
 
-    // Закрытие модалки
     document.getElementById('close-estimate-modal')?.addEventListener('click', closeEstimateModal);
     document.getElementById('cancel-estimate')?.addEventListener('click', closeEstimateModal);
     document.getElementById('submit-estimate')?.addEventListener('click', submitEstimate);

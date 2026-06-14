@@ -1,62 +1,169 @@
-/* ================= БАЗОВЫЕ НАСТРОЙКИ И ПЕРЕМЕННЫЕ ================= */
+/* ================= ПЕРЕМЕННЫЕ ================= */
 :root {
-    --bg-color: #D4D4D4;
+    --bg-color:      #D4D4D4;
     --primary-color: #00529b;
     --primary-hover: #003d75;
-    --card-bg: #ffffff;
-    --text-main: #333333;
-    --text-muted: #666666;
-    --border-color: #cccccc;
-    --error-color: #d93025;
-    --font-family: 'Inter', sans-serif;
+    --card-bg:       #ffffff;
+    --text-main:     #333333;
+    --text-muted:    #666666;
+    --border-color:  #cccccc;
+    --error-color:   #d93025;
+    --font-family:   'Inter', sans-serif;
+}
+
+/* ================= СБРОС ================= */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    margin: 0;
-    padding: 20px;
     min-height: 100vh;
-    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: var(--bg-color);
     font-family: var(--font-family);
     color: var(--text-main);
+    padding: 20px;
 }
 
-/* ================= КАРТОЧКА АВТОРИЗАЦИИ ================= */
-.auth-card {
-    background-color: var(--card-bg);
-    border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-    padding: 40px;
+/* ================= ДВУХКОЛОНОЧНЫЙ LAYOUT ================= */
+.auth-layout {
+    display: flex;
     width: 100%;
-    max-width: 400px; /* По умолчанию ширина для Входа */
+    max-width: 900px;
+    min-height: 520px;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.14);
+    overflow: hidden;
     transition: max-width 0.4s ease-in-out;
 }
 
-/* Модификатор ширины для формы регистрации (чтобы вместить 2 колонки) */
-.auth-card.expanded {
-    max-width: 650px;
+/* При регистрации расширяем карточку */
+.auth-layout.expanded {
+    max-width: 1060px;
+}
+
+/* ================= ЛЕВАЯ ПАНЕЛЬ (брендинг) ================= */
+.auth-left {
+    width: 300px;
+    min-width: 300px;
+    background-color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 36px;
+    transition: width 0.4s ease-in-out, min-width 0.4s ease-in-out;
+}
+
+.auth-left-inner {
+    color: #ffffff;
+}
+
+.brand-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background-color: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    color: rgba(255,255,255,0.9);
+}
+
+.brand-name {
+    font-size: 36px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: #ffffff;
+    margin-bottom: 16px;
+    line-height: 1;
+}
+
+.brand-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.7;
+    margin-bottom: 28px;
+}
+
+.brand-divider {
+    width: 40px;
+    height: 2px;
+    background-color: rgba(255,255,255,0.3);
+    margin-bottom: 24px;
+}
+
+.brand-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.brand-features li {
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+    padding-left: 14px;
+    position: relative;
+    line-height: 1.4;
+}
+
+.brand-features li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.5);
+}
+
+/* ================= ПРАВАЯ ПАНЕЛЬ (форма) ================= */
+.auth-right {
+    flex: 1;
+    padding: 48px 44px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 /* ================= ТИПОГРАФИКА ================= */
 .auth-title {
-    margin: 0 0 8px 0;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 600;
-    text-align: center;
     color: var(--primary-color);
+    margin-bottom: 6px;
 }
 
 .auth-subtitle {
-    margin: 0 0 24px 0;
-    font-size: 14px;
-    text-align: center;
+    font-size: 13px;
     color: var(--text-muted);
+    margin-bottom: 28px;
 }
 
-/* ================= ЭЛЕМЕНТЫ ФОРМЫ ================= */
+/* ================= ОШИБКИ ================= */
+.error-message {
+    display: none;
+    color: var(--error-color);
+    background-color: #fdf2f2;
+    border: 1px solid #f5c6c6;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+}
+
+/* ================= ФОРМА ================= */
 .form-group {
     margin-bottom: 16px;
     display: flex;
@@ -77,33 +184,45 @@ input {
     border-radius: 4px;
     font-size: 14px;
     font-family: var(--font-family);
-    box-sizing: border-box;
     background-color: #fafafa;
+    color: var(--text-main);
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input::placeholder {
+    color: #aaaaaa;
+}
+
+input:hover {
+    border-color: #aaaaaa;
 }
 
 input:focus {
     outline: none;
     border-color: var(--primary-color);
     background-color: #ffffff;
-    box-shadow: 0 0 0 3px rgba(0, 82, 155, 0.1);
+    box-shadow: 0 0 0 3px rgba(0, 82, 155, 0.10);
 }
 
-/* Сетка для регистрации (2 колонки) */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    opacity: 0.5;
+}
+
+/* ================= СЕТКА РЕГИСТРАЦИИ ================= */
 .form-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 0 16px;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 20px;
 }
 
-@media (min-width: 500px) {
-    .auth-card.expanded .form-grid {
-        grid-template-columns: 1fr 1fr;
-    }
+.form-group.full-width {
+    grid-column: 1 / -1;
 }
 
-/* ================= КНОПКИ И ССЫЛКИ ================= */
+/* ================= КНОПКА ================= */
 .btn-primary {
+    display: block;
     width: 100%;
     padding: 12px;
     margin-top: 8px;
@@ -115,13 +234,24 @@ input:focus {
     font-weight: 600;
     font-family: var(--font-family);
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, opacity 0.2s ease;
 }
 
 .btn-primary:hover {
     background-color: var(--primary-hover);
 }
 
+.btn-primary:active {
+    transform: scale(0.99);
+}
+
+.btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ================= ССЫЛКА-ПЕРЕКЛЮЧАТЕЛЬ ================= */
 .toggle-link {
     display: block;
     text-align: center;
@@ -134,21 +264,11 @@ input:focus {
 }
 
 .toggle-link:hover {
-    text-decoration: underline;
     color: var(--primary-hover);
+    text-decoration: underline;
 }
 
-/* ================= СЛУЖЕБНЫЕ КЛАССЫ ================= */
-.error-message {
-    color: var(--error-color);
-    font-size: 13px;
-    text-align: center;
-    margin-bottom: 16px;
-    font-weight: 500;
-    display: none; /* Скрыто по умолчанию */
-}
-
-/* Классы для переключения вьюшек */
+/* ================= ПЕРЕКЛЮЧЕНИЕ ВЬЮШЕК ================= */
 .auth-view {
     display: none;
 }
@@ -157,12 +277,46 @@ input:focus {
     display: block;
 }
 
-/* Плавное появление */
+/* ================= АНИМАЦИЯ ================= */
 .fade-in {
-    animation: fadeIn 0.4s ease-in-out;
+    animation: fadeIn 0.35s ease-in-out;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ================= АДАПТИВ ================= */
+@media (max-width: 762px) {
+    .auth-layout {
+        flex-direction: column;
+        max-width: 100%;
+    }
+
+    .auth-left {
+        width: 100%;
+        min-width: unset;
+        padding: 28px 24px;
+    }
+
+    .brand-name {
+        font-size: 28px;
+    }
+
+    .brand-features {
+        display: none;
+    }
+
+    .auth-right {
+        padding: 32px 24px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full-width {
+        grid-column: 1;
+    }
 }

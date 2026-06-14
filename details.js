@@ -74,3 +74,4 @@ const products = data.sensors;
         console.error("Ошибка рендеринга:", error);
     }
 });
+

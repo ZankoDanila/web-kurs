@@ -1,7 +1,3 @@
-// ═══════════════════════════════════════════════════════════════════════════
-// ОСНОВНОЙ КОД СТРАНИЦЫ (карусель отзывов с прокруткой на 1 карточку)
-// ═══════════════════════════════════════════════════════════════════════════
-
 document.addEventListener('DOMContentLoaded', () => {
 
     function escapeHtml(str) {
@@ -14,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ==================== СЛАЙДЕР ДАТЧИКОВ ====================
     const sliderContainer = document.getElementById('exp-slider-container');
     const dotsContainer   = document.getElementById('exp-dots-container');
     const prevBtn         = document.getElementById('exp-prev-btn');
@@ -87,7 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         window.addEventListener('resize', () => updateSlider());
 
-        // Загрузка данных
         fetch('db.json')
             .then(response => response.ok ? response.json() : Promise.reject('Ошибка загрузки БД'))
             .then(data => {
@@ -101,10 +95,9 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
-    // ==================== КАРУСЕЛЬ ОТЗЫВОВ (прокрутка на 1 карточку) ====================
     function initReviewsCarousel(reviews) {
         const track = document.getElementById('reviews-track');
-        const wrapper = track?.parentElement; // .reviews__track-wrapper
+        const wrapper = track?.parentElement; 
         const btnPrev = document.getElementById('reviews-prev');
         const btnNext = document.getElementById('reviews-next');
 
@@ -116,7 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Создаём карточки
         function createReviewCard(review) {
             const card = document.createElement('div');
             card.className = 'review-card';
@@ -138,12 +130,11 @@ document.addEventListener('DOMContentLoaded', () => {
         reviews.forEach(r => track.appendChild(createReviewCard(r)));
 
         let currentIndex = 0;
-        let visibleCards = 3;           // сколько карточек видно одновременно
-        let cardWidth = 400;            // базовая ширина карточки (без gap)
-        let gap = 16;                   // отступ между карточками
-        let step = cardWidth + gap;     // сдвиг на одну карточку
+        let visibleCards = 3;           
+        let cardWidth = 400;            
+        let gap = 16;                   
+        let step = cardWidth + gap;     
 
-        // Получаем актуальную ширину карточки после рендера
         function updateDimensions() {
             const firstCard = track.querySelector('.review-card');
             if (firstCard) {
@@ -152,12 +143,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // Пересчитываем ширину контейнера трека и максимальное смещение
         function getMaxTranslate() {
             const totalCards = reviews.length;
-            const trackWidth = track.scrollWidth; // общая ширина всех карточек с отступами
+            const trackWidth = track.scrollWidth; 
             const wrapperWidth = wrapper.clientWidth;
-            // если трек уже влезает – прокрутка не нужна
             if (trackWidth <= wrapperWidth) return 0;
             return trackWidth - wrapperWidth;
         }
@@ -191,7 +180,6 @@ document.addEventListener('DOMContentLoaded', () => {
         btnPrev.addEventListener('click', () => go(-1));
         btnNext.addEventListener('click', () => go(1));
 
-        // Пересчитываем при изменении размера окна
         window.addEventListener('resize', () => {
             setTimeout(() => {
                 updateDimensions();
@@ -200,14 +188,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 100);
         });
 
-        // Задержка для получения размеров
         setTimeout(() => {
             updateDimensions();
             translateTo(0);
         }, 50);
     }
 
-    // ==================== SCROLLSPY ====================
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-panel a');
     if (sections.length && navLinks.length) {

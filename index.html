@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>БЕЛАЗ — B2B Портал</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -11,84 +10,128 @@
 </head>
 <body>
 
-    <div class="auth-card" id="auth-card">
-        
-        <div id="login-view" class="auth-view active-view fade-in">
-            <h1 class="auth-title">Вход в систему</h1>
-            <p class="auth-subtitle">B2B-портал ООО «БЕЛАЗ»</p>
-            
-            <div class="error-message" id="login-error">Неверный логин или пароль</div>
+    <div class="auth-layout" id="auth-layout">
 
-            <form id="login-form">
-                <div class="form-group">
-                    <label for="login-email">Email или Логин</label>
-                    <input type="text" id="login-email" name="login-email" placeholder="Введите email" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="login-password">Пароль</label>
-                    <input type="password" id="login-password" name="login-password" placeholder="Введите пароль" required>
-                </div>
-
-                <button type="submit" class="btn-primary">Войти</button>
-            </form>
-
-            <a href="#" class="toggle-link" id="go-to-register">Ещё нет аккаунта? Зарегистрироваться</a>
+        <!-- ===== ЛЕВАЯ ПАНЕЛЬ — брендинг ===== -->
+        <div class="auth-left">
+            <div class="auth-left-inner">
+                <div class="brand-badge">B2B</div>
+                <div class="brand-name">Белорусско-Российский университет</div>
+                <p class="brand-desc">Портал для партнёров<br>и корпоративных клиентов<br>БРУ «Сварочный регистратор</p>
+                <div class="brand-divider"></div>
+                <ul class="brand-features">
+                    <li>Управление заявками и заказами</li>
+                    <li>Мониторинг датчиков и оборудования</li>
+                    <li>Документооборот и отчёты</li>
+                </ul>
+            </div>
         </div>
 
-        <div id="register-view" class="auth-view hidden fade-in">
-            <h1 class="auth-title">Регистрация компании</h1>
-            <p class="auth-subtitle">Заполните данные для создания B2B-аккаунта</p>
+        <!-- ===== ПРАВАЯ ПАНЕЛЬ — формы ===== -->
+        <div class="auth-right">
 
-            <div class="error-message" id="register-error">Пожалуйста, заполните все обязательные поля</div>
+            <!-- ВХОД -->
+            <div id="login-view" class="auth-view active-view fade-in">
+                <h1 class="auth-title">Вход в систему</h1>
+                <p class="auth-subtitle">Введите данные вашего аккаунта</p>
 
-            <form id="register-form">
-                <div class="form-grid">
+                <div class="error-message" id="login-error"></div>
+
+                <form id="login-form" novalidate>
                     <div class="form-group">
-                        <label for="reg-fio">ФИО представителя</label>
-                        <input type="text" id="reg-fio" name="fio" placeholder="Иванов Иван Иванович" required>
+                        <label for="login-email">Email или логин</label>
+                        <input type="text" id="login-email" name="login-email"
+                               placeholder="company@example.com" autocomplete="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Пароль</label>
+                        <input type="password" id="login-password" name="login-password"
+                               placeholder="Введите пароль" autocomplete="current-password" required>
+                    </div>
+                    <button type="submit" class="btn-primary" data-label="Войти">Войти</button>
+                </form>
+
+                <a href="#" class="toggle-link" id="go-to-register">
+                    Ещё нет аккаунта? Зарегистрироваться
+                </a>
+            </div>
+
+            <!-- РЕГИСТРАЦИЯ -->
+            <div id="register-view" class="auth-view fade-in">
+                <h1 class="auth-title">Регистрация компании</h1>
+                <p class="auth-subtitle">Заполните данные для создания аккаунта</p>
+
+                <div class="error-message" id="register-error"></div>
+
+                <form id="register-form" novalidate>
+                    <div class="form-grid">
+
+                        <div class="form-group full-width">
+                            <label for="reg-company">Название компании</label>
+                            <input type="text" id="reg-company" name="company"
+                                   placeholder='ООО "Пример"' required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reg-fio">ФИО представителя</label>
+                            <input type="text" id="reg-fio" name="fio"
+                                   placeholder="Иванов Иван Иванович" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reg-position">Должность</label>
+                            <input type="text" id="reg-position" name="position"
+                                   placeholder="Директор по закупкам" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reg-email">Email</label>
+                            <input type="email" id="reg-email" name="email"
+                                   placeholder="company@example.com" autocomplete="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reg-phone">Телефон</label>
+                            <input type="tel" id="reg-phone" name="phone"
+                                   placeholder="+375 (XX) XXX-XX-XX" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reg-password">Пароль</label>
+                            <input type="password" id="reg-password" name="password"
+                                   placeholder="Минимум 6 символов" autocomplete="new-password" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reg-unp">УНП</label>
+                            <input type="text" id="reg-unp" name="unp"
+                                   placeholder="123456789" required>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="reg-address">Юридический адрес</label>
+                            <input type="text" id="reg-address" name="address"
+                                   placeholder="г. Минск, ул. Примерная, 1" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reg-deps">Кол-во подразделений</label>
+                            <input type="number" id="reg-deps" name="departments_count"
+                                   placeholder="Например: 3" min="0">
+                        </div>
+
                     </div>
 
-                    <div class="form-group">
-                        <label for="reg-position">Должность</label>
-                        <input type="text" id="reg-position" name="position" placeholder="Директор по закупкам" required>
-                    </div>
+                    <button type="submit" class="btn-primary" data-label="Зарегистрировать компанию">
+                        Зарегистрировать компанию
+                    </button>
+                </form>
 
-                    <div class="form-group">
-                        <label for="reg-email">Email</label>
-                        <input type="email" id="reg-email" name="email" placeholder="company@example.com" required>
-                    </div>
+                <a href="#" class="toggle-link" id="go-to-login">
+                    Уже есть аккаунт? Войти
+                </a>
+            </div>
 
-                    <div class="form-group">
-                        <label for="reg-phone">Телефон</label>
-                        <input type="tel" id="reg-phone" name="phone" placeholder="+375 (XX) XXX-XX-XX" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="reg-password">Пароль</label>
-                        <input type="password" id="reg-password" name="password" placeholder="Надежный пароль" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="reg-unp">УНП</label>
-                        <input type="text" id="reg-unp" name="unp" placeholder="123456789" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="reg-address">Юридический адрес</label>
-                        <input type="text" id="reg-address" name="address" placeholder="г. Минск, ул. Примерная, 1" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="reg-deps">Кол-во структурных подразделений</label>
-                        <input type="number" id="reg-deps" name="departments_count" placeholder="Например: 3" min="0" required>
-                    </div>
-                </div>
-
-                <button type="submit" class="btn-primary">Зарегистрировать компанию</button>
-            </form>
-
-            <a href="#" class="toggle-link" id="go-to-login">Уже есть аккаунт? Войти</a>
         </div>
 
     </div>

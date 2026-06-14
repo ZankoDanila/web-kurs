@@ -919,14 +919,6 @@ scroll-margin-top: 105px;
     transform: rotate(+3deg);
 }
 
-/* --- ЖЕЛТЫЕ ПОЛОСКИ И ТЕКСТ --- */
-.complectation-section .yellow-line {
-    position: absolute;
-    width: 7px; /* Измененная ширина полоски */
-    height: 500px; 
-    background-color: #FEEF9E; /* Светло-желтый из макета */
-    z-index: 0; 
-}
 
 /* Позиционирование полосок под картинками */
 .complectation-section .line-1 {
@@ -2893,4 +2885,36 @@ scroll-margin-top: 105px;
         padding-left: 16px;
         padding-right: 16px;
     }
+}
+
+.exp-btn-primary,
+.exp-btn-secondary {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto Slab', serif;
+    font-size: 20px;
+    font-weight: 500;
+    height: 60px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+.exp-btn-primary {
+    background: #004A8F;
+    color: white;
+    border: none;
+}
+.exp-btn-primary:hover {
+    background: #08355F;
+    transform: translateY(-2px);
+}
+.exp-btn-secondary {
+    background: transparent;
+    border: 1px solid #004A8F;
+    color: #004A8F;
+}
+.exp-btn-secondary:hover {
+    background: rgba(0, 74, 143, 0.08);
+    transform: translateY(-2px);
 }

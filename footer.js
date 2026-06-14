@@ -1,13 +1,7 @@
-/**
- * Автоматическая загрузка и инициализация футера сайта
- */
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Создаем базовый контейнер-обертку для футера
     const footerContainer = document.createElement('div');
     footerContainer.id = 'dynamic-footer-wrapper';
 
-    // 2. Подгружаем HTML-содержимое футера
-    // Если footer.html лежит в другой папке, скорректируйте путь (например, '/fragments/footer.html')
     fetch('footer.html')
         .then(response => {
             if (!response.ok) {
@@ -17,7 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .then(htmlContent => {
             footerContainer.innerHTML = htmlContent;
-            // 3. Ровно вставляем в самый конец тега body
             document.body.appendChild(footerContainer);
         })
         .catch(error => {
